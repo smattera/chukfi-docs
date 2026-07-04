@@ -81,7 +81,7 @@ A thin wrapper over the CLI. One job: provide a one-command dev experience.
 
 - `astro:server:setup` hook spawns the CLI's `dev` process when `astro dev` starts
 - Astro middleware proxies `/api/*` and `/admin/*` requests to the local API on port 8080
-- The pre-compiled admin UI in `chukfi-core/admin-ui/` is served from the API at `/admin/*` — the Astro site inherits it transparently
+- The pre-compiled admin UI in `chukfi-cms/admin-ui/` is served from the API at `/admin/*` — the Astro site inherits it transparently
 
 ### What it does NOT do
 
