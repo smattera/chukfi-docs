@@ -1,5 +1,6 @@
 /* ============================================
-   Chukfi CMS — Brand Theme
+   Chukfi CMS — Brand Theme for Starlight
+   Live at https://chukfi.dev
    ============================================ */
 
 /* ---- Chukfi Brand Colors ---- */
@@ -12,24 +13,6 @@
   /* Accent — warm amber/gold */
   --chukfi-accent: #f59e0b;
   --chukfi-accent-light: #fbbf24;
-  --chukfi-accent-glow: rgba(245, 158, 11, 0.15);
-
-  /* Surfaces */
-  --chukfi-surface: #ffffff;
-  --chukfi-surface-alt: #f8fafc;
-  --chukfi-border: #e2e8f0;
-
-  /* Text */
-  --chukfi-text: #0f172a;
-  --chukfi-text-muted: #64748b;
-
-  /* Gradients */
-  --chukfi-gradient-hero: linear-gradient(135deg, #1e3a5f 0%, #2d5a8e 50%, #3b82f6 100%);
-  --chukfi-gradient-card: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
-  --chukfi-gradient-accent: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
-
-  /* Logo glow */
-  --chukfi-logo-glow: 0 0 20px rgba(59, 130, 246, 0.3);
 
   /* Starlight overrides */
   --sl-color-accent: #1e3a5f;
@@ -52,31 +35,15 @@
   --sl-color-hairline-shade: #cbd5e1;
   --sl-color-text-accent: #1e3a5f;
   --sl-color-text-invert: #ffffff;
-  --sl-color-hero-bg: #f8fafc;
 }
 
 /* Dark mode */
 :root[data-theme="dark"] {
   --chukfi-brand: #60a5fa;
   --chukfi-brand-light: #93bbfd;
-  --chukfi-brand-glow: #60a5fa;
 
   --chukfi-accent: #fbbf24;
   --chukfi-accent-light: #fcd34d;
-  --chukfi-accent-glow: rgba(251, 191, 36, 0.15);
-
-  --chukfi-surface: #0f172a;
-  --chukfi-surface-alt: #1e293b;
-  --chukfi-border: #334155;
-
-  --chukfi-text: #f1f5f9;
-  --chukfi-text-muted: #94a3b8;
-
-  --chukfi-gradient-hero: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #2563eb 100%);
-  --chukfi-gradient-card: linear-gradient(135deg, #1e293b 0%, #1e3a5f 100%);
-  --chukfi-gradient-accent: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
-
-  --chukfi-logo-glow: 0 0 25px rgba(96, 165, 250, 0.4);
 
   --sl-color-accent: #60a5fa;
   --sl-color-accent-high: #93bbfd;
@@ -98,312 +65,158 @@
   --sl-color-hairline-shade: #475569;
   --sl-color-text-accent: #60a5fa;
   --sl-color-text-invert: #0f172a;
-  --sl-color-hero-bg: #1e293b;
 }
 
 /* ============================================
-   Chukfi Logo (SVG inline via CSS)
+   Starlight Splash Template
    ============================================ */
 
-/* Logo mark — a stylized "C" / crescent moon shape */
-.chukfi-logo {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  text-decoration: none;
-}
-
-.chukfi-logo-mark {
-  width: 32px;
-  height: 32px;
-  flex-shrink: 0;
-}
-
-.chukfi-logo-text {
-  font-family: 'Inter', system-ui, sans-serif;
-  font-weight: 700;
-  font-size: 1.25rem;
-  letter-spacing: -0.02em;
-  color: var(--chukfi-text);
-}
-
-.chukfi-logo-text span {
-  color: var(--chukfi-brand);
-}
-
-/* ============================================
-   Hero Section
-   ============================================ */
-
+/* Hero section container */
 .hero {
-  padding: 4rem 0;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+  padding: 3rem 0;
 }
 
-.hero::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(ellipse at 50% 50%, var(--chukfi-accent-glow) 0%, transparent 60%);
-  pointer-events: none;
-  opacity: 0.5;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 1;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
+/* Hero title — gradient text */
 .hero h1 {
-  font-size: 3.5rem;
-  font-weight: 800;
-  line-height: 1.1;
-  margin-bottom: 1rem;
-  background: var(--chukfi-gradient-hero);
+  background: linear-gradient(135deg, #1e3a5f 0%, #2d5a8e 50%, #3b82f6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.hero p {
-  font-size: 1.25rem;
-  color: var(--chukfi-text-muted);
+:root[data-theme="dark"] .hero h1 {
+  background: linear-gradient(135deg, #60a5fa 0%, #93bbfd 50%, #bfdbfe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Hero tagline */
+.hero .tagline {
+  color: var(--sl-color-gray-2);
+  font-size: 1.15rem;
   line-height: 1.6;
-  margin-bottom: 2rem;
-  max-width: 600px;
+  max-width: 640px;
   margin-left: auto;
   margin-right: auto;
 }
 
-.hero-actions {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.hero-actions a {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
+/* Primary CTA button */
+.hero .actions a[href*="quick-start"] {
+  background: linear-gradient(135deg, #1e3a5f 0%, #2d5a8e 50%, #3b82f6 100%) !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 4px 14px rgba(30, 58, 95, 0.3);
   font-weight: 600;
-  font-size: 0.95rem;
-  text-decoration: none;
   transition: all 0.2s ease;
 }
 
-.hero-actions .btn-primary {
-  background: var(--chukfi-gradient-hero);
-  color: #ffffff;
-  box-shadow: 0 4px 14px rgba(30, 58, 95, 0.3);
-}
-
-.hero-actions .btn-primary:hover {
+.hero .actions a[href*="quick-start"]:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(30, 58, 95, 0.4);
 }
 
-:root[data-theme="dark"] .hero-actions .btn-primary {
+:root[data-theme="dark"] .hero .actions a[href*="quick-start"] {
+  background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 50%, #60a5fa 100%) !important;
   box-shadow: 0 4px 14px rgba(96, 165, 250, 0.3);
 }
 
-:root[data-theme="dark"] .hero-actions .btn-primary:hover {
+:root[data-theme="dark"] .hero .actions a[href*="quick-start"]:hover {
   box-shadow: 0 6px 20px rgba(96, 165, 250, 0.4);
 }
 
-.hero-actions .btn-secondary {
-  background: var(--chukfi-surface-alt);
-  color: var(--chukfi-text);
-  border: 1px solid var(--chukfi-border);
+/* Secondary CTA button */
+.hero .actions a[href*="cli"] {
+  background: var(--sl-color-gray-6) !important;
+  color: var(--sl-color-white) !important;
+  border: 1px solid var(--sl-color-gray-5) !important;
+  font-weight: 600;
+  transition: all 0.2s ease;
 }
 
-.hero-actions .btn-secondary:hover {
-  border-color: var(--chukfi-brand);
-  color: var(--chukfi-brand);
+.hero .actions a[href*="cli"]:hover {
+  border-color: var(--sl-color-accent) !important;
+  color: var(--sl-color-accent) !important;
   transform: translateY(-2px);
 }
 
 /* ============================================
-   Feature Cards
+   Content Area
    ============================================ */
 
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  margin: 3rem 0;
-}
-
-.feature-card {
-  background: var(--chukfi-gradient-card);
-  border: 1px solid var(--chukfi-border);
-  border-radius: 0.75rem;
-  padding: 1.5rem;
-  transition: all 0.2s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.feature-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--chukfi-gradient-hero);
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.feature-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
-  border-color: var(--chukfi-brand);
-}
-
-:root[data-theme="dark"] .feature-card:hover {
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-}
-
-.feature-card:hover::before {
-  opacity: 1;
-}
-
-.feature-card .icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 0.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1rem;
-  font-size: 1.25rem;
-}
-
-.feature-card .icon-blue {
-  background: rgba(59, 130, 246, 0.1);
-  color: #3b82f6;
-}
-
-.feature-card .icon-amber {
-  background: rgba(245, 158, 11, 0.1);
-  color: #f59e0b;
-}
-
-.feature-card .icon-green {
-  background: rgba(34, 197, 94, 0.1);
-  color: #22c55e;
-}
-
-.feature-card .icon-purple {
-  background: rgba(168, 85, 247, 0.1);
-  color: #a855f7;
-}
-
-.feature-card h3 {
-  font-size: 1.1rem;
+/* Section headings */
+.sl-markdown-content h2 {
   font-weight: 700;
-  margin-bottom: 0.5rem;
-  color: var(--chukfi-text);
+  letter-spacing: -0.02em;
+  margin-top: 2.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--sl-color-hairline);
 }
 
-.feature-card p {
-  font-size: 0.9rem;
-  color: var(--chukfi-text-muted);
-  line-height: 1.5;
-  margin: 0;
+.sl-markdown-content h2:first-of-type {
+  margin-top: 0;
 }
 
-/* ============================================
-   Stats Bar
-   ============================================ */
-
-.stats-bar {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 1rem;
-  margin: 2rem 0;
-  padding: 2rem;
-  background: var(--chukfi-gradient-card);
-  border: 1px solid var(--chukfi-border);
-  border-radius: 0.75rem;
-  text-align: center;
-}
-
-.stat-item {
-  padding: 0.5rem;
-}
-
-.stat-value {
-  font-size: 2rem;
-  font-weight: 800;
-  background: var(--chukfi-gradient-hero);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  line-height: 1.2;
-}
-
-.stat-label {
-  font-size: 0.85rem;
-  color: var(--chukfi-text-muted);
-  margin-top: 0.25rem;
-}
-
-/* ============================================
-   Code Block Enhancements
-   ============================================ */
-
-.expressive-code {
+/* Code blocks */
+.sl-markdown-content .expressive-code {
   border-radius: 0.5rem !important;
-  border: 1px solid var(--chukfi-border) !important;
+  border: 1px solid var(--sl-color-gray-5) !important;
+}
+
+/* Tables */
+.sl-markdown-content table {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid var(--sl-color-gray-5);
+}
+
+.sl-markdown-content table th {
+  background: var(--sl-color-gray-6);
+  font-weight: 600;
+}
+
+/* Links */
+.sl-markdown-content a {
+  color: var(--sl-color-accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.sl-markdown-content a:hover {
+  text-decoration: underline;
 }
 
 /* ============================================
-   Starlight Overrides
+   Sidebar
    ============================================ */
 
-/* Site title in nav */
+.sidebar-content a[aria-current="page"] {
+  background: var(--sl-color-accent-low) !important;
+  color: var(--sl-color-accent) !important;
+  font-weight: 600 !important;
+  border-right: 3px solid var(--sl-color-accent);
+}
+
+/* ============================================
+   Site Title
+   ============================================ */
+
 .site-title {
   font-weight: 700 !important;
   letter-spacing: -0.02em !important;
 }
 
-/* Hero section in Starlight */
-.sl-markdown-content .hero {
-  padding: 3rem 0;
-}
-
-/* Make the hero image area more prominent */
-.hero img {
-  filter: drop-shadow(var(--chukfi-logo-glow));
-}
-
-/* Sidebar active state */
-.sidebar-content a[aria-current="page"] {
-  background: var(--sl-color-accent-low) !important;
-  color: var(--sl-color-accent) !important;
-  font-weight: 600 !important;
-}
-
-/* Search button */
-starlight-search button {
-  border-color: var(--chukfi-border) !important;
-}
-
-/* Social links */
+/* Social icons */
 .social-icons a:hover {
-  color: var(--chukfi-brand) !important;
+  color: var(--sl-color-accent) !important;
+}
+
+/* ============================================
+   Search
+   ============================================ */
+
+starlight-search button {
+  border-color: var(--sl-color-gray-5) !important;
 }
 
 /* ============================================
@@ -412,18 +225,10 @@ starlight-search button {
 
 @media (max-width: 768px) {
   .hero h1 {
-    font-size: 2.25rem;
+    font-size: 2.25rem !important;
   }
 
-  .hero p {
-    font-size: 1.05rem;
-  }
-
-  .features-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .stats-bar {
-    grid-template-columns: repeat(2, 1fr);
+  .hero .tagline {
+    font-size: 1rem !important;
   }
 }
