@@ -11,6 +11,8 @@ description: Get started with Chukfi CMS in minutes — install, local dev, and 
 
 ## Installation
 
+<video src="/videos/quick-start.mp4" controls autoplay loop muted style="width: 100%; border-radius: 0.75rem; border: 1px solid var(--sl-color-gray-5); margin: 1.5rem 0;" />
+
 ```bash
 npm install @chukfi/cli
 ```
