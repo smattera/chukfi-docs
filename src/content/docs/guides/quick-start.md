@@ -5,7 +5,7 @@ description: Get started with Chukfi CMS in minutes
 
 ## Prerequisites
 
-- Node.js 18+
+- Node.js 24+
 - Docker (for local PostgreSQL)
 - An AWS account (for production deployment)
 
