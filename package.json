@@ -1,0 +1,26 @@
+{
+  "name": "chukfi-docs",
+  "version": "1.0.0",
+  "description": "Documentation for the Chukfi CMS platform",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smattera/chukfi-docs.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/smattera/chukfi-docs/issues"
+  },
+  "homepage": "https://github.com/smattera/chukfi-docs#readme",
+  "dependencies": {
+    "@astrojs/starlight": "^0.41.3",
+    "astro": "^7.0.6"
+  }
+}

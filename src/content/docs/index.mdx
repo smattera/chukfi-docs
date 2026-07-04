@@ -1,0 +1,33 @@
+---
+title: Chukfi Docs
+description: Welcome to the Chukfi CMS documentation
+---
+
+Welcome to the **Chukfi CMS** documentation. Chukfi is a high-performance, lightweight headless CMS built with Rust, Astro, and Cloudflare.
+
+## What is Chukfi?
+
+Chukfi is a headless CMS purpose-built for Astro, distributed as a single `npx chukfi` command. It provides:
+
+- **CLI-first distribution** — The Rust binary ships as platform-specific npm packages. No Rust toolchain required.
+- **Local-to-prod parity** — Local dev uses Docker PostgreSQL; production uses AWS RDS PostgreSQL. Same engine, same migrations.
+- **AWS-only deploy** — One command provisions the full stack on AWS via CDK.
+
+## Quick Links
+
+- [Overview](/guides/overview/)
+- [Quick Start](/guides/quick-start/)
+- [Architecture](/architecture/architecture/)
+- [Roadmap](/project/roadmap/)
+- [Lessons Learned](/project/lessons/)
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Backend | Rust (compiled to native binary) |
+| Frontend | Astro 5 + React islands |
+| Database | PostgreSQL (local Docker / AWS RDS) |
+| Auth | Magic Link + Microsoft Entra ID |
+| Media | S3 / Local filesystem |
+| Deploy | AWS CDK / Cloudflare Pages |
