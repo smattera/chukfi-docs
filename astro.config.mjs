@@ -36,6 +36,17 @@ export default defineConfig({
           items: [{ autogenerate: { directory: 'frontend' } }],
         },
         {
+          label: 'Teams Bot',
+          items: [
+            { label: 'Overview', link: '/teams-bot/overview/' },
+            { label: 'Setup Guide', link: '/teams-bot/setup/' },
+            { label: 'Bedrock Integration', link: '/teams-bot/bedrock/' },
+            { label: 'Deployment', link: '/teams-bot/deployment/' },
+            { label: 'Development', link: '/teams-bot/development/' },
+            { label: 'Troubleshooting', link: '/teams-bot/troubleshooting/' },
+          ],
+        },
+        {
           label: 'Deployment',
           items: [{ autogenerate: { directory: 'deployment' } }],
         },

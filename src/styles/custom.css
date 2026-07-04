@@ -1,16 +1,16 @@
 /* ============================================
    Chukfi CMS — Brand Theme for Starlight
    Live at https://chukfi.dev
-   ============================================ */
+   ============================================
+
+   Brand colors: deep indigo-blue (#1e3a5f) with warm amber accent (#f59e0b)
+   Dark mode: lighter blue (#60a5fa) with golden amber (#fbbf24)
+*/
 
 /* ---- Chukfi Brand Colors ---- */
 :root {
-  /* Primary brand — deep indigo-blue */
   --chukfi-brand: #1e3a5f;
   --chukfi-brand-light: #2d5a8e;
-  --chukfi-brand-glow: #3b82f6;
-
-  /* Accent — warm amber/gold */
   --chukfi-accent: #f59e0b;
   --chukfi-accent-light: #fbbf24;
 
@@ -41,7 +41,6 @@
 :root[data-theme="dark"] {
   --chukfi-brand: #60a5fa;
   --chukfi-brand-light: #93bbfd;
-
   --chukfi-accent: #fbbf24;
   --chukfi-accent-light: #fcd34d;
 
@@ -71,7 +70,7 @@
    Starlight Splash Template
    ============================================ */
 
-/* Hero section container */
+/* Hero section */
 .hero {
   padding: 3rem 0;
 }
@@ -141,7 +140,7 @@
 }
 
 /* ============================================
-   Content Area
+   Content Area — Starlight uses .sl-markdown-content
    ============================================ */
 
 /* Section headings */
