@@ -13,11 +13,11 @@ description: Get started with Chukfi CMS in minutes — install, local dev, and 
 
 <video src="/videos/quick-start.mp4" controls autoplay loop muted style="width: 100%; border-radius: 0.75rem; border: 1px solid var(--sl-color-gray-5); margin: 1.5rem 0;" />
 
+Install the CLI:
+
 ```bash
 npm install @chukfi/cli
 ```
-
-## Local Development
 
 Start the local development server:
 
@@ -30,6 +30,8 @@ This will:
 2. Spawn an ephemeral `postgres:17-alpine` container on port 5433
 3. Run embedded migrations
 4. Start the Rust API on port 8080
+
+Your CMS is now running at **http://localhost:8080**.
 
 ## Initialize a Project
 

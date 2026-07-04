@@ -1,4 +1,4 @@
-import { AbsoluteFill, Sequence, useCurrentFrame, useVideoConfig } from 'remotion';
+import { AbsoluteFill, useCurrentFrame } from 'remotion';
 
 /* ── Color Palette ──────────────────────────────────────── */
 const COLORS = {
@@ -6,7 +6,6 @@ const COLORS = {
   surface: '#1e293b',
   surfaceLight: '#334155',
   brand: '#60a5fa',
-  brandDark: '#1e3a5f',
   accent: '#fbbf24',
   text: '#f1f5f9',
   textMuted: '#94a3b8',
@@ -14,18 +13,17 @@ const COLORS = {
   terminal: '#0d1117',
 };
 
-/* ── Fonts ──────────────────────────────────────────────── */
 const FONT = { family: 'Inter, system-ui, sans-serif', weight: 700 };
 const FONT_MONO = { family: 'JetBrains Mono, Fira Code, monospace', weight: 400 };
 
-/* ── Helpers ─────────────────────────────────────────────── */
+/* ── Easing ──────────────────────────────────────────────── */
 const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
 const slideUp = (frame: number, start: number, duration: number = 15) => {
   const progress = Math.max(0, Math.min(1, (frame - start) / duration));
   return easeOut(progress);
 };
 
-/* ── Scene 1: Logo + Tagline ─────────────────────────────── */
+/* ── Scene 1: Full-Screen Logo + Tagline ─────────────────── */
 const IntroScene: React.FC<{ frame: number }> = ({ frame }) => {
   const p = slideUp(frame, 0, 20);
   const subtitleP = slideUp(frame, 10, 15);
@@ -39,16 +37,31 @@ const IntroScene: React.FC<{ frame: number }> = ({ frame }) => {
         justifyContent: 'center',
       }}
     >
-      {/* Logo mark */}
+      {/* Background glow */}
+      <div
+        style={{
+          position: 'absolute',
+          width: 600,
+          height: 600,
+          borderRadius: '50%',
+          background: `radial-gradient(circle, rgba(96, 165, 250, 0.08) 0%, transparent 70%)`,
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+        }}
+      />
+
+      {/* Logo mark — large */}
       <svg
-        width="80"
-        height="80"
+        width="120"
+        height="120"
         viewBox="0 0 32 32"
         fill="none"
         style={{
           opacity: p,
-          transform: `translateY(${(1 - p) * 30}px)`,
-          marginBottom: 24,
+          transform: `translateY(${(1 - p) * 40}px) scale(${p})`,
+          marginBottom: 32,
+          filter: 'drop-shadow(0 0 30px rgba(96, 165, 250, 0.3))',
         }}
       >
         <path
@@ -62,17 +75,18 @@ const IntroScene: React.FC<{ frame: number }> = ({ frame }) => {
         />
       </svg>
 
-      {/* Title */}
+      {/* Title — huge */}
       <h1
         style={{
           fontFamily: FONT.family,
           fontWeight: FONT.weight,
-          fontSize: 64,
+          fontSize: 96,
           color: COLORS.text,
           margin: 0,
           opacity: p,
-          transform: `translateY(${(1 - p) * 30}px)`,
+          transform: `translateY(${(1 - p) * 40}px)`,
           letterSpacing: '-0.03em',
+          textAlign: 'center',
         }}
       >
         Chukfi{' '}
@@ -84,11 +98,11 @@ const IntroScene: React.FC<{ frame: number }> = ({ frame }) => {
         style={{
           fontFamily: FONT.family,
           fontWeight: 400,
-          fontSize: 24,
+          fontSize: 32,
           color: COLORS.textMuted,
-          marginTop: 16,
+          marginTop: 20,
           opacity: subtitleP,
-          transform: `translateY(${(1 - subtitleP) * 20}px)`,
+          transform: `translateY(${(1 - subtitleP) * 25}px)`,
         }}
       >
         Ship a CMS in 30 Seconds
@@ -97,7 +111,7 @@ const IntroScene: React.FC<{ frame: number }> = ({ frame }) => {
   );
 };
 
-/* ── Scene 2: Terminal ────────────────────────────────────── */
+/* ── Scene 2: Full-Screen Terminal ────────────────────────── */
 const TerminalLine: React.FC<{
   text: string;
   prompt?: string;
@@ -116,12 +130,13 @@ const TerminalLine: React.FC<{
     <div
       style={{
         fontFamily: FONT_MONO.family,
-        fontSize: 20,
+        fontSize: 28,
         color: isOutput ? COLORS.green : COLORS.text,
         opacity: p,
         transform: `translateY(${(1 - p) * 10}px)`,
-        lineHeight: 1.8,
+        lineHeight: 2.0,
         whiteSpace: 'pre',
+        padding: '0 40px',
       }}
     >
       {isOutput ? (
@@ -134,12 +149,12 @@ const TerminalLine: React.FC<{
             <span
               style={{
                 display: 'inline-block',
-                width: 10,
-                height: 22,
+                width: 14,
+                height: 30,
                 backgroundColor: COLORS.text,
-                opacity: Math.floor(frame / 6) % 2 === 0 ? 1 : 0,
+                opacity: Math.floor(frame / 5) % 2 === 0 ? 1 : 0,
                 verticalAlign: 'text-bottom',
-                marginLeft: 2,
+                marginLeft: 3,
               }}
             />
           )}
@@ -157,95 +172,97 @@ const TerminalScene: React.FC<{ frame: number }> = ({ frame }) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        padding: 40,
       }}
     >
-      {/* Terminal window */}
+      {/* Terminal window — fills most of the screen */}
       <div
         style={{
-          width: 800,
+          width: '100%',
+          maxWidth: 1400,
           backgroundColor: COLORS.terminal,
-          borderRadius: 12,
+          borderRadius: 16,
           border: `1px solid ${COLORS.surfaceLight}`,
           overflow: 'hidden',
-          boxShadow: '0 20px 60px rgba(0,0,0,0.5)',
+          boxShadow: '0 30px 80px rgba(0,0,0,0.6)',
         }}
       >
         {/* Title bar */}
         <div
           style={{
-            height: 36,
+            height: 48,
             backgroundColor: COLORS.surface,
             display: 'flex',
             alignItems: 'center',
-            padding: '0 16px',
-            gap: 8,
+            padding: '0 20px',
+            gap: 10,
           }}
         >
-          <div style={{ width: 12, height: 12, borderRadius: '50%', backgroundColor: '#ef4444' }} />
-          <div style={{ width: 12, height: 12, borderRadius: '50%', backgroundColor: '#f59e0b' }} />
-          <div style={{ width: 12, height: 12, borderRadius: '50%', backgroundColor: '#22c55e' }} />
+          <div style={{ width: 14, height: 14, borderRadius: '50%', backgroundColor: '#ef4444' }} />
+          <div style={{ width: 14, height: 14, borderRadius: '50%', backgroundColor: '#f59e0b' }} />
+          <div style={{ width: 14, height: 14, borderRadius: '50%', backgroundColor: '#22c55e' }} />
           <span
             style={{
               fontFamily: FONT_MONO.family,
-              fontSize: 13,
+              fontSize: 16,
               color: COLORS.textMuted,
-              marginLeft: 16,
+              marginLeft: 20,
             }}
           >
-            terminal — chukfi — 80×24
+            terminal — chukfi
           </span>
         </div>
 
         {/* Terminal content */}
-        <div style={{ padding: '20px 24px', minHeight: 280 }}>
+        <div style={{ padding: '32px 0', minHeight: 420 }}>
           <TerminalLine
             text="npm install @chukfi/cli"
             frame={frame}
             delay={0}
-            speed={3}
+            speed={2}
           />
           <TerminalLine
             text="+ @chukfi/cli@1.0.0"
             isOutput
             frame={frame}
-            delay={45}
+            delay={40}
           />
           <TerminalLine
             text="added 1 package in 2s"
             isOutput
             frame={frame}
-            delay={55}
+            delay={50}
           />
-          <div style={{ height: 12 }} />
+          <div style={{ height: 20 }} />
           <TerminalLine
             text="npx chukfi dev"
             frame={frame}
-            delay={75}
-            speed={3}
+            delay={70}
+            speed={2}
           />
           <TerminalLine
             text="✓ Docker detected (Docker Desktop)"
             isOutput
             frame={frame}
-            delay={120}
+            delay={110}
           />
           <TerminalLine
             text="✓ PostgreSQL 17 started on port 5433"
             isOutput
             frame={frame}
-            delay={130}
+            delay={120}
           />
           <TerminalLine
             text="✓ Migrations applied"
             isOutput
             frame={frame}
-            delay={138}
+            delay={128}
           />
           <TerminalLine
             text="✓ Chukfi CMS running on http://localhost:8080"
             isOutput
             frame={frame}
-            delay={146}
+            delay={136}
           />
         </div>
       </div>
@@ -253,7 +270,7 @@ const TerminalScene: React.FC<{ frame: number }> = ({ frame }) => {
   );
 };
 
-/* ── Scene 3: Success / CTA ───────────────────────────────── */
+/* ── Scene 3: Full-Screen Success ─────────────────────────── */
 const OutroScene: React.FC<{ frame: number }> = ({ frame }) => {
   const p = slideUp(frame, 0, 20);
   const urlP = slideUp(frame, 15, 15);
@@ -267,22 +284,37 @@ const OutroScene: React.FC<{ frame: number }> = ({ frame }) => {
         justifyContent: 'center',
       }}
     >
-      {/* Checkmark */}
+      {/* Background glow */}
       <div
         style={{
-          width: 80,
-          height: 80,
+          position: 'absolute',
+          width: 500,
+          height: 500,
+          borderRadius: '50%',
+          background: `radial-gradient(circle, rgba(34, 197, 94, 0.08) 0%, transparent 70%)`,
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+        }}
+      />
+
+      {/* Checkmark — large */}
+      <div
+        style={{
+          width: 120,
+          height: 120,
           borderRadius: '50%',
           backgroundColor: COLORS.green,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          marginBottom: 24,
+          marginBottom: 32,
           opacity: p,
           transform: `scale(${p})`,
+          boxShadow: '0 0 60px rgba(34, 197, 94, 0.3)',
         }}
       >
-        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="20 6 9 17 4 12" />
         </svg>
       </div>
@@ -291,11 +323,12 @@ const OutroScene: React.FC<{ frame: number }> = ({ frame }) => {
         style={{
           fontFamily: FONT.family,
           fontWeight: FONT.weight,
-          fontSize: 48,
+          fontSize: 72,
           color: COLORS.text,
           margin: 0,
           opacity: p,
-          transform: `translateY(${(1 - p) * 20}px)`,
+          transform: `translateY(${(1 - p) * 25}px)`,
+          letterSpacing: '-0.02em',
         }}
       >
         Your CMS is Live
@@ -303,28 +336,29 @@ const OutroScene: React.FC<{ frame: number }> = ({ frame }) => {
 
       <p
         style={{
-          fontFamily: FONT.family,
+          fontFamily: FONT_MONO.family,
           fontWeight: 400,
-          fontSize: 20,
-          color: COLORS.textMuted,
-          marginTop: 12,
+          fontSize: 28,
+          color: COLORS.brand,
+          marginTop: 20,
           opacity: urlP,
-          transform: `translateY(${(1 - urlP) * 15}px)`,
+          transform: `translateY(${(1 - urlP) * 20}px)`,
+          backgroundColor: COLORS.surface,
+          padding: '12px 32px',
+          borderRadius: 8,
+          border: `1px solid ${COLORS.surfaceLight}`,
         }}
       >
-        Ready at{' '}
-        <span style={{ color: COLORS.brand, fontFamily: FONT_MONO.family }}>
-          http://localhost:8080
-        </span>
+        http://localhost:8080
       </p>
 
       <p
         style={{
           fontFamily: FONT.family,
           fontWeight: 400,
-          fontSize: 16,
+          fontSize: 20,
           color: COLORS.textMuted,
-          marginTop: 32,
+          marginTop: 40,
           opacity: Math.max(0, urlP - 0.3),
         }}
       >
@@ -343,7 +377,7 @@ export const QuickStart: React.FC = () => {
       {/* Scene 1: Intro — frames 0-45 */}
       {frame < 45 && <IntroScene frame={frame} />}
 
-      {/* Scene 2: Terminal — frames 45-130 */}
+      {/* Scene 2: Terminal — frames 40-135 */}
       {frame >= 40 && frame < 135 && (
         <div style={{ opacity: frame < 45 ? (frame - 40) / 5 : frame > 130 ? (135 - frame) / 5 : 1 }}>
           <TerminalScene frame={frame - 45} />
