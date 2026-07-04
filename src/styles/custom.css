@@ -72,7 +72,8 @@
 
 /* Hero section */
 .hero {
-  padding: 3rem 0;
+  padding: 4rem 0;
+  position: relative;
 }
 
 /* Hero title — gradient text */
@@ -81,6 +82,9 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  font-size: 3.5rem !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.03em !important;
 }
 
 :root[data-theme="dark"] .hero h1 {
@@ -93,9 +97,9 @@
 /* Hero tagline */
 .hero .tagline {
   color: var(--sl-color-gray-2);
-  font-size: 1.15rem;
-  line-height: 1.6;
-  max-width: 640px;
+  font-size: 1.2rem !important;
+  line-height: 1.7;
+  max-width: 680px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -142,6 +146,106 @@
 /* ============================================
    Content Area — Starlight uses .sl-markdown-content
    ============================================ */
+
+/* Feature grid */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin: 2rem 0;
+}
+
+.feature-card {
+  background: var(--sl-color-gray-6);
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(135deg, #1e3a5f 0%, #3b82f6 100%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+:root[data-theme="dark"] .feature-card::before {
+  background: linear-gradient(135deg, #60a5fa 0%, #93bbfd 100%);
+}
+
+.feature-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--sl-color-accent);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+:root[data-theme="dark"] .feature-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.feature-card:hover::before {
+  opacity: 1;
+}
+
+.feature-card.accent {
+  border-color: var(--sl-color-accent-low);
+  background: linear-gradient(135deg, var(--sl-color-gray-6) 0%, var(--sl-color-accent-low) 100%);
+}
+
+.feature-card.compact {
+  padding: 1rem 1.25rem;
+}
+
+.feature-card.compact h3 {
+  margin-bottom: 0.25rem !important;
+}
+
+.feature-card.compact p {
+  margin: 0 !important;
+  font-size: 0.85rem;
+}
+
+.feature-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+  font-weight: 700;
+  background: var(--sl-color-accent-low);
+  color: var(--sl-color-accent);
+}
+
+.feature-card h3 {
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 0.5rem !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+.feature-card p {
+  font-size: 0.9rem;
+  color: var(--sl-color-gray-2);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.feature-card a {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
 
 /* Section headings */
 .sl-markdown-content h2 {

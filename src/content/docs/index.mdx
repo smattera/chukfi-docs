@@ -3,8 +3,8 @@ title: Chukfi CMS
 description: A high-performance, lightweight headless CMS built with Rust, Astro, and Cloudflare. CLI-first, local-to-prod parity, one-command deploy.
 template: splash
 hero:
-  title: Chukfi CMS
-  tagline: A high-performance, lightweight headless CMS built with Rust, Astro, and Cloudflare. CLI-first distribution, local-to-prod parity, one-command AWS deploy.
+  title: 'Ship a CMS in Minutes.<br/>Manage It with AI.'
+  tagline: Chukfi is a headless CMS purpose-built for solo developers. CLI-first distribution, local-to-prod parity, one-command AWS deploy — and every command speaks JSON so AI agents can manage your content for you.
   image:
     file: ../../assets/logo.svg
   actions:
@@ -20,11 +20,56 @@ hero:
 
 ## Why Chukfi?
 
-Chukfi is a headless CMS purpose-built for solo developers shipping Astro sites. Three non-negotiable pillars:
+Chukfi is a headless CMS built from the ground up for **speed, simplicity, and AI-native workflows**. Three non-negotiable pillars:
 
-- **CLI-First Distribution** — The Rust binary ships as platform-specific npm packages. `npx chukfi` — no Rust toolchain, no build steps, no operating knowledge required.
-- **Local-to-Prod Parity** — Local dev uses Docker-managed PostgreSQL; production uses AWS RDS PostgreSQL. Same engine, same migrations, same SQL. No SQLite surprises.
-- **One-Command Deploy** — `npx chukfi deploy` provisions the full AWS stack via CDK. One domain, one bill, no hybrid hosting. Free Tier eligible.
+<div class="feature-grid">
+
+<div class="feature-card">
+<div class="feature-icon terminal">></div>
+<h3>CLI-First Distribution</h3>
+<p>The Rust binary ships as platform-specific npm packages. <code>npx chukfi</code> — no Rust toolchain, no build steps, no Docker Compose files to write.</p>
+</div>
+
+<div class="feature-card">
+<div class="feature-icon database">DB</div>
+<h3>Local-to-Prod Parity</h3>
+<p>Docker PostgreSQL locally, AWS RDS in production. Same engine, same migrations, same SQL. No SQLite surprises at deploy time.</p>
+</div>
+
+<div class="feature-card">
+<div class="feature-icon cloud">☁</div>
+<h3>One-Command Deploy</h3>
+<p><code>npx chukfi deploy</code> provisions the full AWS stack via CDK. One domain, one bill, no hybrid hosting. Free Tier eligible.</p>
+</div>
+
+</div>
+
+## AI-Native by Design
+
+Every CLI command outputs structured JSON. This means **AI agents can operate Chukfi as easily as humans** — no screen scraping, no brittle parsing.
+
+<div class="feature-grid">
+
+<div class="feature-card accent">
+<div class="feature-icon sparkle">✦</div>
+<h3>Teams + Bedrock Bot</h3>
+<p>Connect Claude 3.5 Haiku via Microsoft Teams. Staff can create, list, and update content from chat — all forced to draft for human review.</p>
+<p><a href="/teams-bot/overview/">Learn more →</a></p>
+</div>
+
+<div class="feature-card accent">
+<div class="feature-icon sparkle">✦</div>
+<h3>JSON-Output CLI</h3>
+<p>Every command accepts <code>--json</code> for machine-parseable responses. AI agents get structured data, not terminal tables.</p>
+</div>
+
+<div class="feature-card accent">
+<div class="feature-icon sparkle">✦</div>
+<h3>Draft-Only Safety</h3>
+<p>AI agents can create and edit content, but never publish. Every change requires human review — enforced in code, not prompts.</p>
+</div>
+
+</div>
 
 ## Get Started in 30 Seconds
 
@@ -33,34 +78,49 @@ npm install @chukfi/cli
 npx chukfi dev
 ```
 
-That's it. Chukfi detects Docker, spawns PostgreSQL, runs migrations, and starts the API on port 8080.
+That's it. Chukfi detects Docker, spawns PostgreSQL, runs migrations, and starts the API on port 8080. Your CMS is live.
 
-## Built for AI Agents
+## What You Get
 
-Every CLI command supports `--json` output for machine-parseable responses. Chukfi is designed to be operated by AI agents as easily as by humans:
+<div class="feature-grid">
 
-```bash
-# Create a draft blog post
-npx chukfi content create \
-  --type blog-posts \
-  --title "Hello World" \
-  --fields '{"body":"<p>First post!</p>"}' \
-  --status draft \
-  --json
+<div class="feature-card">
+<div class="feature-icon content">📝</div>
+<h3>Content Management</h3>
+<p>Schema-driven content types, flexible JSON fields, draft/published workflow, version history, and full-text search.</p>
+</div>
 
-# Upload media
-npx chukfi media upload \
-  --path ./images/hero.png \
-  --alt "Hero banner" \
-  --json
+<div class="feature-card">
+<div class="feature-icon media">🖼</div>
+<h3>Media Library</h3>
+<p>Upload, tag, filter, and organize media. S3-backed storage with image transformations and folder organization.</p>
+</div>
 
-# Deploy to production
-npx chukfi site deploy \
-  --dir ./frontend \
-  --project my-site \
-  --yes \
-  --json
-```
+<div class="feature-card">
+<div class="feature-icon users">👥</div>
+<h3>Auth & RBAC</h3>
+<p>Magic link authentication, Microsoft Entra ID support, and role-based access control with granular permissions.</p>
+</div>
+
+<div class="feature-card">
+<div class="feature-icon api">🔌</div>
+<h3>REST API</h3>
+<p>Full RESTful API for content CRUD, media management, and site deployment. Built with Axum for maximum performance.</p>
+</div>
+
+<div class="feature-card">
+<div class="feature-icon code">⚡</div>
+<h3>TypeScript Codegen</h3>
+<p>Generate TypeScript types from your content schema. Type-safe content queries in your frontend, zero manual definitions.</p>
+</div>
+
+<div class="feature-card">
+<div class="feature-icon deploy">🚀</div>
+<h3>One-Click Deploy</h3>
+<p>AWS CDK provisions RDS, ECS Fargate, S3, CloudFront, and SES. One command, one bill, Free Tier friendly.</p>
+</div>
+
+</div>
 
 ## Tech Stack
 
@@ -70,19 +130,45 @@ npx chukfi site deploy \
 | **Frontend** | Astro 7 + React islands |
 | **Database** | PostgreSQL (Docker local / AWS RDS) |
 | **Auth** | Magic Link + Microsoft Entra ID |
+| **AI** | Amazon Bedrock (Claude 3.5 Haiku) |
 | **Media** | S3 / Local filesystem |
 | **Deploy** | AWS CDK / Cloudflare Pages |
 
 ## Explore the Docs
 
-- **[Overview](/guides/overview/)** — Understand the Chukfi architecture, vision, and design decisions.
-- **[Quick Start Guide](/guides/quick-start/)** — Get Chukfi running locally in under a minute.
-- **[CLI Reference](/guides/cli/)** — Complete documentation for all 10 CLI commands with flags and JSON output.
-- **[Architecture](/architecture/architecture/)** — Deep dive into the CLI-first distribution model, Astro integration, and AWS deployment.
-- **[Backend API](/backend/overview/)** — REST API documentation for content management, auth, media, and more.
-- **[Frontend](/frontend/overview/)** — Admin interface architecture — schema builder, content editor, media library.
-- **[Deployment](/deployment/overview/)** — AWS production deployment and Cloudflare Pages for the docs site.
-- **[Roadmap](/project/roadmap/)** — Upcoming features, priorities, and completed milestones.
+<div class="feature-grid">
+
+<div class="feature-card compact">
+<h3><a href="/guides/overview/">Overview</a></h3>
+<p>Architecture, vision, and design decisions.</p>
+</div>
+
+<div class="feature-card compact">
+<h3><a href="/guides/quick-start/">Quick Start</a></h3>
+<p>Running locally in under a minute.</p>
+</div>
+
+<div class="feature-card compact">
+<h3><a href="/guides/cli/">CLI Reference</a></h3>
+<p>All 10 commands with flags and JSON output.</p>
+</div>
+
+<div class="feature-card compact">
+<h3><a href="/teams-bot/overview/">Teams Bot</a></h3>
+<p>AI-powered content management via chat.</p>
+</div>
+
+<div class="feature-card compact">
+<h3><a href="/architecture/architecture/">Architecture</a></h3>
+<p>CLI distribution, Astro integration, AWS deploy.</p>
+</div>
+
+<div class="feature-card compact">
+<h3><a href="/deployment/overview/">Deployment</a></h3>
+<p>AWS production and Cloudflare Pages docs.</p>
+</div>
+
+</div>
 
 ## License
 
