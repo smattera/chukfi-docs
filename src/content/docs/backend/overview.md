@@ -1,6 +1,6 @@
 ---
 title: Backend Overview
-description: Chukfi CMS backend architecture
+description: Chukfi CMS backend architecture — REST API, auth, content engine, and media storage
 ---
 
 The Chukfi CMS backend is written in Rust and compiled to a native binary. It provides a RESTful API for content management, authentication, media handling, and more.

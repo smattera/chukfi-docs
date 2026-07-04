@@ -1,6 +1,6 @@
 ---
 title: Quick Start
-description: Get started with Chukfi CMS in minutes
+description: Get started with Chukfi CMS in minutes — install, local dev, and deploy
 ---
 
 ## Prerequisites

@@ -1,6 +1,6 @@
 ---
 title: Overview
-description: An overview of the Chukfi CMS platform
+description: An overview of the Chukfi CMS platform — a headless CMS built with Rust, Astro, and Cloudflare
 ---
 
 Chukfi is a headless CMS — a content management system that provides a content API and admin interface without dictating how your frontend renders content.

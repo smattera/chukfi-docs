@@ -1,6 +1,6 @@
 ---
 title: Architecture
-description: Chukfi CMS architecture overview
+description: Chukfi CMS architecture overview — CLI-first distribution, Astro integration, and AWS deployment
 ---
 
 # Chukfi — Phase 3 Architecture

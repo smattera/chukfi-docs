@@ -1,6 +1,6 @@
 ---
 title: Lessons Learned
-description: Lessons learned during Chukfi CMS development
+description: Lessons learned during Chukfi CMS development — monorepo mistakes, Cloudflare quirks, and more
 ---
 
 ## 2026-03-22 — Monorepo Over-Engineering

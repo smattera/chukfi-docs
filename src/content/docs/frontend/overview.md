@@ -1,6 +1,6 @@
 ---
 title: Frontend Overview
-description: Chukfi CMS frontend architecture
+description: Chukfi CMS frontend architecture — Astro 7, React islands, and admin interface
 ---
 
 The Chukfi CMS frontend is built with Astro 7 and React 19, providing a modern admin interface for content management.

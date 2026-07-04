@@ -2,10 +2,15 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
+  site: 'https://chukfi.dev',
   integrations: [
     starlight({
-      title: 'Chukfi Docs',
-      description: 'Documentation for the Chukfi CMS platform — a high-performance, lightweight CMS built with Rust, Astro, and Cloudflare.',
+      title: 'Chukfi CMS',
+      description: 'Documentation for the Chukfi CMS platform — a high-performance, lightweight headless CMS built with Rust, Astro, and Cloudflare.',
+
+      customCss: [
+        './src/styles/custom.css',
+      ],
       social: [
         { label: 'GitHub', icon: 'github', href: 'https://github.com/smattera/chukfi-docs' },
       ],
@@ -42,6 +47,7 @@ export default defineConfig({
           ],
         },
       ],
+
     }),
   ],
 });

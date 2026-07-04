@@ -1,6 +1,6 @@
 ---
 title: Roadmap
-description: Chukfi CMS feature roadmap
+description: Chukfi CMS feature roadmap — upcoming features, priorities, and completed milestones
 ---
 
 # Chukfi CMS — Feature Roadmap

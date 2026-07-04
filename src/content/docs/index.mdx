@@ -1,33 +1,87 @@
 ---
-title: Chukfi Docs
-description: Welcome to the Chukfi CMS documentation
+title: Chukfi CMS
+description: A high-performance, lightweight headless CMS built with Rust, Astro, and Cloudflare. CLI-first, local-to-prod parity, one-command deploy.
+template: splash
+hero:
+  title: Chukfi CMS
+  tagline: A high-performance, lightweight headless CMS built with Rust, Astro, and Cloudflare. CLI-first distribution, local-to-prod parity, one-command AWS deploy.
+  actions:
+    - text: Quick Start
+      link: /guides/quick-start/
+      icon: right-arrow
+      variant: primary
+    - text: CLI Reference
+      link: /guides/cli/
+      icon: external
+      variant: secondary
 ---
 
-Welcome to the **Chukfi CMS** documentation. Chukfi is a high-performance, lightweight headless CMS built with Rust, Astro, and Cloudflare.
+## Why Chukfi?
 
-## What is Chukfi?
+Chukfi is a headless CMS purpose-built for solo developers shipping Astro sites. Three non-negotiable pillars:
 
-Chukfi is a headless CMS purpose-built for Astro, distributed as a single `npx chukfi` command. It provides:
+- **CLI-First Distribution** — The Rust binary ships as platform-specific npm packages. `npx chukfi` — no Rust toolchain, no build steps, no operating knowledge required.
+- **Local-to-Prod Parity** — Local dev uses Docker-managed PostgreSQL; production uses AWS RDS PostgreSQL. Same engine, same migrations, same SQL. No SQLite surprises.
+- **One-Command Deploy** — `npx chukfi deploy` provisions the full AWS stack via CDK. One domain, one bill, no hybrid hosting. Free Tier eligible.
 
-- **CLI-first distribution** — The Rust binary ships as platform-specific npm packages. No Rust toolchain required.
-- **Local-to-prod parity** — Local dev uses Docker PostgreSQL; production uses AWS RDS PostgreSQL. Same engine, same migrations.
-- **AWS-only deploy** — One command provisions the full stack on AWS via CDK.
+## Get Started in 30 Seconds
 
-## Quick Links
+```bash
+npm install @chukfi/cli
+npx chukfi dev
+```
 
-- [Overview](/guides/overview/)
-- [Quick Start](/guides/quick-start/)
-- [Architecture](/architecture/architecture/)
-- [Roadmap](/project/roadmap/)
-- [Lessons Learned](/project/lessons/)
+That's it. Chukfi detects Docker, spawns PostgreSQL, runs migrations, and starts the API on port 8080.
+
+## Built for AI Agents
+
+Every CLI command supports `--json` output for machine-parseable responses. Chukfi is designed to be operated by AI agents as easily as by humans:
+
+```bash
+# Create a draft blog post
+npx chukfi content create \
+  --type blog-posts \
+  --title "Hello World" \
+  --fields '{"body":"<p>First post!</p>"}' \
+  --status draft \
+  --json
+
+# Upload media
+npx chukfi media upload \
+  --path ./images/hero.png \
+  --alt "Hero banner" \
+  --json
+
+# Deploy to production
+npx chukfi site deploy \
+  --dir ./frontend \
+  --project my-site \
+  --yes \
+  --json
+```
 
 ## Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
-| Backend | Rust (compiled to native binary) |
-| Frontend | Astro 7 + React islands |
-| Database | PostgreSQL (local Docker / AWS RDS) |
-| Auth | Magic Link + Microsoft Entra ID |
-| Media | S3 / Local filesystem |
-| Deploy | AWS CDK / Cloudflare Pages |
+| **Backend** | Rust (native binary via Axum) |
+| **Frontend** | Astro 7 + React islands |
+| **Database** | PostgreSQL (Docker local / AWS RDS) |
+| **Auth** | Magic Link + Microsoft Entra ID |
+| **Media** | S3 / Local filesystem |
+| **Deploy** | AWS CDK / Cloudflare Pages |
+
+## Explore the Docs
+
+- **[Overview](/guides/overview/)** — Understand the Chukfi architecture, vision, and design decisions.
+- **[Quick Start Guide](/guides/quick-start/)** — Get Chukfi running locally in under a minute.
+- **[CLI Reference](/guides/cli/)** — Complete documentation for all 10 CLI commands with flags and JSON output.
+- **[Architecture](/architecture/architecture/)** — Deep dive into the CLI-first distribution model, Astro integration, and AWS deployment.
+- **[Backend API](/backend/overview/)** — REST API documentation for content management, auth, media, and more.
+- **[Frontend](/frontend/overview/)** — Admin interface architecture — schema builder, content editor, media library.
+- **[Deployment](/deployment/overview/)** — AWS production deployment and Cloudflare Pages for the docs site.
+- **[Roadmap](/project/roadmap/)** — Upcoming features, priorities, and completed milestones.
+
+## License
+
+MIT

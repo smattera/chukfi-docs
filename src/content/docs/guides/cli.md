@@ -1,6 +1,6 @@
 ---
 title: CLI Reference
-description: Complete reference for the Chukfi CLI — content management, media uploads, site deployment, and code generation.
+description: Complete reference for the Chukfi CMS CLI — content management, media uploads, site deployment, and code generation.
 ---
 
 The `chukfi` CLI is the primary interface for managing your CMS, both for humans and AI agents. Every command supports `--json` for machine-parseable output and clear exit codes.

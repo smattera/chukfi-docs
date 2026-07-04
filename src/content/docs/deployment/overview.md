@@ -1,6 +1,6 @@
 ---
 title: Deployment Overview
-description: Deploying Chukfi CMS
+description: Deploying Chukfi CMS — AWS production stack and Cloudflare Pages docs
 ---
 
 Chukfi CMS supports two deployment targets: **AWS** for production and **Cloudflare** for the docs site.
