@@ -15,6 +15,7 @@ export default defineConfig({
           items: [
             { label: 'Overview', link: '/guides/overview/' },
             { label: 'Quick Start', link: '/guides/quick-start/' },
+            { label: 'CLI Reference', link: '/guides/cli/' },
           ],
         },
         {
