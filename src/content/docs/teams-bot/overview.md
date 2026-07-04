@@ -3,18 +3,18 @@ title: Teams Bot Overview
 description: Architecture and capabilities of the Chukfi CMS Teams Bot — AI-powered content management via Microsoft Teams and Amazon Bedrock.
 ---
 
-The Chukfi Teams Bot connects Microsoft Teams to the Chukfi CMS through Amazon Bedrock (Claude 3.5 Haiku). CHC staff can create, list, and update website content directly from Teams conversations without touching the admin interface.
+The Chukfi Teams Bot connects Microsoft Teams to the Chukfi CMS through Amazon Bedrock (Claude 3.5 Haiku). Staff can create, list, and update website content directly from Teams conversations without touching the admin interface.
 
 ## Architecture
 
 ```
-[CHC Staff] ──(Teams @mention)──> [chukfi-teams-bot]
+[Staff] ──(Teams @mention)──> [chukfi-teams-bot]
                                        │
                                   FastAPI Server
                                        │
                             ┌──────────┴──────────┐
                             │  HMAC Verification   │  ← Teams webhook origin
-                            │  Entra Tenant Check  │  ← Only NCS/CHC tenants
+                            │  Entra Tenant Check  │  ← Only authorized tenants
                             └──────────┬──────────┘
                                        │
                             ┌──────────┴──────────┐
@@ -74,7 +74,7 @@ The bot checks the tenant ID sent cryptographically by Teams in `channelData.ten
 # config.py — Tenant whitelist
 ALLOWED_TENANTS: ClassVar[set[str]] = {
     "ncs-tenant-uuid-here",  # Replace with actual NCS UUID
-    "chc-tenant-uuid-here",  # Replace with actual CHC UUID
+    "your-tenant-uuid-here",  # Replace with your actual Entra Tenant UUID
 }
 ```
 

@@ -7,7 +7,7 @@ description: How to set up the Chukfi Teams Bot — AWS Bedrock, Teams Outgoing 
 
 - Python 3.11+
 - An **AWS account** with Bedrock access (Claude 3.5 Haiku)
-- A **Microsoft 365 tenant** with Teams (NCS or CHC)
+- A **Microsoft 365 tenant** with Teams
 - The **`chukfi` CLI binary** compiled and on PATH
 - A **PostgreSQL database** for the Chukfi CMS
 
@@ -48,7 +48,7 @@ aws bedrock-runtime converse \
 3. Configure:
    - **Name:** `Chukfi CMS Bot`
    - **Callback URL:** `https://your-server.com/api/webhook`
-   - **Description:** `AI-powered content management for CHC website`
+   - **Description:** `AI-powered content management`
 4. Click **Create**
 5. **Copy the HMAC secret** — you'll need it for the environment config
 
@@ -84,12 +84,11 @@ cp .env.example .env
 
 ### Update Tenant IDs
 
-Edit `config.py` to set the actual NCS and CHC Entra Tenant UUIDs:
+Edit `config.py` to set your actual Entra Tenant UUIDs:
 
 ```python
 ALLOWED_TENANTS: ClassVar[set[str]] = {
-    "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",  # NCS tenant UUID
-    "ffffffff-gggg-hhhh-iiii-jjjjjjjjjjjj",  # CHC tenant UUID
+    "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",  # Your tenant UUID
 }
 ```
 

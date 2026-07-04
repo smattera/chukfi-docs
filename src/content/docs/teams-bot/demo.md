@@ -109,7 +109,7 @@ curl -X POST http://localhost:8000/api/webhook \
 - **Cost: ~$22/month** — All-in for moderate usage
 - **No data training** — Bedrock doesn't train on your data
 - **Draft-only** — No accidental publishing
-- **Tenant-restricted** — Only CHC staff can use it
+- **Tenant-restricted** — Only authorized tenants can use it
 
 ## Demo Troubleshooting
 
