@@ -13,6 +13,12 @@ description: Get started with Chukfi CMS in minutes — install, local dev, and 
 
 <video src="/videos/quick-start.mp4" controls autoplay loop muted style="width: 100%; border-radius: 0.75rem; border: 1px solid var(--sl-color-gray-5); margin: 1.5rem 0;" />
 
+If the video doesn't load, here's what you'll see:
+
+1. **Chukfi CMS logo** with the tagline "Ship a CMS in 30 Seconds"
+2. **Terminal demo** showing the two commands to get started
+3. **"Your CMS is Live"** confirmation screen
+
 Install the CLI:
 
 ```bash
