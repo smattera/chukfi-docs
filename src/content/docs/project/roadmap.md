@@ -11,6 +11,13 @@ Features discussed and prioritized for future implementation.
 
 ## High Priority
 
+### Infrastructure & Performance
+
+- **Static assets → CDN** — serve `/admin-ui/dist/*` from Cloudflare's CDN rather than the Worker. Single biggest end-user latency win: edge caching for all static JS/CSS/HTML, API-only load on the origin Worker.
+- **D1 query optimization** — profile and tune hot D1 queries with `wrangler d1 execute --json`. D1 latency dominates API response times; query tuning yields more than any JS-level optimization.
+- **Bun profiling** — use `bun --inspect` and Chrome DevTools to profile hot Worker paths. The runtime is Bun now, not Rust — chase the JS hot paths.
+- **Edge caching strategy** — add `Cache-Control` headers on public API endpoints and use Cloudflare Cache API in the Worker for frequently-accessed content. Reduces Worker invocation count and end-user latency.
+
 ### Bun product line
 - What else can we implement from Bun? They currently offer their Runtime, Package Manager, Bundler, Test Running... and now Bun Image. (https://bun.com/docs/runtime/image)
 - Check to see if these actually fit into our tech stack before implementing. This would be great if it could replace Cloudflare Image Compression.
