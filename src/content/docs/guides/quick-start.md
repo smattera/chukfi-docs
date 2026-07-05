@@ -16,8 +16,10 @@ description: Get started with Chukfi CMS in minutes — install, local dev, and 
 If the video doesn't load, here's what you'll see:
 
 1. **Chukfi CMS logo** with the tagline "Ship a CMS in 30 Seconds"
-2. **Terminal demo** showing the two commands to get started
-3. **"Your CMS is Live"** confirmation screen
+2. **Terminal demo** — two commands typed out:
+   - `npm install @chukfi/cli` — installs the CLI (1,847 packages)
+   - `npx chukfi dev` — starts the dev server (Docker → PostgreSQL → API on port 8080)
+3. **"Your CMS is Live"** confirmation screen with the URL
 
 Install the CLI:
 
