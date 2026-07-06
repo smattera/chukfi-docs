@@ -1,6 +1,6 @@
 ---
 title: Roadmap
-description: Chukfi CMS feature roadmap — upcoming features, priorities, and completed milestones (AWS: ECS Fargate + RDS PostgreSQL + CloudFront)
+description: "Chukfi CMS feature roadmap — upcoming features, priorities, and completed milestones (AWS: ECS Fargate + RDS PostgreSQL + CloudFront)"
 ---
 
 # Chukfi CMS — Feature Roadmap
