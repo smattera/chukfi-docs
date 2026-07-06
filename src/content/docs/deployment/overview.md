@@ -5,6 +5,11 @@ description: Deploying Chukfi CMS — production AWS stack (ECS Fargate + RDS Po
 
 Chukfi CMS deploys entirely to AWS. The `npx chukfi deploy` command provisions the full production stack via the AWS CDK:
 
+<video controls autoplay loop muted playsinline style="width: 100%; border-radius: 0.75rem; border: 1px solid var(--sl-color-gray-5); margin: 1.5rem 0;">
+  <source src="/videos/deploy-tour.webm" type="video/webm">
+  <source src="/videos/deploy-tour.mp4" type="video/mp4">
+</video>
+
 | Resource | Config |
 |----------|--------|
 | RDS PostgreSQL | `db.t4g.micro`, 20 GB, single-AZ |
