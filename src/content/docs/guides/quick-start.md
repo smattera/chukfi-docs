@@ -11,17 +11,7 @@ description: Get started with Chukfi CMS in minutes — install, local dev, and 
 
 ## Installation
 
-<video src="/videos/quick-start.webm" controls autoplay loop muted style="width: 100%; border-radius: 0.75rem; border: 1px solid var(--sl-color-gray-5); margin: 1.5rem 0;" />
-
-If the video doesn't load, here's what you'll see:
-
-1. **Chukfi CMS logo** with the tagline "Ship a CMS in 30 Seconds"
-2. **Terminal demo** — 3 lines showing ease of use:
-   - `npm install @chukfi/cli` — installs the CLI
-   - `npx chukfi dev` — starts the dev server
-   - `  ✓ API ready on port 8080` — server is live
-3. **"Ready"** confirmation screen with the URL
-4. **Chukfi CMS logo** — video loops back to the start
+<video src="/videos/quick-start.webm" controls autoplay loop muted style="width: 100%; border-radius: 0.75rem; border: 1px solid var(--sl-color-gray-5); margin: 1.5rem 0;"></video>
 
 Install the CLI:
 
