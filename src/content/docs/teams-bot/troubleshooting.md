@@ -153,7 +153,7 @@ nslookup your-server.com
 
 ```bash
 curl https://your-server.com/health
-# Should return: {"status": "ok", "version": "0.1.0"}
+# Should return: {"status": "ok", "version": "0.2.0"}
 ```
 
 **Teams Outgoing Webhook requirements:**

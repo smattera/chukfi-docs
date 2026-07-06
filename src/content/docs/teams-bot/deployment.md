@@ -165,7 +165,7 @@ The bot exposes a health check endpoint:
 
 ```bash
 curl https://your-server.com/health
-# {"status": "ok", "version": "0.1.0"}
+# {"status": "ok", "version": "0.2.0"}
 ```
 
 Configure your load balancer or orchestrator to use `GET /health` with a 30-second interval.
