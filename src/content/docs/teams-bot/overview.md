@@ -5,6 +5,11 @@ description: Architecture and capabilities of the Chukfi CMS Teams Bot — AI-po
 
 The Chukfi Teams Bot connects Microsoft Teams to the Chukfi CMS through Amazon Bedrock (Claude 3.5 Haiku). Staff can create, list, and update website content directly from Teams conversations without touching the admin interface.
 
+<video controls autoplay loop muted playsinline style="width: 100%; border-radius: 0.75rem; border: 1px solid var(--sl-color-gray-5); margin: 1.5rem 0;">
+  <source src="/videos/teams-bot-tour.webm" type="video/webm">
+  <source src="/videos/teams-bot-tour.mp4" type="video/mp4">
+</video>
+
 ## Architecture
 
 ```
