@@ -1,6 +1,6 @@
 ---
 title: Roadmap
-description: Chukfi CMS feature roadmap — upcoming features, priorities, and completed milestones
+description: Chukfi CMS feature roadmap — upcoming features, priorities, and completed milestones (AWS: ECS Fargate + RDS PostgreSQL + CloudFront)
 ---
 
 # Chukfi CMS — Feature Roadmap
@@ -13,14 +13,10 @@ Features discussed and prioritized for future implementation.
 
 ### Infrastructure & Performance
 
-- **Static assets → CDN** — serve `/admin-ui/dist/*` from Cloudflare's CDN rather than the Worker. Single biggest end-user latency win: edge caching for all static JS/CSS/HTML, API-only load on the origin Worker.
-- **D1 query optimization** — profile and tune hot D1 queries with `wrangler d1 execute --json`. D1 latency dominates API response times; query tuning yields more than any JS-level optimization.
-- **Bun profiling** — use `bun --inspect` and Chrome DevTools to profile hot Worker paths. The runtime is Bun now, not Rust — chase the JS hot paths.
-- **Edge caching strategy** — add `Cache-Control` headers on public API endpoints and use Cloudflare Cache API in the Worker for frequently-accessed content. Reduces Worker invocation count and end-user latency.
-
-### Bun product line
-- What else can we implement from Bun? They currently offer their Runtime, Package Manager, Bundler, Test Running... and now Bun Image. (https://bun.com/docs/runtime/image)
-- Check to see if these actually fit into our tech stack before implementing. This would be great if it could replace Cloudflare Image Compression.
+- **S3 + CloudFront for Admin UI** — serve the static admin UI (`admin-ui/dist/`) from S3 via CloudFront instead of through the Axum binary on ECS Fargate. Single biggest latency + cost win: edge-cached static assets, API-only Fargate load.
+- **RDS Proxy / Connection pooling** — add AWS RDS Proxy or tune SQLx connection pool limits aggressively. ECS Fargate tasks scale horizontally and can exhaust Postgres connection limits without pooling.
+- **AWS X-Ray / tracing** — integrate distributed tracing to profile database queries and middleware overhead under production load.
+- **CloudFront cache-control for media** — harden `Cache-Control` headers on S3 media objects served via CloudFront to maximize edge cache hit ratios.
 
 ---
 
@@ -52,7 +48,7 @@ A review queue so authors can submit content for editorial sign-off before it go
 
 ### Analytics Dashboard
 Basic traffic and engagement metrics surfaced inside the admin without a third-party dashboard.
-- Use Cloudflare Workers Analytics Engine to record page views via a lightweight `GET /api/track?path=...` pixel
+- Use a lightweight API endpoint (`GET /api/track?path=...`) that logs page views to RDS PostgreSQL (JSONB) with a CloudWatch dashboard for metrics
 - Dashboard page: top content by views (7d/30d), subscriber growth over time, form submission volume
 - No PII collected — only path + date + rough geo (country)
 
@@ -71,7 +67,7 @@ Drag-and-drop tree of links (internal pages or external URLs) outputting a navig
 ### Nested / Repeatable Fields
 Array-type field where each item is a group of sub-fields (e.g. a "sections" array on a page, each section having `heading` + `body` + `image`).
 - New field type: `repeatable` with `subfields: CmsField[]`
-- Stored as JSON in D1
+- Stored as JSONB in PostgreSQL
 - Frontend: add/remove/reorder rows in the form
 
 ---

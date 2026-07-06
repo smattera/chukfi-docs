@@ -1,6 +1,6 @@
 ---
 title: Chukfi CMS
-description: A high-performance, lightweight headless CMS built with Rust, Astro, and Cloudflare. CLI-first, local-to-prod parity, one-command deploy.
+description: A high-performance, lightweight headless CMS built with Rust, Astro, and AWS. CLI-first, local-to-prod parity, one-command deploy to AWS ECS Fargate.
 template: splash
 hero:
   title: 'Ship a CMS in Minutes.<br/>Manage It with AI.'
@@ -132,7 +132,7 @@ That's it. Chukfi detects Docker, spawns PostgreSQL, runs migrations, and starts
 | **Auth** | Magic Link + Microsoft Entra ID |
 | **AI** | Amazon Bedrock (Claude 3.5 Haiku) |
 | **Media** | S3 / Local filesystem |
-| **Deploy** | AWS CDK / Cloudflare Pages |
+| **Deploy** | AWS CDK (ECS Fargate + RDS + S3 + CloudFront) |
 
 ## Explore the Docs
 
@@ -165,7 +165,7 @@ That's it. Chukfi detects Docker, spawns PostgreSQL, runs migrations, and starts
 
 <div class="feature-card compact">
 <h3><a href="/deployment/overview/">Deployment</a></h3>
-<p>AWS production and Cloudflare Pages docs.</p>
+<p>AWS production stack (ECS Fargate, RDS, S3, CloudFront).</p>
 </div>
 
 </div>

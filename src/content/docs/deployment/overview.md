@@ -1,13 +1,9 @@
 ---
 title: Deployment Overview
-description: Deploying Chukfi CMS — AWS production stack and Cloudflare Pages docs
+description: Deploying Chukfi CMS — production AWS stack (ECS Fargate + RDS PostgreSQL + S3 + CloudFront)
 ---
 
-Chukfi CMS supports two deployment targets: **AWS** for production and **Cloudflare** for the docs site.
-
-## AWS Deployment (Production)
-
-The `npx chukfi deploy` command provisions the full AWS stack via CDK:
+Chukfi CMS deploys entirely to AWS. The `npx chukfi deploy` command provisions the full production stack via the AWS CDK:
 
 | Resource | Config |
 |----------|--------|
@@ -18,13 +14,17 @@ The `npx chukfi deploy` command provisions the full AWS stack via CDK:
 | CloudFront | One distribution with ACM cert |
 | VPC | 2 AZs, no NAT Gateway (Free Tier) |
 
-## Cloudflare Pages (Docs)
+## Cloudflare Pages
 
-The documentation site is deployed to Cloudflare Pages:
+While the core CMS (API + Admin UI) runs entirely on AWS, public-facing frontend websites (e.g., the end user's Astro site) can be hosted anywhere.
+
+If you choose Cloudflare Pages for your public frontend, the CLI provides a convenience command to build and deploy it:
 
 ```bash
-npx wrangler pages deploy dist --project-name=chukfi-docs
+chukfi site deploy --dir ./frontend --project my-public-site
 ```
+
+The `--project` flag defaults to `chukfi-docs`. The Chukfi project itself uses this command to deploy this documentation site, but end users override the flag with their own Cloudflare Pages project name.
 
 ## CI/CD
 

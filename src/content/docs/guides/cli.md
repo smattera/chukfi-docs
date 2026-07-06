@@ -29,7 +29,7 @@ cd chukfi-cms && cargo build --release -p chukfi-bin
 |----------|-------------|-------------|
 | `DATABASE_URL` | `content`, `media` commands | PostgreSQL connection string |
 | `CHUKFI_CONFIG` | `content create`, `codegen` | Path to `chukfi.config.json` (default: `./chukfi.config.json`) |
-| `CLOUDFLARE_API_TOKEN` | `site deploy` | Cloudflare API token with Pages Deploy permission |
+| `CLOUDFLARE_API_TOKEN` | `site deploy` | Cloudflare API token with Pages Deploy permission — required to deploy your public frontend to Cloudflare Pages |
 | `AWS_ACCESS_KEY_ID` | `media upload` (S3) | AWS credentials for S3-backed media storage |
 | `S3_BUCKET` | `media upload` (S3) | S3 bucket name (default: `chukfi-media`) |
 
@@ -167,19 +167,21 @@ chukfi media list --mime-type image/ --q banner --limit 20 --json
 
 ### `chukfi site deploy`
 
-Build and deploy the frontend to Cloudflare Pages.
+Build and deploy a static website (your public frontend or the project docs) to Cloudflare Pages.
+
+> **Note:** The `--project` flag defaults to `chukfi-docs`. When deploying your own public frontend, override this with your Cloudflare Pages project name via `--project <your-project>`.
 
 ```bash
 chukfi site deploy \
   --dir ./frontend \
-  --project chukfi-docs \
+  --project my-astro-site \
   --yes \
   --json
 ```
 
 | Flag | Default | Description |
 |------|---------|-------------|
-| `--dir` | `.` | Path to the frontend project directory |
+| `--dir` | `.` | Path to your public frontend project directory (e.g. `./frontend`) |
 | `--project` | `chukfi-docs` | Cloudflare Pages project name |
 | `--branch` | `main` | Branch context for the deploy |
 | `--yes` / `-y` | `false` | Skip confirmation prompt |
@@ -239,11 +241,11 @@ chukfi content update --id <uuid> --status published --json
 ### AI Agent: Deploy after changes
 
 ```bash
-chukfi site deploy --dir ./frontend --project chukfi-docs --yes --json
+chukfi site deploy --dir ./frontend --project my-astro-site --yes --json
 ```
 
 ### Developer: Generate types for the frontend
 
 ```bash
-chukfi codegen --out ../frontend/src/types
+chukfi codegen --out ../admin-ui/src/types
 ```
