@@ -20,6 +20,8 @@ export default defineConfig({
           items: [
             { label: 'Overview', link: '/guides/overview/' },
             { label: 'Quick Start', link: '/guides/quick-start/' },
+            { label: 'Content Types', link: '/guides/content-types/' },
+            { label: 'Media Library', link: '/guides/media/' },
             { label: 'CLI Reference', link: '/guides/cli/' },
           ],
         },

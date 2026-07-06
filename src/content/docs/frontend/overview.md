@@ -33,5 +33,14 @@ The Chukfi CMS frontend is built with Astro 7 and React 19, providing a modern a
 - Content Calendar with month-grid view
 - Bulk actions (publish, archive, trash, export)
 - Full-text search with highlighted results
-- Two-factor authentication
-- oEmbed support for YouTube, Vimeo, Twitter/X
+- **Two-factor authentication**
+- **oEmbed support** for YouTube, Vimeo, Twitter/X
+
+## Search
+
+<video controls autoplay loop muted playsinline style="width: 100%; border-radius: 0.75rem; border: 1px solid var(--sl-color-gray-5); margin: 1.5rem 0;">
+  <source src="/videos/search-tour.webm" type="video/webm">
+  <source src="/videos/search-tour.mp4" type="video/mp4">
+</video>
+
+Full-text search is backed by PostgreSQL `tsvector` with GIN indexes — no third-party search service needed. Search across all content types with highlighted results and sub-30ms response times.
