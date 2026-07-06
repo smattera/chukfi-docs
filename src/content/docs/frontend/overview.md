@@ -5,6 +5,11 @@ description: Chukfi CMS frontend architecture — Astro 7, React islands, and ad
 
 The Chukfi CMS frontend is built with Astro 7 and React 19, providing a modern admin interface for content management.
 
+<video controls autoplay loop muted playsinline style="width: 100%; border-radius: 0.75rem; border: 1px solid var(--sl-color-gray-5); margin: 1.5rem 0;">
+  <source src="/videos/astro-integration-tour.webm" type="video/webm">
+  <source src="/videos/astro-integration-tour.mp4" type="video/mp4">
+</video>
+
 ## Architecture
 
 - **Astro 7** — Static site generation with server-side rendering support
