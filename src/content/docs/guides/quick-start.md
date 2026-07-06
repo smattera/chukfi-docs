@@ -6,7 +6,7 @@ description: Get started with Chukfi CMS in minutes — install, local dev, and 
 ## Prerequisites
 
 - Node.js 24+
-- Docker (for local PostgreSQL)
+- PostgreSQL — via Docker, a local PostgreSQL service (Homebrew, Postgres.app), or AWS Secrets Manager
 - An AWS account (for production deployment)
 
 ## Installation
@@ -16,23 +16,16 @@ description: Get started with Chukfi CMS in minutes — install, local dev, and 
   <source src="/videos/quick-start.mp4" type="video/mp4">
 </video>
 
-Install the CLI:
-
-```bash
-npm install @chukfi/cli
-```
-
 Start the local development server:
 
 ```bash
 npx chukfi dev
 ```
 
-This will:
-1. Detect a Docker runtime (Docker Desktop, Colima, OrbStack, etc.)
-2. Spawn an ephemeral `postgres:17-alpine` container on port 5433
-3. Run embedded migrations
-4. Start the Rust API on port 8080
+Chukfi handles PostgreSQL setup automatically:
+1. **With Docker:** If Docker is running, the CLI spawns an ephemeral `postgres:17-alpine` container on port 5433, runs migrations, and starts the API.
+2. **Without Docker (interactive prompt):** If Docker is absent, the CLI walks you through connecting to a local PostgreSQL instance, or pulling development credentials from AWS Secrets Manager. It validates the connection and saves it to `.env` so subsequent runs skip the prompt.
+3. Starts the Rust API on port 8080.
 
 Your CMS is now running at **http://localhost:8080**.
 
@@ -50,4 +43,9 @@ Scaffolds a new Astro project wired to Chukfi with the `@chukfi/astro` integrati
 npx chukfi deploy
 ```
 
-Provisions the full AWS stack via CDK and writes `.env.production` with all connection values.
+A single command to ship to production:
+1. Provisions your AWS infrastructure (RDS PostgreSQL + compute) via CDK.
+2. Fetches the generated database credentials from AWS Secrets Manager.
+3. Writes `DATABASE_URL` to `.env.production` for your CI/CD pipeline.
+
+Requires: AWS CLI configured (`aws configure`) and CDK installed globally (`npm install -g aws-cdk`).
