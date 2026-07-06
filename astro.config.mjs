@@ -22,6 +22,8 @@ export default defineConfig({
             { label: 'Quick Start', link: '/guides/quick-start/' },
             { label: 'Content Types', link: '/guides/content-types/' },
             { label: 'Media Library', link: '/guides/media/' },
+            { label: 'Migration Guide', link: '/guides/migration/' },
+            { label: 'Security & RBAC', link: '/guides/security/' },
             { label: 'CLI Reference', link: '/guides/cli/' },
           ],
         },
