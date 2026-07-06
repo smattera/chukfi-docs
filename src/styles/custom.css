@@ -3,18 +3,28 @@
    Live at https://chukfi.dev
    ============================================
 
-   Brand colors: deep indigo-blue (#1e3a5f) with warm amber accent (#f59e0b)
-   Dark mode: lighter blue (#60a5fa) with golden amber (#fbbf24)
+   Design System: Dark Mode (OLED) + Developer Documentation
+   Fonts:     JetBrains Mono (headings) + IBM Plex Sans (body)
+   Brand:     Deep indigo-blue (#1e3a5f / #60a5fa)
+   Accent:    Warm amber (#f59e0b / #fbbf24)
+   Background: Deep slate (#090d16 dark / #ffffff light)
 */
 
-/* ---- Chukfi Brand Colors ---- */
+/* ---- Google Fonts ---- */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+/* ---- Chukfi Brand Colors + Fonts ---- */
 :root {
   --chukfi-brand: #1e3a5f;
   --chukfi-brand-light: #2d5a8e;
   --chukfi-accent: #f59e0b;
   --chukfi-accent-light: #fbbf24;
 
-  /* Starlight overrides */
+  /* Typography */
+  --sl-font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --sl-font-mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+
+  /* Starlight light-mode overrides */
   --sl-color-accent: #1e3a5f;
   --sl-color-accent-high: #2d5a8e;
   --sl-color-accent-low: #dbeafe;
@@ -37,13 +47,14 @@
   --sl-color-text-invert: #ffffff;
 }
 
-/* Dark mode */
+/* ---- Dark Mode (OLED-inspired, high contrast) ---- */
 :root[data-theme="dark"] {
   --chukfi-brand: #60a5fa;
   --chukfi-brand-light: #93bbfd;
   --chukfi-accent: #fbbf24;
   --chukfi-accent-light: #fcd34d;
 
+  /* Deep OLED background stack */
   --sl-color-accent: #60a5fa;
   --sl-color-accent-high: #93bbfd;
   --sl-color-accent-low: #1e3a5f;
@@ -54,29 +65,28 @@
   --sl-color-gray-4: #64748b;
   --sl-color-gray-5: #334155;
   --sl-color-gray-6: #1e293b;
-  --sl-color-black: #0f172a;
-  --sl-color-bg: #0f172a;
-  --sl-color-bg-nav: #1e293b;
-  --sl-color-bg-sidebar: #1e293b;
+  --sl-color-black: #090d16;
+  --sl-color-bg: #090d16;
+  --sl-color-bg-nav: #0f172a;
+  --sl-color-bg-sidebar: #0f172a;
   --sl-color-bg-inline-code: #1e293b;
   --sl-color-bg-hint: #1e3a5f;
   --sl-color-hairline: #334155;
   --sl-color-hairline-shade: #475569;
   --sl-color-text-accent: #60a5fa;
-  --sl-color-text-invert: #0f172a;
+  --sl-color-text-invert: #090d16;
 }
 
 /* ============================================
-   Starlight Splash Template
+   Starlight Splash Template — Hero Section
    ============================================ */
 
-/* Hero section */
 .hero {
-  padding: 4rem 0;
+  padding: 5rem 0 4rem;
   position: relative;
 }
 
-/* Hero title — gradient text */
+/* Hero title — gradient brand text */
 .hero h1 {
   background: linear-gradient(135deg, #1e3a5f 0%, #2d5a8e 50%, #3b82f6 100%);
   -webkit-background-clip: text;
@@ -88,7 +98,7 @@
 }
 
 :root[data-theme="dark"] .hero h1 {
-  background: linear-gradient(135deg, #60a5fa 0%, #93bbfd 50%, #bfdbfe 100%);
+  background: linear-gradient(135deg, #60a5fa 0%, #93bbfd 40%, #bfdbfe 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -104,7 +114,9 @@
   margin-right: auto;
 }
 
-/* Primary CTA button */
+/* ---- CTA Buttons ---- */
+
+/* Primary button (Quick Start) */
 .hero .actions a[href*="quick-start"] {
   background: linear-gradient(135deg, #1e3a5f 0%, #2d5a8e 50%, #3b82f6 100%) !important;
   color: #ffffff !important;
@@ -128,7 +140,7 @@
   box-shadow: 0 6px 20px rgba(96, 165, 250, 0.4);
 }
 
-/* Secondary CTA button */
+/* Secondary button (CLI Reference) */
 .hero .actions a[href*="cli"] {
   background: var(--sl-color-gray-6) !important;
   color: var(--sl-color-white) !important;
@@ -144,10 +156,72 @@
 }
 
 /* ============================================
-   Content Area — Starlight uses .sl-markdown-content
+   Hero Search Bar (distinct documentation UX)
    ============================================ */
 
-/* Feature grid */
+.hero-search {
+  margin-top: 2.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-search-button {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 500px;
+  padding: 0.75rem 1.25rem;
+  background: var(--sl-color-gray-6);
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.75rem;
+  color: var(--sl-color-gray-3) !important;
+  text-decoration: none !important;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.hero-search-button svg {
+  flex-shrink: 0;
+}
+
+.hero-search-button span {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.hero-search-button kbd {
+  background: var(--sl-color-gray-5);
+  border: 1px solid var(--sl-color-gray-4);
+  border-radius: 0.25rem;
+  padding: 0.1rem 0.4rem;
+  font-size: 0.75rem;
+  font-family: var(--sl-font-mono);
+  color: var(--sl-color-gray-2);
+}
+
+.hero-search-button:hover {
+  border-color: var(--sl-color-accent) !important;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.15);
+  color: var(--sl-color-gray-2) !important;
+}
+
+:root[data-theme="dark"] .hero-search-button {
+  background: rgba(30, 41, 59, 0.6) !important;
+  border-color: rgba(148, 163, 184, 0.15) !important;
+}
+
+:root[data-theme="dark"] .hero-search-button kbd {
+  background: rgba(15, 23, 42, 0.8);
+  border-color: rgba(148, 163, 184, 0.2);
+  color: var(--sl-color-gray-3);
+}
+
+/* ============================================
+   Feature Grid & Cards
+   ============================================ */
+
 .feature-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -181,6 +255,11 @@
   background: linear-gradient(135deg, #60a5fa 0%, #93bbfd 100%);
 }
 
+:root[data-theme="dark"] .feature-card {
+  background: rgba(30, 41, 59, 0.3);
+  border-color: rgba(148, 163, 184, 0.1);
+}
+
 .feature-card:hover {
   transform: translateY(-3px);
   border-color: var(--sl-color-accent);
@@ -188,7 +267,8 @@
 }
 
 :root[data-theme="dark"] .feature-card:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 20px rgba(96, 165, 250, 0.1);
+  border-color: var(--sl-color-accent);
 }
 
 .feature-card:hover::before {
@@ -198,6 +278,11 @@
 .feature-card.accent {
   border-color: var(--sl-color-accent-low);
   background: linear-gradient(135deg, var(--sl-color-gray-6) 0%, var(--sl-color-accent-low) 100%);
+}
+
+:root[data-theme="dark"] .feature-card.accent {
+  border-color: rgba(96, 165, 250, 0.15);
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.5) 0%, rgba(30, 58, 95, 0.4) 100%);
 }
 
 .feature-card.compact {
@@ -247,6 +332,103 @@
   font-size: 0.9rem;
 }
 
+/* ============================================
+   FAQ Accordion (recommended by design system)
+   ============================================ */
+
+.faq-accordion {
+  margin: 2rem 0;
+}
+
+.faq-item {
+  border: 1px solid var(--sl-color-hairline);
+  border-radius: 0.5rem;
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+  background: var(--sl-color-gray-6);
+}
+
+:root[data-theme="dark"] .faq-item {
+  background: rgba(30, 41, 59, 0.3);
+  border-color: rgba(148, 163, 184, 0.1);
+}
+
+.faq-item summary {
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--sl-color-white);
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: color 0.2s ease;
+}
+
+.faq-item summary:hover {
+  color: var(--sl-color-accent);
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: '+';
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--sl-color-gray-3);
+  transition: transform 0.2s ease;
+}
+
+.faq-item[open] summary::after {
+  content: '−';
+  transform: rotate(180deg);
+}
+
+.faq-item .faq-answer {
+  padding: 0 1.25rem 1.25rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--sl-color-gray-2);
+}
+
+/* ============================================
+   Support CTA section
+   ============================================ */
+
+.support-cta {
+  text-align: center;
+  padding: 2.5rem 2rem;
+  margin: 3rem 0 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--sl-color-hairline);
+  background: var(--sl-color-gray-6);
+}
+
+:root[data-theme="dark"] .support-cta {
+  background: rgba(30, 41, 59, 0.4);
+  border-color: rgba(148, 163, 184, 0.12);
+}
+
+.support-cta h3 {
+  font-size: 1.3rem !important;
+  margin-bottom: 0.5rem !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+.support-cta p {
+  color: var(--sl-color-gray-2);
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+/* ============================================
+   Content Area — Starlight overrides
+   ============================================ */
+
 /* Section headings */
 .sl-markdown-content h2 {
   font-weight: 700;
@@ -258,6 +440,18 @@
 
 .sl-markdown-content h2:first-of-type {
   margin-top: 0;
+}
+
+/* Section divider (between hero and first content section) */
+.section-divider {
+  border: 0;
+  height: 1px;
+  background: var(--sl-color-hairline);
+  margin: 2rem 0;
+}
+
+:root[data-theme="dark"] .section-divider {
+  background: rgba(148, 163, 184, 0.1);
 }
 
 /* Code blocks */
@@ -333,5 +527,9 @@ starlight-search button {
 
   .hero .tagline {
     font-size: 1rem !important;
+  }
+
+  .support-cta {
+    padding: 2rem 1.25rem;
   }
 }

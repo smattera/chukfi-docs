@@ -18,6 +18,15 @@ hero:
       variant: secondary
 ---
 
+<div class="hero-search">
+  <a href="/guides/overview/" class="hero-search-button">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+    <span>Search the docs...</span>
+  </a>
+</div>
+
+<hr class="section-divider" />
+
 ## Why Chukfi?
 
 Chukfi is a headless CMS built from the ground up for **speed, simplicity, and AI-native workflows**. Three non-negotiable pillars:
@@ -25,19 +34,19 @@ Chukfi is a headless CMS built from the ground up for **speed, simplicity, and A
 <div class="feature-grid">
 
 <div class="feature-card">
-<div class="feature-icon terminal">></div>
+<div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg></div>
 <h3>CLI-First Distribution</h3>
 <p>The Rust binary ships as platform-specific npm packages. <code>npx chukfi</code> — no Rust toolchain, no build steps, no Docker Compose files to write.</p>
 </div>
 
 <div class="feature-card">
-<div class="feature-icon database">DB</div>
+<div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></svg></div>
 <h3>Local-to-Prod Parity</h3>
 <p>Docker PostgreSQL locally, AWS RDS in production. Same engine, same migrations, same SQL. No SQLite surprises at deploy time.</p>
 </div>
 
 <div class="feature-card">
-<div class="feature-icon cloud">☁</div>
+<div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19A3.5 3.5 0 0 0 21 15.5c0-2.79-2.54-4.5-5-4.5-.42-1.02-1-2.5-2.5-3A5 5 0 0 0 4 12c0 1 .5 2 1 2.5A3.5 3.5 0 0 0 8.5 19Z"/></svg></div>
 <h3>One-Command Deploy</h3>
 <p><code>npx chukfi deploy</code> provisions the full AWS stack via CDK. One domain, one bill, no hybrid hosting. Free Tier eligible.</p>
 </div>
@@ -51,20 +60,20 @@ Every CLI command outputs structured JSON. This means **AI agents can operate Ch
 <div class="feature-grid">
 
 <div class="feature-card accent">
-<div class="feature-icon sparkle">✦</div>
+<div class="feature-icon">✦</div>
 <h3>Teams + Bedrock Bot</h3>
 <p>Connect Claude 3.5 Haiku via Microsoft Teams. Staff can create, list, and update content from chat — all forced to draft for human review.</p>
 <p><a href="/teams-bot/overview/">Learn more →</a></p>
 </div>
 
 <div class="feature-card accent">
-<div class="feature-icon sparkle">✦</div>
+<div class="feature-icon">✦</div>
 <h3>JSON-Output CLI</h3>
 <p>Every command accepts <code>--json</code> for machine-parseable responses. AI agents get structured data, not terminal tables.</p>
 </div>
 
 <div class="feature-card accent">
-<div class="feature-icon sparkle">✦</div>
+<div class="feature-icon">✦</div>
 <h3>Draft-Only Safety</h3>
 <p>AI agents can create and edit content, but never publish. Every change requires human review — enforced in code, not prompts.</p>
 </div>
@@ -85,37 +94,37 @@ That's it. Chukfi detects Docker, spawns PostgreSQL, runs migrations, and starts
 <div class="feature-grid">
 
 <div class="feature-card">
-<div class="feature-icon content">📝</div>
+<div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div>
 <h3>Content Management</h3>
 <p>Schema-driven content types, flexible JSON fields, draft/published workflow, version history, and full-text search.</p>
 </div>
 
 <div class="feature-card">
-<div class="feature-icon media">🖼</div>
+<div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg></div>
 <h3>Media Library</h3>
 <p>Upload, tag, filter, and organize media. S3-backed storage with image transformations and folder organization.</p>
 </div>
 
 <div class="feature-card">
-<div class="feature-icon users">👥</div>
-<h3>Auth & RBAC</h3>
+<div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+<h3>Auth &amp; RBAC</h3>
 <p>Magic link authentication, Microsoft Entra ID support, and role-based access control with granular permissions.</p>
 </div>
 
 <div class="feature-card">
-<div class="feature-icon api">🔌</div>
+<div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v8"/><path d="m16 12-4 4-4-4"/><path d="M12 16v6"/></svg></div>
 <h3>REST API</h3>
 <p>Full RESTful API for content CRUD, media management, and site deployment. Built with Axum for maximum performance.</p>
 </div>
 
 <div class="feature-card">
-<div class="feature-icon code">⚡</div>
+<div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
 <h3>TypeScript Codegen</h3>
 <p>Generate TypeScript types from your content schema. Type-safe content queries in your frontend, zero manual definitions.</p>
 </div>
 
 <div class="feature-card">
-<div class="feature-icon deploy">🚀</div>
+<div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 3.4-2 3.4s2.14-.5 3.4-2"/><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5.5.75 1.5.75 2.5 0 1.725.775 2.5 1.75 2.5s1.75-.775 1.75-2.5c0-1-.25-2-.75-2.5 2.224 1.946 3.072 3.857 2 6-.5 1-1 1.62-1 3a2.5 2.5 0 0 0 2.5 2.5"/><path d="M15 9s1 1 2 4"/><path d="M9 15s1 1 4 2"/></svg></div>
 <h3>One-Click Deploy</h3>
 <p>AWS CDK provisions RDS, ECS Fargate, S3, CloudFront, and SES. One command, one bill, Free Tier friendly.</p>
 </div>
@@ -133,6 +142,47 @@ That's it. Chukfi detects Docker, spawns PostgreSQL, runs migrations, and starts
 | **AI** | Amazon Bedrock (Claude 3.5 Haiku) |
 | **Media** | S3 / Local filesystem |
 | **Deploy** | AWS CDK (ECS Fargate + RDS + S3 + CloudFront) |
+
+## Frequently Asked Questions
+
+<div class="faq-accordion">
+
+<details class="faq-item">
+<summary>Do I need to know Rust to use Chukfi?</summary>
+<div class="faq-answer">
+No. Chukfi is distributed as a pre-compiled native binary wrapped in npm packages. You interact with it entirely via CLI commands — no Rust toolchain, no compilation, no Cargo.
+</div>
+</details>
+
+<details class="faq-item">
+<summary>How does the one-command deploy work?</summary>
+<div class="faq-answer">
+<code>npx chukfi deploy</code> uses AWS CDK under the hood to provision ECS Fargate, RDS PostgreSQL, S3, CloudFront, and SES. It reads your local config and maps it to production — same engine, same migrations, same behavior.
+</div>
+</details>
+
+<details class="faq-item">
+<summary>Can I use Chukfi without AWS?</summary>
+<div class="faq-answer">
+The core API runs anywhere Docker or a Linux binary works. The automated one-command deploy is optimized for AWS, but you can self-host the binary on any platform that runs PostgreSQL.
+</div>
+</details>
+
+<details class="faq-item">
+<summary>What makes it "AI-native"?</summary>
+<div class="faq-answer">
+Every CLI command accepts <code>--json</code> for structured output designed for LLM tool-calling. The Teams bot lets staff manage content via chat. All AI-driven changes are forced to draft — humans always approve before publishing.
+</div>
+</details>
+
+<details class="faq-item">
+<summary>Is there a free tier?</summary>
+<div class="faq-answer">
+Yes. The entire AWS stack fits within Free Tier limits for hobby projects. Chukfi itself is MIT-licensed and the CLI is free via npm.
+</div>
+</details>
+
+</div>
 
 ## Explore the Docs
 
@@ -170,6 +220,12 @@ That's it. Chukfi detects Docker, spawns PostgreSQL, runs migrations, and starts
 
 </div>
 
-## License
+<div class="support-cta">
+  <h3>Need Help or Custom Integration?</h3>
+  <p>Check the step-by-step guides, or open an issue on GitHub for advanced architectures.</p>
+  <a href="/guides/overview/">Browse All Guides →</a>
+</div>
 
-MIT
+<div style="text-align: center; margin-top: 2rem; padding-bottom: 1rem; font-size: 0.85rem; color: var(--sl-color-gray-3);">
+  MIT Licensed · <a href="https://github.com/smattera/chukfi-docs">GitHub</a>
+</div>
