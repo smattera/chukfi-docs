@@ -5,7 +5,7 @@ description: An overview of the Chukfi CMS platform — a headless CMS built wit
 
 Chukfi is a headless CMS — a content management system that provides a content API and admin interface without dictating how your frontend renders content.
 
-<video controls autoplay loop muted style="width: 100%; border-radius: 0.75rem; border: 1px solid var(--sl-color-gray-5); margin: 1.5rem 0;">
+<video controls autoplay loop muted playsinline style="width: 100%; border-radius: 0.75rem; border: 1px solid var(--sl-color-gray-5); margin: 1.5rem 0;">
   <source src="/videos/admin-ui-tour.webm" type="video/webm">
   <source src="/videos/admin-ui-tour.mp4" type="video/mp4">
 </video>
