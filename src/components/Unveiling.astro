@@ -9,6 +9,15 @@
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
     CHUKFI CMS v0.2.0 IS LIVE
   </div>
+
+  <div class="hero-logo-container">
+    <div class="hero-logo-glow"></div>
+    <svg class="hero-logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+      <path d="M24 4C14.059 4 6 12.059 6 22C6 24.077 6.404 26.058 7.129 27.875C4.478 25.087 2.8 21.334 2.8 17.2C2.8 8.858 9.658 2 18 2C20.764 2 23.365 2.71 25.6 3.926C25.067 3.975 24.533 4 24 4Z" fill="#60a5fa" opacity="0.6"/>
+      <path d="M28 8C19.163 8 12 15.163 12 24C12 25.846 12.336 27.612 12.946 29.25C10.676 26.876 9.2 23.588 9.2 20C9.2 12.82 15.02 7 22.2 7C24.533 7 26.733 7.588 28.667 8.617C28.222 8.784 28 8.784 28 8Z" fill="#fbbf24"/>
+    </svg>
+  </div>
+
   <h1 class="unveiling-title">
     Ship a CMS in Minutes.<br/>
     <span style="color: var(--sl-color-accent-high);">Manage it with AI.</span>
@@ -38,13 +47,13 @@
     <div class="stack-layer layer-core">
       <div class="layer-content">
         <div class="layer-title" style="color: var(--chukfi-accent);">RUST CORE</div>
-        <div class="layer-subtitle">Axum API · Zero Runtime Deps</div>
+        <div class="layer-subtitle">Axum API &middot; Zero Runtime Deps</div>
       </div>
     </div>
     <div class="stack-layer layer-infra">
       <div class="layer-content">
         <div class="layer-title" style="color: #94a3b8;">AWS + PG</div>
-        <div class="layer-subtitle">ECS Fargate · RDS Postgres</div>
+        <div class="layer-subtitle">ECS Fargate &middot; RDS Postgres</div>
       </div>
     </div>
   </div>
@@ -67,12 +76,127 @@
 <div class="statement-section">
   <div class="statement-grid">
     <div>
-      <p style="font-size: 1.15rem; line-height: 1.7; opacity: 0.8; margin: 0; color: var(--sl-color-gray-1);">
-        Every CLI command outputs structured JSON natively. AI agents can read, write, and manage your content schemas directly without screen-scraping or brittle parsing. All AI changes are forced to draft status &mdash; human review is hardcoded.
+      <div class="unveiling-badge" style="margin-bottom: 1.5rem;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        TEAMS + AWS BEDROCK + CLAUDE
+      </div>
+      <h2 class="statement-huge">Chat to Publish.</h2>
+      <p style="font-size: 1.15rem; line-height: 1.7; opacity: 0.8; margin: 0 0 1rem; color: var(--sl-color-gray-1);">
+        Staff can create, edit, and schedule content directly from Microsoft Teams. Chukfi connects to AWS Bedrock running Claude to draft posts, rewrite copy, and generate metadata &mdash; all from a chat thread.
+      </p>
+      <p style="font-size: 1rem; opacity: 0.7; color: var(--sl-color-accent-high); margin: 0;">
+        Every AI change is forced to <strong>draft</strong>. Human approval is hardcoded &mdash; not a prompt, not a suggestion.
       </p>
     </div>
+    <div class="teams-mockup">
+      <div class="teams-header">
+        <div class="teams-dots">
+          <span class="teams-dot teams-dot-red"></span>
+          <span class="teams-dot teams-dot-yellow"></span>
+          <span class="teams-dot teams-dot-green"></span>
+        </div>
+        <span class="teams-title">Chukfi CMS Bot</span>
+        <span class="teams-status">
+          <span class="teams-online"></span> Online
+        </span>
+      </div>
+      <div class="teams-messages">
+        <div class="teams-msg teams-msg-user">
+          <div class="teams-avatar">JD</div>
+          <div class="teams-bubble">
+            <strong>Jane (Editor)</strong>
+            <p>Create a blog post about our new donation matching program with the Choctaw Nation. Include a header image, a quote from Chief Standingbear, and a CTA for volunteering.</p>
+          </div>
+        </div>
+        <div class="teams-msg teams-msg-bot">
+          <div class="teams-avatar teams-avatar-bot">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275Z"/></svg>
+          </div>
+          <div class="teams-bubble teams-bubble-bot">
+            <div class="teams-typing">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+        <div class="teams-msg teams-msg-bot">
+          <div class="teams-avatar teams-avatar-bot">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275Z"/></svg>
+          </div>
+          <div class="teams-bubble teams-bubble-bot">
+            <strong>Chukfi CMS Bot</strong>
+            <div class="teams-draft-card">
+              <div class="teams-draft-badge">DRAFT &mdash; Awaiting Approval</div>
+              <div class="teams-draft-title">Choctaw Nation Donation Match: $50K Grant Expands Tribal Services</div>
+              <div class="teams-draft-meta">📷 Header image selected &middot; 850 words &middot; 3 citations</div>
+              <div class="teams-draft-actions">
+                <span class="teams-draft-btn teams-draft-approve">✓ Approve</span>
+                <span class="teams-draft-btn teams-draft-edit">✎ Edit</span>
+                <span class="teams-draft-btn teams-draft-reject">✕ Reject</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="statement-section">
+  <div class="statement-grid">
+    <div class="fb-mockup">
+      <div class="fb-card">
+        <div class="fb-card-header">
+          <div class="fb-avatar">N</div>
+          <div>
+            <div class="fb-name">Native Consulting Services</div>
+            <div class="fb-time">Just now &middot; 🌐</div>
+          </div>
+        </div>
+        <div class="fb-card-body">
+          Breaking ground on the new Tribal digital services platform in partnership with the Mississippi Band of Choctaw Indians. Read about the $2.3M infrastructure investment and what it means for rural broadband access across the reservation.
+        </div>
+        <div class="fb-card-preview">
+          <div class="fb-card-preview-img">
+            <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none"><rect width="400" height="200" rx="4" fill="#1e293b"/><rect x="140" y="60" width="120" height="80" rx="8" fill="#334155"/><line x1="160" y1="100" x2="240" y2="100" stroke="#64748b" stroke-width="2"/><line x1="160" y1="110" x2="225" y2="110" stroke="#64748b" stroke-width="2"/><circle cx="200" cy="80" r="10" fill="#60a5fa" opacity="0.3"/></svg>
+          </div>
+          <div class="fb-card-preview-text">
+            <div class="fb-card-preview-domain">chukfi.dev</div>
+            <div class="fb-card-preview-title">$2.3M Tribal Broadband Investment &mdash; MBCI Infrastructure Initiative</div>
+            <div class="fb-card-preview-desc">Phase 1 delivers fiber to 2,400 homes across 6 communities. Full coverage expected by Q3 2027.</div>
+          </div>
+        </div>
+        <div class="fb-card-actions">
+          <div class="fb-action">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9V5.5a3.5 3.5 0 0 0-7 0V9H2v10h20V9h-8Zm-5-3.5a1.5 1.5 0 0 1 3 0V9H9V5.5Z"/></svg>
+            <span>Like</span>
+          </div>
+          <div class="fb-action">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <span>Comment</span>
+          </div>
+          <div class="fb-action">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/></svg>
+            <span>Share</span>
+          </div>
+        </div>
+        <div class="fb-card-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Published via Chukfi CMS &middot; Auto-syndicated
+        </div>
+      </div>
+    </div>
     <div>
-      <h2 class="statement-huge" style="color: var(--chukfi-accent);">AI-Native.<br/>JSON-Driven.</h2>
+      <div class="unveiling-badge" style="margin-bottom: 1.5rem;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        FACEBOOK SYNDICATION
+      </div>
+      <h2 class="statement-huge" style="color: #1877F2;">Auto-Syndicate.</h2>
+      <p style="font-size: 1.15rem; line-height: 1.7; opacity: 0.8; margin: 0 0 1rem; color: var(--sl-color-gray-1);">
+        Publish once, distribute everywhere. The moment you approve a blog post in Chukfi, it automatically formats and syndicates to Facebook, LinkedIn, and X &mdash; complete with Open Graph tags, rich previews, and tracking links.
+      </p>
+      <p style="font-size: 1rem; opacity: 0.7; color: var(--sl-color-gray-2); margin: 0;">
+        No copy-paste. No social media manager. One click to publish, one click to syndicate.
+      </p>
     </div>
   </div>
 </div>
