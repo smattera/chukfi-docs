@@ -6,7 +6,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'Chukfi CMS',
-      description: 'Documentation for the Chukfi CMS platform — a high-performance, lightweight headless CMS built with Rust, Astro, and Cloudflare.',
+      description: 'Documentation for the Chukfi CMS platform — a high-performance, lightweight headless CMS built with Rust, Astro, and AWS.',
 
       customCss: [
         './src/styles/custom.css',
