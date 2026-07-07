@@ -559,40 +559,40 @@ starlight-search button {
   margin: 0 !important;
 }
 
-/* Force header transparency and dark-mode styling on splash page */
+/* Splash header — transparent with subtle border, theme-aware */
 [data-has-hero] .header {
   background-color: transparent !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+  border-bottom: 1px solid var(--sl-color-hairline) !important;
   backdrop-filter: blur(12px);
 }
 
-/* Ensure header text, icons, and buttons are readable on the dark background */
-[data-has-hero] .header a,
-[data-has-hero] .header button,
-[data-has-hero] .header svg,
-[data-has-hero] .site-title {
+/* Header text forced light only in dark mode */
+:root[data-theme="dark"] [data-has-hero] .header a,
+:root[data-theme="dark"] [data-has-hero] .header button,
+:root[data-theme="dark"] [data-has-hero] .header svg,
+:root[data-theme="dark"] [data-has-hero] .site-title {
   color: #F0FDF4 !important;
 }
 
-/* Full-bleed splash background */
+/* Full-bleed splash background — light base (uses Starlight tokens) */
 [data-has-hero] {
+  background-color: var(--sl-color-bg) !important;
+  background-image:
+    radial-gradient(at 50% 0%, rgba(20, 184, 166, 0.08) 0px, transparent 50%),
+    linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px) !important;
+  background-size: 100% 100%, 50px 50px, 50px 50px !important;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Dark-mode splash override — deep navy + teal glow + white grid */
+:root[data-theme="dark"] [data-has-hero] {
   background-color: #0C1222 !important;
   background-image:
     radial-gradient(at 50% 0%, rgba(20, 184, 166, 0.15) 0px, transparent 50%),
     linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px) !important;
-  background-size: 100% 100%, 50px 50px, 50px 50px !important;
-  position: relative;
-  overflow-x: hidden;
-  /* Force dark-theme variables on splash page regardless of site theme.
-     !important is required because Starlight's :root[data-theme="light"]
-     rules have specificity (0,2,0) which beats [data-has-hero] at (0,1,0). */
-  --sl-color-white: #F0FDF4 !important;
-  --sl-color-gray-1: #CBD5E1 !important;
-  --sl-color-gray-2: #94A3B8 !important;
-  --sl-color-gray-3: #64748B !important;
-  --sl-color-gray-5: #1E293B !important;
-  --sl-color-gray-6: #172032 !important;
   color-scheme: dark;
 }
 
@@ -773,7 +773,7 @@ starlight-search button {
   padding: 8rem 1rem;
   max-width: 1000px;
   margin: 0 auto;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid var(--sl-color-hairline);
 }
 .statement-grid {
   display: grid;
