@@ -533,3 +533,257 @@ starlight-search button {
     padding: 2rem 1.25rem;
   }
 }
+
+/* ============================================
+   Product Unveiling & Parallax Engine
+   All rules scoped to [data-has-hero] to prevent
+   bleeding into the other 23 documentation pages.
+   Starlight injects data-has-hero on splash pages.
+   ============================================ */
+
+/* Hide default Starlight hero only on splash page */
+[data-has-hero] .hero-wrapper {
+  display: none !important;
+}
+
+/* Force full-bleed content only on splash page */
+[data-has-hero] .main-frame {
+  padding-top: 0 !important;
+}
+[data-has-hero] .content-panel {
+  padding: 0 !important;
+}
+[data-has-hero] .sl-container {
+  max-width: 100% !important;
+  margin: 0 !important;
+}
+
+/* Full-bleed splash background */
+[data-has-hero] {
+  background-color: #030712 !important;
+  background-image:
+    radial-gradient(at 50% 0%, rgba(96, 165, 250, 0.15) 0px, transparent 50%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px) !important;
+  background-size: 100% 100%, 50px 50px, 50px 50px !important;
+  position: relative;
+  overflow-x: hidden;
+  /* Force dark-theme text on forced-dark background so light-mode visitors can read */
+  --sl-color-white: #f1f5f9;
+  --sl-color-gray-1: #e2e8f0;
+  --sl-color-gray-2: #cbd5e1;
+  --sl-color-gray-3: #94a3b8;
+  color-scheme: dark;
+}
+
+  /* Ambient Glow Orbs */
+.glow-orb {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 0;
+}
+.glow-orb-1 {
+  top: 10%;
+  left: -10%;
+  background: radial-gradient(circle, var(--sl-color-accent) 0%, transparent 70%);
+  transform: translateY(calc(var(--scroll-y, 0) * -0.2 * 1px));
+}
+.glow-orb-2 {
+  top: 40%;
+  right: -10%;
+  background: radial-gradient(circle, var(--chukfi-accent) 0%, transparent 70%);
+  transform: translateY(calc(var(--scroll-y, 0) * 0.15 * 1px));
+}
+
+/* Bold Typography & Hero */
+.unveiling-hero {
+  text-align: center;
+  padding: 8rem 1rem 4rem;
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+}
+.unveiling-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(96, 165, 250, 0.1);
+  border: 1px solid rgba(96, 165, 250, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-family: var(--sl-font-mono);
+  font-size: 0.85rem;
+  color: var(--sl-color-accent-high);
+  margin-bottom: 2rem;
+}
+.unveiling-title {
+  font-size: clamp(2.5rem, 7vw, 5.5rem) !important;
+  font-weight: 900 !important;
+  line-height: 0.95 !important;
+  letter-spacing: -0.05em !important;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+/* Unveil CTA buttons (not Starlight hero actions) */
+.unveiling-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  text-decoration: none !important;
+  transition: all 0.2s ease;
+  background: var(--sl-color-gray-6);
+  border: 1px solid var(--sl-color-gray-5);
+  color: var(--sl-color-white) !important;
+  min-width: 180px;
+}
+.unveiling-cta:hover {
+  border-color: var(--sl-color-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(96, 165, 250, 0.15);
+}
+.unveiling-cta-primary {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
+  color: #fff !important;
+  border: none !important;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+}
+.unveiling-cta-primary:hover {
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+}
+:root[data-theme="dark"] .unveiling-cta {
+  background: rgba(30, 41, 59, 0.5);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: var(--sl-color-gray-1) !important;
+}
+:root[data-theme="dark"] .unveiling-cta-primary {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+  color: #fff !important;
+}
+
+/* Isometric 3D Stack Graphic */
+.isometric-container {
+  perspective: 1200px;
+  padding: 4rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 500px;
+  position: relative;
+  z-index: 5;
+}
+.isometric-stack {
+  transform-style: preserve-3d;
+  transform: rotateX(60deg) rotateZ(-45deg);
+  width: 320px;
+  height: 320px;
+  position: relative;
+}
+.stack-layer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: -10px 10px 30px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.1s ease-out;
+  cursor: pointer;
+}
+.stack-layer:hover {
+  border-color: var(--sl-color-accent);
+  box-shadow: -15px 15px 40px rgba(96, 165, 250, 0.2);
+}
+.layer-frontend {
+  transform: translate3d(
+    calc(var(--scroll-y, 0) * -0.08 * 1px),
+    calc(var(--scroll-y, 0) * 0.08 * 1px),
+    160px
+  );
+  border-color: rgba(96, 165, 250, 0.4);
+}
+.layer-core {
+  transform: translate3d(0, 0, 80px);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+.layer-infra {
+  transform: translate3d(
+    calc(var(--scroll-y, 0) * 0.08 * 1px),
+    calc(var(--scroll-y, 0) * -0.08 * 1px),
+    0px
+  );
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.layer-content {
+  transform: rotate(45deg);
+  text-align: center;
+  color: #fff;
+}
+.layer-title {
+  font-family: var(--sl-font-mono);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+.layer-subtitle {
+  font-size: 0.8rem;
+  opacity: 0.6;
+  margin-top: 0.25rem;
+}
+
+/* Bold Unveiling Sections */
+.statement-section {
+  padding: 8rem 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+.statement-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+.statement-huge {
+  font-size: clamp(2rem, 5vw, 3.5rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.05 !important;
+  letter-spacing: -0.03em !important;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .statement-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .isometric-container {
+    min-height: 320px;
+    padding: 2rem 0;
+  }
+  .isometric-stack {
+    transform: rotateX(60deg) rotateZ(-45deg) scale(0.65);
+    width: 320px;
+    height: 320px;
+  }
+  .unveiling-hero {
+    padding: 4rem 1rem 2rem;
+  }
+}

@@ -1,0 +1,125 @@
+---
+// src/components/Unveiling.astro — Product unveiling page with parallax engine
+---
+<div class="glow-orb glow-orb-1"></div>
+<div class="glow-orb glow-orb-2"></div>
+
+<div class="unveiling-hero">
+  <div class="unveiling-badge">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+    CHUKFI CMS v0.2.0 IS LIVE
+  </div>
+  <h1 class="unveiling-title">
+    Ship a CMS in Minutes.<br/>
+    <span style="color: var(--sl-color-accent-high);">Manage it with AI.</span>
+  </h1>
+  <p style="margin: 0 auto 3rem; font-size: 1.3rem; opacity: 0.8; max-width: 700px; line-height: 1.6; color: var(--sl-color-gray-1);">
+    The zero-dependency, CLI-first headless CMS built in Rust for solo developers who want production-grade parity without managing infrastructure.
+  </p>
+
+  <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+    <a href="/guides/quick-start/" class="unveiling-cta unveiling-cta-primary">
+      Get Started
+    </a>
+    <a href="/guides/overview/" class="unveiling-cta">
+      Read Architecture
+    </a>
+  </div>
+</div>
+
+<div class="isometric-container">
+  <div class="isometric-stack">
+    <div class="stack-layer layer-frontend">
+      <div class="layer-content">
+        <div class="layer-title" style="color: var(--sl-color-accent);">ASTRO 7</div>
+        <div class="layer-subtitle">Type-Safe Client Islands</div>
+      </div>
+    </div>
+    <div class="stack-layer layer-core">
+      <div class="layer-content">
+        <div class="layer-title" style="color: var(--chukfi-accent);">RUST CORE</div>
+        <div class="layer-subtitle">Axum API · Zero Runtime Deps</div>
+      </div>
+    </div>
+    <div class="stack-layer layer-infra">
+      <div class="layer-content">
+        <div class="layer-title" style="color: #94a3b8;">AWS + PG</div>
+        <div class="layer-subtitle">ECS Fargate · RDS Postgres</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="statement-section">
+  <div class="statement-grid">
+    <div>
+      <h2 class="statement-huge">CLI-First.<br/>Zero Toolchains.</h2>
+    </div>
+    <div>
+      <p style="font-size: 1.15rem; line-height: 1.7; opacity: 0.8; margin: 0; color: var(--sl-color-gray-1);">
+        No Rust environment, no compilation wait times, no Docker Compose templates to copy-paste.
+        <code>npx chukfi dev</code> spins up a local PostgreSQL engine, applies migrations, and launches your API in under 5 seconds.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="statement-section">
+  <div class="statement-grid">
+    <div>
+      <p style="font-size: 1.15rem; line-height: 1.7; opacity: 0.8; margin: 0; color: var(--sl-color-gray-1);">
+        Every CLI command outputs structured JSON natively. AI agents can read, write, and manage your content schemas directly without screen-scraping or brittle parsing. All AI changes are forced to draft status &mdash; human review is hardcoded.
+      </p>
+    </div>
+    <div>
+      <h2 class="statement-huge" style="color: var(--chukfi-accent);">AI-Native.<br/>JSON-Driven.</h2>
+    </div>
+  </div>
+</div>
+
+<div class="statement-section" style="text-align: center; background: radial-gradient(circle at 50% 50%, rgba(96, 165, 250, 0.05) 0%, transparent 70%);">
+  <h2 class="unveiling-title" style="font-size: clamp(2rem, 6vw, 4rem) !important; margin-bottom: 1rem;">One Command to AWS.</h2>
+  <p style="font-size: 1.25rem; max-width: 600px; margin: 0 auto 3rem; opacity: 0.8; color: var(--sl-color-gray-1);">
+    Provisions ECS Fargate, RDS PostgreSQL, S3, CloudFront, and SES via AWS CDK. One command, one bill, 100% Free Tier eligible.
+  </p>
+  <code style="font-family: var(--sl-font-mono); background: rgba(255,255,255,0.05); padding: 1rem 2rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); font-size: 1.2rem; color: var(--sl-color-accent-high);">
+    npx chukfi deploy
+  </code>
+</div>
+
+<div style="padding: 6rem 1rem; max-width: 900px; margin: 0 auto; text-align: center;">
+  <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem;">Explore the Technical Deep Dives</h3>
+  <p style="color: var(--sl-color-gray-2); font-size: 1.05rem; margin-bottom: 2rem;">Chukfi's internal details are fully documented across our guides.</p>
+  <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+    <a href="/guides/cli/" class="unveiling-cta">CLI Reference</a>
+    <a href="/architecture/architecture/" class="unveiling-cta">Architecture</a>
+    <a href="/teams-bot/overview/" class="unveiling-cta">Teams Bot</a>
+  </div>
+</div>
+
+<div style="text-align: center; padding: 3rem 1rem 2rem; font-size: 0.85rem; color: var(--sl-color-gray-3); border-top: 1px solid rgba(255,255,255,0.03);">
+  MIT Licensed &middot; <a href="https://github.com/smattera/chukfi-docs">GitHub</a> &middot; <a href="/project/roadmap/">Roadmap</a>
+</div>
+
+<script is:inline>
+  let ticking = false;
+  const root = document.documentElement;
+
+  function updateParallax() {
+    root.style.setProperty('--scroll-y', String(window.scrollY));
+    ticking = false;
+  }
+
+  updateParallax();
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  if (!prefersReducedMotion.matches) {
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    }, { passive: true });
+  }
+</script>
