@@ -583,11 +583,15 @@ starlight-search button {
   background-size: 100% 100%, 50px 50px, 50px 50px !important;
   position: relative;
   overflow-x: hidden;
-  /* Force dark-theme text on forced-dark background so light-mode visitors can read */
-  --sl-color-white: #f1f5f9;
-  --sl-color-gray-1: #e2e8f0;
-  --sl-color-gray-2: #cbd5e1;
-  --sl-color-gray-3: #94a3b8;
+  /* Force dark-theme variables on splash page regardless of site theme.
+     !important is required because Starlight's :root[data-theme="light"]
+     rules have specificity (0,2,0) which beats [data-has-hero] at (0,1,0). */
+  --sl-color-white: #f1f5f9 !important;
+  --sl-color-gray-1: #e2e8f0 !important;
+  --sl-color-gray-2: #cbd5e1 !important;
+  --sl-color-gray-3: #94a3b8 !important;
+  --sl-color-gray-5: #334155 !important;
+  --sl-color-gray-6: #1e293b !important;
   color-scheme: dark;
 }
 
