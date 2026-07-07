@@ -3,78 +3,79 @@
    Live at https://chukfi.dev
    ============================================
 
-   Design System: Dark Mode (OLED) + Developer Documentation
-   Fonts:     JetBrains Mono (headings) + IBM Plex Sans (body)
-   Brand:     Deep indigo-blue (#1e3a5f / #60a5fa)
-   Accent:    Warm amber (#f59e0b / #fbbf24)
-   Background: Deep slate (#090d16 dark / #ffffff light)
+   Design System: Earth-Tech Palette (from brandkit-sample/chukfi-brand-guide.html)
+   Fonts:     Inter (UI/body) + JetBrains Mono (code)
+   Brand:     Teal #0F766E (primary) / #14B8A6 (accent)
+   Accent:    Amber #D97706 (CTAs / secondary)
+   Background: #0C1222 (dark) / #F0FDF4 (light)
+   Dark-First: built for dark terminals — teal + amber on deep navy
 */
 
 /* ---- Google Fonts ---- */
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 /* ---- Chukfi Brand Colors + Fonts ---- */
 :root {
-  --chukfi-brand: #1e3a5f;
-  --chukfi-brand-light: #2d5a8e;
-  --chukfi-accent: #f59e0b;
-  --chukfi-accent-light: #fbbf24;
+  --chukfi-brand: #0F766E;
+  --chukfi-brand-light: #14B8A6;
+  --chukfi-accent: #D97706;
+  --chukfi-accent-light: #F59E0B;
 
   /* Typography */
-  --sl-font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --sl-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --sl-font-mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
 
-  /* Starlight light-mode overrides */
-  --sl-color-accent: #1e3a5f;
-  --sl-color-accent-high: #2d5a8e;
-  --sl-color-accent-low: #dbeafe;
-  --sl-color-white: #0f172a;
-  --sl-color-gray-1: #1e293b;
+  /* Starlight light-mode — Earth-Tech on light bg */
+  --sl-color-accent: #0F766E;
+  --sl-color-accent-high: #14B8A6;
+  --sl-color-accent-low: #CCFBF1;
+  --sl-color-white: #0C1222;
+  --sl-color-gray-1: #1E293B;
   --sl-color-gray-2: #475569;
-  --sl-color-gray-3: #94a3b8;
-  --sl-color-gray-4: #cbd5e1;
-  --sl-color-gray-5: #e2e8f0;
-  --sl-color-gray-6: #f1f5f9;
-  --sl-color-black: #ffffff;
-  --sl-color-bg: #ffffff;
-  --sl-color-bg-nav: #f8fafc;
-  --sl-color-bg-sidebar: #f8fafc;
-  --sl-color-bg-inline-code: #f1f5f9;
-  --sl-color-bg-hint: #eef2ff;
-  --sl-color-hairline: #e2e8f0;
-  --sl-color-hairline-shade: #cbd5e1;
-  --sl-color-text-accent: #1e3a5f;
-  --sl-color-text-invert: #ffffff;
+  --sl-color-gray-3: #64748B;
+  --sl-color-gray-4: #94A3B8;
+  --sl-color-gray-5: #CBD5E1;
+  --sl-color-gray-6: #F1F5F9;
+  --sl-color-black: #FFFFFF;
+  --sl-color-bg: #F0FDF4;
+  --sl-color-bg-nav: #F0FDF4;
+  --sl-color-bg-sidebar: #F0FDF4;
+  --sl-color-bg-inline-code: #F1F5F9;
+  --sl-color-bg-hint: #CCFBF1;
+  --sl-color-hairline: #CBD5E1;
+  --sl-color-hairline-shade: #94A3B8;
+  --sl-color-text-accent: #0F766E;
+  --sl-color-text-invert: #FFFFFF;
 }
 
-/* ---- Dark Mode (OLED-inspired, high contrast) ---- */
+/* ---- Dark Mode — teal + amber on deep navy ---- */
 :root[data-theme="dark"] {
-  --chukfi-brand: #60a5fa;
-  --chukfi-brand-light: #93bbfd;
-  --chukfi-accent: #fbbf24;
-  --chukfi-accent-light: #fcd34d;
+  --chukfi-brand: #14B8A6;
+  --chukfi-brand-light: #2DD4BF;
+  --chukfi-accent: #F59E0B;
+  --chukfi-accent-light: #FBBF24;
 
-  /* Deep OLED background stack */
-  --sl-color-accent: #60a5fa;
-  --sl-color-accent-high: #93bbfd;
-  --sl-color-accent-low: #1e3a5f;
-  --sl-color-white: #f1f5f9;
-  --sl-color-gray-1: #e2e8f0;
-  --sl-color-gray-2: #cbd5e1;
-  --sl-color-gray-3: #94a3b8;
-  --sl-color-gray-4: #64748b;
-  --sl-color-gray-5: #334155;
-  --sl-color-gray-6: #1e293b;
-  --sl-color-black: #090d16;
-  --sl-color-bg: #090d16;
-  --sl-color-bg-nav: #0f172a;
-  --sl-color-bg-sidebar: #0f172a;
-  --sl-color-bg-inline-code: #1e293b;
-  --sl-color-bg-hint: #1e3a5f;
-  --sl-color-hairline: #334155;
-  --sl-color-hairline-shade: #475569;
-  --sl-color-text-accent: #60a5fa;
-  --sl-color-text-invert: #090d16;
+  /* Earth-Tech dark stack */
+  --sl-color-accent: #14B8A6;
+  --sl-color-accent-high: #2DD4BF;
+  --sl-color-accent-low: #134E4A;
+  --sl-color-white: #F0FDF4;
+  --sl-color-gray-1: #CBD5E1;
+  --sl-color-gray-2: #94A3B8;
+  --sl-color-gray-3: #64748B;
+  --sl-color-gray-4: #475569;
+  --sl-color-gray-5: #1E293B;
+  --sl-color-gray-6: #172032;
+  --sl-color-black: #0C1222;
+  --sl-color-bg: #0C1222;
+  --sl-color-bg-nav: #172032;
+  --sl-color-bg-sidebar: #172032;
+  --sl-color-bg-inline-code: #172032;
+  --sl-color-bg-hint: #134E4A;
+  --sl-color-hairline: #1E293B;
+  --sl-color-hairline-shade: #334155;
+  --sl-color-text-accent: #14B8A6;
+  --sl-color-text-invert: #0C1222;
 }
 
 /* ============================================
@@ -88,7 +89,7 @@
 
 /* Hero title — gradient brand text */
 .hero h1 {
-  background: linear-gradient(135deg, #1e3a5f 0%, #2d5a8e 50%, #3b82f6 100%);
+  background: linear-gradient(135deg, #0F766E 0%, #14B8A6 50%, #2DD4BF 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -98,7 +99,7 @@
 }
 
 :root[data-theme="dark"] .hero h1 {
-  background: linear-gradient(135deg, #60a5fa 0%, #93bbfd 40%, #bfdbfe 100%);
+  background: linear-gradient(135deg, #14B8A6 0%, #2DD4BF 40%, #5EEAD4 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -118,26 +119,26 @@
 
 /* Primary button (Quick Start) */
 .hero .actions a[href*="quick-start"] {
-  background: linear-gradient(135deg, #1e3a5f 0%, #2d5a8e 50%, #3b82f6 100%) !important;
+  background: linear-gradient(135deg, #0F766E 0%, #14B8A6 50%, #2DD4BF 100%) !important;
   color: #ffffff !important;
   border: none !important;
-  box-shadow: 0 4px 14px rgba(30, 58, 95, 0.3);
+  box-shadow: 0 4px 14px rgba(15, 118, 110, 0.3);
   font-weight: 600;
   transition: all 0.2s ease;
 }
 
 .hero .actions a[href*="quick-start"]:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(30, 58, 95, 0.4);
+  box-shadow: 0 6px 20px rgba(15, 118, 110, 0.4);
 }
 
 :root[data-theme="dark"] .hero .actions a[href*="quick-start"] {
-  background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 50%, #60a5fa 100%) !important;
-  box-shadow: 0 4px 14px rgba(96, 165, 250, 0.3);
+  background: linear-gradient(135deg, #0F766E 0%, #14B8A6 50%, #14B8A6 100%) !important;
+  box-shadow: 0 4px 14px rgba(20, 184, 166, 0.3);
 }
 
 :root[data-theme="dark"] .hero .actions a[href*="quick-start"]:hover {
-  box-shadow: 0 6px 20px rgba(96, 165, 250, 0.4);
+  box-shadow: 0 6px 20px rgba(20, 184, 166, 0.4);
 }
 
 /* Secondary button (CLI Reference) */
@@ -203,7 +204,7 @@
 
 .hero-search-button:hover {
   border-color: var(--sl-color-accent) !important;
-  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.15);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.15);
   color: var(--sl-color-gray-2) !important;
 }
 
@@ -246,13 +247,13 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(135deg, #1e3a5f 0%, #3b82f6 100%);
+  background: linear-gradient(135deg, #0F766E 0%, #14B8A6 100%);
   opacity: 0;
   transition: opacity 0.25s ease;
 }
 
 :root[data-theme="dark"] .feature-card::before {
-  background: linear-gradient(135deg, #60a5fa 0%, #93bbfd 100%);
+  background: linear-gradient(135deg, #14B8A6 0%, #2DD4BF 100%);
 }
 
 :root[data-theme="dark"] .feature-card {
@@ -267,7 +268,7 @@
 }
 
 :root[data-theme="dark"] .feature-card:hover {
-  box-shadow: 0 4px 20px rgba(96, 165, 250, 0.1);
+  box-shadow: 0 4px 20px rgba(20, 184, 166, 0.1);
   border-color: var(--sl-color-accent);
 }
 
@@ -281,8 +282,8 @@
 }
 
 :root[data-theme="dark"] .feature-card.accent {
-  border-color: rgba(96, 165, 250, 0.15);
-  background: linear-gradient(135deg, rgba(30, 41, 59, 0.5) 0%, rgba(30, 58, 95, 0.4) 100%);
+  border-color: rgba(20, 184, 166, 0.15);
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 118, 110, 0.4) 100%);
 }
 
 .feature-card.compact {
@@ -570,14 +571,14 @@ starlight-search button {
 [data-has-hero] .header button,
 [data-has-hero] .header svg,
 [data-has-hero] .site-title {
-  color: #f1f5f9 !important;
+  color: #F0FDF4 !important;
 }
 
 /* Full-bleed splash background */
 [data-has-hero] {
-  background-color: #030712 !important;
+  background-color: #0C1222 !important;
   background-image:
-    radial-gradient(at 50% 0%, rgba(96, 165, 250, 0.15) 0px, transparent 50%),
+    radial-gradient(at 50% 0%, rgba(20, 184, 166, 0.15) 0px, transparent 50%),
     linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px) !important;
   background-size: 100% 100%, 50px 50px, 50px 50px !important;
@@ -586,12 +587,12 @@ starlight-search button {
   /* Force dark-theme variables on splash page regardless of site theme.
      !important is required because Starlight's :root[data-theme="light"]
      rules have specificity (0,2,0) which beats [data-has-hero] at (0,1,0). */
-  --sl-color-white: #f1f5f9 !important;
-  --sl-color-gray-1: #e2e8f0 !important;
-  --sl-color-gray-2: #cbd5e1 !important;
-  --sl-color-gray-3: #94a3b8 !important;
-  --sl-color-gray-5: #334155 !important;
-  --sl-color-gray-6: #1e293b !important;
+  --sl-color-white: #F0FDF4 !important;
+  --sl-color-gray-1: #CBD5E1 !important;
+  --sl-color-gray-2: #94A3B8 !important;
+  --sl-color-gray-3: #64748B !important;
+  --sl-color-gray-5: #1E293B !important;
+  --sl-color-gray-6: #172032 !important;
   color-scheme: dark;
 }
 
@@ -632,8 +633,8 @@ starlight-search button {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(96, 165, 250, 0.1);
-  border: 1px solid rgba(96, 165, 250, 0.2);
+  background: rgba(20, 184, 166, 0.1);
+  border: 1px solid rgba(20, 184, 166, 0.2);
   padding: 0.5rem 1rem;
   border-radius: 9999px;
   font-family: var(--sl-font-mono);
@@ -670,17 +671,17 @@ starlight-search button {
 .unveiling-cta:hover {
   border-color: var(--sl-color-accent);
   transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(96, 165, 250, 0.15);
+  box-shadow: 0 4px 14px rgba(20, 184, 166, 0.15);
 }
 .unveiling-cta-primary {
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
+  background: linear-gradient(135deg, #0F766E 0%, #115E59 100%) !important;
   color: #fff !important;
   border: none !important;
   font-weight: 700;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 4px 14px rgba(15, 118, 110, 0.3);
 }
 .unveiling-cta-primary:hover {
-  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+  box-shadow: 0 6px 20px rgba(15, 118, 110, 0.5);
 }
 :root[data-theme="dark"] .unveiling-cta {
   background: rgba(30, 41, 59, 0.5);
@@ -688,7 +689,7 @@ starlight-search button {
   color: var(--sl-color-gray-1) !important;
 }
 :root[data-theme="dark"] .unveiling-cta-primary {
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+  background: linear-gradient(135deg, #14B8A6 0%, #0F766E 100%) !important;
   color: #fff !important;
 }
 
@@ -727,7 +728,7 @@ starlight-search button {
 }
 .stack-layer:hover {
   border-color: var(--sl-color-accent);
-  box-shadow: -15px 15px 40px rgba(96, 165, 250, 0.2);
+  box-shadow: -15px 15px 40px rgba(20, 184, 166, 0.2);
 }
 .layer-frontend {
   transform: translate3d(
@@ -735,7 +736,7 @@ starlight-search button {
     calc(var(--scroll-y, 0) * 0.08 * 1px),
     160px
   );
-  border-color: rgba(96, 165, 250, 0.4);
+  border-color: rgba(20, 184, 166, 0.4);
 }
 .layer-core {
   transform: translate3d(0, 0, 80px);
@@ -822,7 +823,7 @@ starlight-search button {
 .hero-logo-svg {
   width: 100px;
   height: 100px;
-  filter: drop-shadow(0 0 30px rgba(96, 165, 250, 0.3));
+  filter: drop-shadow(0 0 30px rgba(20, 184, 166, 0.3));
   animation: logo-float 4s ease-in-out infinite;
   color: var(--sl-color-accent-high);
 }
@@ -832,7 +833,7 @@ starlight-search button {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(96, 165, 250, 0.2) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(20, 184, 166, 0.2) 0%, transparent 70%);
   filter: blur(30px);
   animation: glow-pulse 3s ease-in-out infinite;
 }
@@ -941,7 +942,7 @@ starlight-search button {
 }
 
 .teams-avatar-bot {
-  background: #1e3a5f;
+  background: #0F766E;
 }
 
 .teams-bubble {
@@ -981,7 +982,7 @@ starlight-search button {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #60a5fa;
+  background: #14B8A6;
   animation: typing-bounce 1.2s ease-in-out infinite;
 }
 
@@ -1043,9 +1044,9 @@ starlight-search button {
 }
 
 .teams-draft-edit {
-  background: rgba(96, 165, 250, 0.15);
-  color: #60a5fa;
-  border-color: rgba(96, 165, 250, 0.3);
+  background: rgba(20, 184, 166, 0.15);
+  color: #14B8A6;
+  border-color: rgba(20, 184, 166, 0.3);
 }
 
 .teams-draft-reject {
