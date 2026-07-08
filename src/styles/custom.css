@@ -638,7 +638,10 @@ starlight-search button {
 
 /* Scroll snap — desktop only, scoped to splash */
 @media (min-width: 769px) {
-  html[data-has-hero] { scroll-snap-type: y proximity; }
+  html[data-has-hero] {
+    scroll-snap-type: y proximity;
+    scroll-padding-top: var(--sl-nav-height, 4rem);
+  }
   [data-has-hero] .unveiling-hero,
   [data-has-hero] .splash-section,
   [data-has-hero] .splash-deepdives {
@@ -647,7 +650,8 @@ starlight-search button {
     scroll-snap-align: start;
   }
   [data-has-hero] .unveiling-hero,
-  [data-has-hero] .splash-section {
+  [data-has-hero] .splash-section,
+  [data-has-hero] .splash-deepdives {
     display: flex;
     flex-direction: column;
     justify-content: center;
