@@ -30,14 +30,14 @@ import Logo from "../assets/logo.svg";
         >
       </h1>
       <p
-          style="margin: 0 0 3rem; font-size: 1.3rem; opacity: 0.8; max-width: 700px; line-height: 1.6; color: var(--sl-color-gray-1);"
+          style="margin: 0 0 3rem; font-size: clamp(1rem, 0.85rem + 0.6vw, 1.3rem); opacity: 0.8; max-width: 700px; line-height: 1.6; color: var(--sl-color-gray-1);"
       >
         The zero-dependency, CLI-first headless CMS built in Rust for solo
         developers who want production-grade parity without managing
         infrastructure.
       </p>
 
-      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+      <div style="display: flex; gap: clamp(0.75rem, 1.5vh, 1.5rem); flex-wrap: wrap;">
         <a
             href="/guides/quick-start/"
             class="unveiling-cta unveiling-cta-primary"
@@ -122,7 +122,7 @@ import Logo from "../assets/logo.svg";
             </div>
             <div>
                 <p
-                    style="font-size: 1.15rem; line-height: 1.7; opacity: 0.9; margin: 0;"
+                    style="font-size: clamp(0.95rem, 0.85rem + 0.4vw, 1.15rem); line-height: 1.7; opacity: 0.9; margin: 0;"
                 >
                     No Rust environment, no compilation wait times, no Docker
                     Compose templates to copy-paste.
@@ -174,7 +174,7 @@ import Logo from "../assets/logo.svg";
                 </div>
                 <h2 class="statement-huge">Chat to Publish.</h2>
                 <p
-                    style="font-size: 1.15rem; line-height: 1.7; opacity: 0.8; margin: 0 0 1rem; color: var(--sl-color-gray-1);"
+                    style="font-size: clamp(0.95rem, 0.85rem + 0.4vw, 1.15rem); line-height: 1.7; opacity: 0.8; margin: 0 0 1rem; color: var(--sl-color-gray-1);"
                 >
                     Staff can create, edit, and schedule content directly from
                     Microsoft Teams. Chukfi connects to AWS Bedrock running
@@ -511,7 +511,7 @@ import Logo from "../assets/logo.svg";
                     Auto-Syndicate.
                 </h2>
                 <p
-                    style="font-size: 1.15rem; line-height: 1.7; opacity: 0.8; margin: 0 0 1rem; color: var(--sl-color-gray-1);"
+                    style="font-size: clamp(0.95rem, 0.85rem + 0.4vw, 1.15rem); line-height: 1.7; opacity: 0.8; margin: 0 0 1rem; color: var(--sl-color-gray-1);"
                 >
                     Publish once, distribute everywhere. The moment you approve
                     a blog post in Chukfi, it automatically formats and
@@ -590,13 +590,13 @@ import Logo from "../assets/logo.svg";
             One Command to AWS.
         </h2>
         <p
-            style="font-size: 1.25rem; max-width: 600px; margin: 0 auto 3rem; opacity: 0.9;"
+            style="font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem); max-width: 600px; margin: 0 auto 3rem; opacity: 0.9;"
         >
             Provisions ECS Fargate, RDS PostgreSQL, S3, CloudFront, and SES via
             AWS CDK. One command, one bill, 100% Free Tier eligible.
         </p>
         <code
-            style="font-family: var(--sl-font-mono); background: var(--sl-color-bg-inline-code); padding: 1rem 2rem; border-radius: 12px; border: 1px solid var(--sl-color-hairline); font-size: 1.2rem; color: var(--sl-color-white);"
+            style="font-family: var(--sl-font-mono); background: var(--sl-color-bg-inline-code); padding: 1rem 2rem; border-radius: 12px; border: 1px solid var(--sl-color-hairline); font-size: clamp(0.9rem, 0.8rem + 0.5vw, 1.2rem); color: var(--sl-color-white);"
         >
             npx chukfi deploy
         </code>
@@ -605,13 +605,13 @@ import Logo from "../assets/logo.svg";
 
 <div
     class="splash-deepdives"
-    style="padding: 6rem 1rem; max-width: 900px; margin: 0 auto; text-align: center;"
+    style="padding: clamp(2rem, 6vh, 6rem) clamp(1rem, 2vw, 2rem); max-width: 900px; margin: 0 auto; text-align: center;"
 >
-    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem;">
+    <h3 style="font-size: clamp(1.2rem, 1rem + 1vw, 1.5rem); font-weight: 700; margin-bottom: 0.75rem;">
         Explore the Technical Deep Dives
     </h3>
     <p
-        style="color: var(--sl-color-gray-2); font-size: 1.05rem; margin-bottom: 2rem;"
+        style="color: var(--sl-color-gray-2); font-size: clamp(0.9rem, 0.8rem + 0.4vw, 1.05rem); margin-bottom: 2rem;"
     >
         Chukfi's internal details are fully documented across our guides.
     </p>
@@ -627,7 +627,7 @@ import Logo from "../assets/logo.svg";
 </div>
 
 <div class="splash-footer"
-    style="text-align: center; padding: 3rem 1rem 2rem; font-size: 0.85rem; color: var(--sl-color-gray-3); border-top: 1px solid var(--sl-color-hairline);"
+    style="text-align: center; padding: 3rem 1rem 2rem; font-size: clamp(0.75rem, 0.7rem + 0.2vw, 0.85rem); color: var(--sl-color-gray-3); border-top: 1px solid var(--sl-color-hairline);"
 >
     MIT Licensed &middot; <a href="https://github.com/smattera/chukfi-docs"
         >GitHub</a
