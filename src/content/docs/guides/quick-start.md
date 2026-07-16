@@ -3,6 +3,11 @@ title: Quick Start
 description: Get started with Chukfi CMS in minutes — install, local dev, and deploy
 ---
 
+<video controls>
+  <source src="/videos/quick-start.webm" type="video/webm">
+  <source src="/videos/quick-start.mp4" type="video/mp4">
+</video>
+
 ## Prerequisites
 
 - **Rust 1.91+** — Chukfi CLI is a Rust binary. Install via [rustup](https://rustup.rs).
