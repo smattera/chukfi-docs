@@ -1627,3 +1627,36 @@ starlight-search button {
 :root[data-theme="dark"] .unveiling-search-trigger:hover {
     border-color: rgba(148, 163, 184, 0.3);
 }
+
+/* ============================================
+   Accessibility — prefers-reduced-motion
+   Resolves wayfinder #4
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ============================================
+   Accessibility — focus-visible ring
+   Resolves wayfinder #5
+   ============================================ */
+
+*:focus-visible {
+    outline: 2px solid var(--chukfi-brand);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
+/* Override focus ring on teal-background sections where brand teal
+   is the background color itself — use the lighter variant instead */
+.splash-section--teal *:focus-visible {
+    outline-color: var(--chukfi-brand-light);
+}
