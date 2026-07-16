@@ -3,7 +3,7 @@ title: Quick Start
 description: Get started with Chukfi CMS in minutes — install, local dev, and deploy
 ---
 
-<video controls>
+<video controls="" autoplay="" loop="" muted="" playsinline="" style="width: 100%; border-radius: 0.75rem; border: 1px solid var(--sl-color-gray-5); margin: 1.5rem 0;">
   <source src="/videos/quick-start.webm" type="video/webm">
   <source src="/videos/quick-start.mp4" type="video/mp4">
 </video>
