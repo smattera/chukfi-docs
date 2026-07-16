@@ -1583,6 +1583,52 @@ starlight-search button {
 }
 
 /* ============================================
+   Hero search trigger — resolves wayfinder #2
+   ============================================ */
+
+.unveiling-search-trigger {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    padding: 0.75rem 1.25rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 0.5rem;
+    color: var(--sl-color-gray-3);
+    font-size: 0.95rem;
+    cursor: pointer;
+    width: 100%;
+    max-width: 480px;
+    transition: border-color 0.2s ease;
+}
+
+.unveiling-search-trigger:hover {
+    border-color: var(--sl-color-gray-2);
+    color: var(--sl-color-white);
+}
+
+.unveiling-search-trigger span {
+    flex: 1;
+    text-align: left;
+}
+
+.unveiling-search-trigger kbd {
+    font-size: 0.75rem;
+    font-family: var(--sl-font-mono);
+    opacity: 0.5;
+}
+
+:root[data-theme="dark"] .unveiling-search-trigger {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(148, 163, 184, 0.15);
+}
+
+:root[data-theme="dark"] .unveiling-search-trigger:hover {
+    border-color: rgba(148, 163, 184, 0.3);
+}
+
+/* ============================================
    Accessibility — prefers-reduced-motion
    Resolves wayfinder #4
    ============================================ */

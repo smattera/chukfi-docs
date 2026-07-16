@@ -10,7 +10,7 @@ import Logo from "../assets/logo.svg";
   <div class="unveiling-hero-row">
     <div class="unveiling-hero-content">
       <div class="unveiling-badge">
-        <svg
+        <svg aria-hidden="true"
             width="14"
             height="14"
             viewBox="0 0 24 24"
@@ -48,11 +48,24 @@ import Logo from "../assets/logo.svg";
           Read Architecture
         </a>
       </div>
+
+      <!-- Search trigger — opens Starlight's Pagefind search modal -->
+      <site-search>
+        <button data-open-modal aria-label="Search documentation" aria-keyshortcuts="Control+K" class="unveiling-search-trigger">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <span>Search docs...</span>
+          <kbd>Ctrl K</kbd>
+        </button>
+      </site-search>
     </div>
 
     <div class="hero-logo-container">
       <div class="hero-logo-glow"></div>
-      <Logo class="hero-logo-svg" />
+      <div role="img" aria-label="Chukfi CMS">
+        <Logo class="hero-logo-svg" />
+      </div>
     </div>
   </div>
 
@@ -144,7 +157,7 @@ import Logo from "../assets/logo.svg";
     >
     </div>
     <div class="parallax-logo parallax-logo--left parallax-logo--teams">
-        <svg width="120" height="120" viewBox="0 0 48 48" fill="none">
+        <svg aria-hidden="true" width="120" height="120" viewBox="0 0 48 48" fill="none">
             <rect x="6" y="8" width="15" height="25" rx="2" fill="#6264A7"
             ></rect>
             <rect x="23" y="14" width="19" height="19" rx="2" fill="#6264A7"
@@ -158,7 +171,7 @@ import Logo from "../assets/logo.svg";
         <div class="statement-grid">
             <div>
                 <div class="unveiling-badge" style="margin-bottom: 1.5rem;">
-                    <svg
+                    <svg aria-hidden="true"
                         width="14"
                         height="14"
                         viewBox="0 0 24 24"
@@ -216,7 +229,7 @@ import Logo from "../assets/logo.svg";
                     </div>
                     <div class="teams-msg teams-msg-bot">
                         <div class="teams-avatar teams-avatar-bot">
-                            <svg
+                            <svg aria-hidden="true"
                                 width="14"
                                 height="14"
                                 viewBox="0 0 24 24"
@@ -236,7 +249,7 @@ import Logo from "../assets/logo.svg";
                     </div>
                     <div class="teams-msg teams-msg-bot">
                         <div class="teams-avatar teams-avatar-bot">
-                            <svg
+                            <svg aria-hidden="true"
                                 width="14"
                                 height="14"
                                 viewBox="0 0 24 24"
@@ -259,7 +272,7 @@ import Logo from "../assets/logo.svg";
                                     Expands Tribal Services
                                 </div>
                                 <div class="teams-draft-meta">
-                                    <svg
+                                    <svg aria-hidden="true"
                                         width="12"
                                         height="12"
                                         viewBox="0 0 24 24"
@@ -277,7 +290,7 @@ import Logo from "../assets/logo.svg";
                                 <div class="teams-draft-actions">
                                     <span
                                         class="teams-draft-btn teams-draft-approve"
-                                        ><svg
+                                        ><svg aria-hidden="true"
                                             width="12"
                                             height="12"
                                             viewBox="0 0 24 24"
@@ -291,7 +304,7 @@ import Logo from "../assets/logo.svg";
                                     >
                                     <span
                                         class="teams-draft-btn teams-draft-edit"
-                                        ><svg
+                                        ><svg aria-hidden="true"
                                             width="12"
                                             height="12"
                                             viewBox="0 0 24 24"
@@ -306,7 +319,7 @@ import Logo from "../assets/logo.svg";
                                     >
                                     <span
                                         class="teams-draft-btn teams-draft-reject"
-                                        ><svg
+                                        ><svg aria-hidden="true"
                                             width="12"
                                             height="12"
                                             viewBox="0 0 24 24"
@@ -340,7 +353,7 @@ import Logo from "../assets/logo.svg";
     >
     </div>
     <div class="parallax-logo parallax-logo--right parallax-logo--facebook">
-        <svg width="110" height="110" viewBox="0 0 48 48" fill="none">
+        <svg aria-hidden="true" width="110" height="110" viewBox="0 0 48 48" fill="none">
             <circle cx="24" cy="24" r="22" fill="#1877F2"></circle>
             <path
                 d="M29.5 15.5H26.5C25.119 15.5 24 16.619 24 18V21H20.5V24.5H24V33H27.5V24.5H30L31 21H27.5V18C27.5 17.448 27.948 17 28.5 17H31L29.5 15.5Z"
@@ -358,7 +371,7 @@ import Logo from "../assets/logo.svg";
                                 Native Consulting Services
                             </div>
                             <div class="fb-time">
-                                Just now &middot; <svg
+                                Just now &middot; <svg aria-hidden="true"
                                     width="12"
                                     height="12"
                                     viewBox="0 0 24 24"
@@ -387,7 +400,7 @@ import Logo from "../assets/logo.svg";
                     </div>
                     <div class="fb-card-preview">
                         <div class="fb-card-preview-img">
-                            <svg
+                            <svg aria-hidden="true"
                                 width="100%"
                                 height="100%"
                                 viewBox="0 0 400 200"
@@ -440,7 +453,7 @@ import Logo from "../assets/logo.svg";
                     </div>
                     <div class="fb-card-actions">
                         <div class="fb-action">
-                            <svg
+                            <svg aria-hidden="true"
                                 width="16"
                                 height="16"
                                 viewBox="0 0 24 24"
@@ -452,7 +465,7 @@ import Logo from "../assets/logo.svg";
                             <span>Like</span>
                         </div>
                         <div class="fb-action">
-                            <svg
+                            <svg aria-hidden="true"
                                 width="16"
                                 height="16"
                                 viewBox="0 0 24 24"
@@ -464,7 +477,7 @@ import Logo from "../assets/logo.svg";
                             <span>Comment</span>
                         </div>
                         <div class="fb-action">
-                            <svg
+                            <svg aria-hidden="true"
                                 width="16"
                                 height="16"
                                 viewBox="0 0 24 24"
@@ -479,7 +492,7 @@ import Logo from "../assets/logo.svg";
                         </div>
                     </div>
                     <div class="fb-card-badge">
-                        <svg
+                        <svg aria-hidden="true"
                             width="12"
                             height="12"
                             viewBox="0 0 24 24"
@@ -496,7 +509,7 @@ import Logo from "../assets/logo.svg";
             </div>
             <div>
                 <div class="unveiling-badge" style="margin-bottom: 1.5rem;">
-                    <svg
+                    <svg aria-hidden="true"
                         width="14"
                         height="14"
                         viewBox="0 0 24 24"
@@ -537,7 +550,7 @@ import Logo from "../assets/logo.svg";
     >
     </div>
     <div class="parallax-logo parallax-logo--right parallax-logo--aws">
-        <svg width="130" height="130" viewBox="0 0 48 48" fill="none">
+        <svg aria-hidden="true" width="130" height="130" viewBox="0 0 48 48" fill="none">
             <path
                 d="M12 28C12 28 13.5 26 19 26C24.5 26 27 28 32 28C35 28 36 26.5 36 26.5"
                 stroke="#FF9900"
