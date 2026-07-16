@@ -656,12 +656,6 @@ starlight-search button {
     flex-direction: column;
     justify-content: center;
   }
-  /* Teams & Facebook mockups can exceed viewport height — exempt from snap */
-  [data-has-hero] .splash-section--teams,
-  [data-has-hero] .splash-section--facebook {
-    min-height: auto;
-    scroll-snap-align: none;
-  }
   /* Footer needs its own snap point so users can rest at page bottom */
   [data-has-hero] .splash-footer { scroll-snap-align: start; }
 }
