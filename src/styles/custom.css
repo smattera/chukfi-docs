@@ -677,17 +677,6 @@ starlight-search button {
   [data-has-hero] .splash-section-inner p { text-wrap: pretty; }
 }
 
-/* Container queries — reflow two-column grids on narrow containers */
-@container (max-width: 700px) {
-  .statement-grid {
-    grid-template-columns: 1fr;
-    gap: clamp(1rem, 2vh, 2rem);
-  }
-  .teams-mockup,
-  .fb-mockup {
-    max-width: 100%;
-  }
-}
 @media (prefers-reduced-motion: reduce) {
   html[data-has-hero] { scroll-snap-type: none; }
 }
@@ -1006,7 +995,7 @@ starlight-search button {
     margin: 0 auto;
     position: relative;
     z-index: 2;
-    container-type: inline-size;
+    width: 100%;
 }
 
 /* Teal — solid brand */
