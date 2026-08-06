@@ -1,121 +1,76 @@
 ---
 title: Roadmap
-description: "Chukfi CMS feature roadmap — upcoming features, priorities, and completed milestones (AWS: ECS Fargate + RDS PostgreSQL + CloudFront)"
+description: "Chukfi CMS feature roadmap — upcoming features, priorities, and completed milestones"
 ---
 
 # Chukfi CMS — Feature Roadmap
 
-Features discussed and prioritized for future implementation.
+> **Detailed roadmap moved to [Architecture → Roadmap](/architecture/architecture/#7-roadmap).** This page tracks lower-priority feature ideas and the v0.2.0 completed list.
+
+## v0.2.0 — Shipped
+
+| Feature | Status |
+|---------|--------|
+| Axum REST API with embedded migrations (`sqlx::migrate!`) | ✓ |
+| `cargo install chukfi-bin` distribution | ✓ |
+| Dioxus 0.7 WASM admin UI | ✓ |
+| Content CRUD (CLI + REST API) | ✓ |
+| Media library (local filesystem + S3) | ✓ |
+| RBAC (Administrator, Publisher, Editor) | ✓ |
+| Magic-link auth + Entra ID OIDC | ✓ |
+| `chukfi token <email>` JWT generation | ✓ |
+| `chukfi seed` demo data | ✓ |
+| `chukfi site deploy` (Cloudflare Pages) | ✓ |
+| `chukfi codegen` TypeScript type generation | ✓ |
+| Audit logging | ✓ |
+| Docker Compose deployment | ✓ |
+
+## Planned (v0.3.0+)
+
+| Feature | Notes |
+|---------|-------|
+| `chukfi init` | `init.rs` implemented, CLI wiring + .env.example template in v0.3.0 |
+| AWS CDK provisioning | `deploy` command auto-provisioning RDS/ECS/CloudFront |
+| Content import | Import from WordPress WXR, Sanity NDJSON, Strapi JSON |
+| S3 + CloudFront for admin UI | Edge-cached static assets, API-only Fargate load |
+| RDS Proxy / connection pooling | Scale ECS tasks without exhausting Postgres connections |
+| AWS X-Ray / tracing | Distributed tracing for DB queries and middleware overhead |
 
 ---
 
-## High Priority
+## Completed (v0.1.0–v0.2.0)
 
-### Infrastructure & Performance
+- [x] Content types with typed fields (Text, Rich Text, Date, Number, Boolean, Media)
+- [x] Content revisions (snapshot on save, restore)
+- [x] Trash can (soft delete, 30-day retention)
+- [x] Full-text search (PostgreSQL tsvector + GIN indexes)
+- [x] Status workflow (draft / published / archived)
+- [x] Per-record SEO fields
+- [x] Content calendar
+- [x] Media upload with MIME detection
+- [x] Media library filtering (type, search)
+- [x] Bulk actions (publish, archive, trash)
+- [x] JWT-based sessions with configurable expiry
+- [x] Role-based access control (colon-delimited permissions)
+- [x] Admin dashboard with stats and activity feed
+- [x] Magic link passwordless auth (SES in production, stdout in dev)
 
-- **S3 + CloudFront for Admin UI** — serve the static admin UI (`admin-ui/dist/`) from S3 via CloudFront instead of through the Axum binary on ECS Fargate. Single biggest latency + cost win: edge-cached static assets, API-only Fargate load.
-- **RDS Proxy / Connection pooling** — add AWS RDS Proxy or tune SQLx connection pool limits aggressively. ECS Fargate tasks scale horizontally and can exhaust Postgres connection limits without pooling.
-- **AWS X-Ray / tracing** — integrate distributed tracing to profile database queries and middleware overhead under production load.
-- **CloudFront cache-control for media** — harden `Cache-Control` headers on S3 media objects served via CloudFront to maximize edge cache hit ratios.
+## Lower Priority (Backlog)
 
----
-
-## Medium Priority
-
-### Environment / Config management
-- A way to define environment-specific settings (staging vs prod API URLs, feature flags) without hardcoding.
-- Fits naturally as a Settings sub-section and pairs well with your draft preview work.
-
----
-
-## Lower Priority
-
-### Event Registration System (Cvent-like)
-Full attendee management for events — dependent on public user authentication and payment processing being established first.
-- Public-facing registration flow with customizable per-event fields (built on Form Builder foundation)
-- Attendee authentication — public user accounts separate from admin users (requires its own auth system)
-- Payment processing integration (Stripe or similar) for paid/ticketed events with fee tiers and promo codes
-- Registrations inbox per event: attendee list, check-in status, CSV export
-- Automated confirmation and reminder emails via the newsletter plugin's email providers
-- Capacity limits and waitlist management
+### Event Registration System
+Public-facing event registration with Stripe payments, attendee management, waitlists, and CSV export.
 
 ### Approval / Editorial Workflow
-A review queue so authors can submit content for editorial sign-off before it goes live.
-- New post status: `in_review` (sits between `draft` and `published`)
-- Authors can only move records to `in_review`; editors/admins can approve (→ `published`) or reject (→ `draft` with a note)
-- In-app notification badge for editors when reviews are pending
-- Rejection notes stored in a `review_notes` column
+Editorial review queue with `in_review` status, rejection notes, and in-app notification badges.
 
 ### Analytics Dashboard
-Basic traffic and engagement metrics surfaced inside the admin without a third-party dashboard.
-- Use a lightweight API endpoint (`GET /api/track?path=...`) that logs page views to RDS PostgreSQL (JSONB) with a CloudWatch dashboard for metrics
-- Dashboard page: top content by views (7d/30d), subscriber growth over time, form submission volume
-- No PII collected — only path + date + rough geo (country)
+Lightweight page view tracking (`GET /api/track`) with CloudWatch dashboard and top content metrics.
 
 ### Localization / i18n
-Translate collection records into multiple languages while keeping them linked as variants of the same content.
-- New `locale` column on supported collections; composite unique key `(slug, locale)`
-- Language picker in the record editor to switch between or create locale variants
-- API: `GET /api/posts?locale=fr` returns locale-specific records, falls back to default locale
-- Locale list configured in Settings (e.g. `en`, `fr`, `de`)
+Multi-language content variants with `locale` column, composite unique keys, and locale-specific API queries.
 
 ### Navigation Builder
-Drag-and-drop tree of links (internal pages or external URLs) outputting a navigation JSON structure for the frontend to consume.
-- Stored in the Global Settings singleton or a dedicated `navigation` table
-- Frontend: tree editor component with add/remove/reorder/nest
+Drag-and-drop tree editor for header/footer navigation outputting structured JSON.
 
 ### Nested / Repeatable Fields
-Array-type field where each item is a group of sub-fields (e.g. a "sections" array on a page, each section having `heading` + `body` + `image`).
-- New field type: `repeatable` with `subfields: CmsField[]`
-- Stored as JSONB in PostgreSQL
-- Frontend: add/remove/reorder rows in the form
-
----
-
-## Completed
-
-- [x] Mobile Friendly Admin Dashboard
-- [x] Admin Dashboard Homepage
-- [x] Tags collection with media tagging and filtering
-- [x] Media Library (upload, delete, tag, filter, search)
-- [x] Dark mode with system preference detection
-- [x] Custom Collections (generic CRUD with schema-driven UI)
-- [x] Status workflow (draft / published / scheduled / archived)
-- [x] Scheduled publishing (cron auto-publish)
-- [x] Content revisions (snapshot on save, restore)
-- [x] Trash can (soft delete, 30-day retention, restore, permanent delete)
-- [x] Media filename editing
-- [x] Command palette (`Cmd+K` / `Ctrl+K`)
-- [x] Global Settings singleton
-- [x] Webhooks
-- [x] Newsletter
-- [x] API Key Management
-- [x] Import / Export
-- [x] Activity Log / Audit Trail
-- [x] Image Transformations
-- [x] Settings Hub
-- [x] Folder Organization for Media
-- [x] Email Newsletter Templates
-- [x] Multi-User / Role-Based Access Control (RBAC)
-- [x] Full-Text Search
-- [x] Custom Collections (dynamic schema)
-- [x] Public Landing Page
-- [x] Form Builder
-- [x] Tags Option
-- [x] Per-Record SEO Fields
-- [x] Media Library Folders Home Button
-- [x] Form Field Validation
-- [x] Form Submissions Page
-- [x] Unified Submissions Routing
-- [x] Revised Dashboard
-- [x] Bulk Actions
-- [x] Content Calendar
-- [x] Newsletter Campaigns on Content Calendar
-- [x] Events Collection
-- [x] Share Posts to Facebook
-- [x] Content relationships / References
-- [x] Public API / Headless delivery layer
-- [x] Redirect Manager
-- [x] Page Builder
-- [x] Embed / oEmbed Support
-- [x] Two-Factor Authentication
+Array-type fields with `subfields` stored as JSONB, with add/remove/reorder UI.

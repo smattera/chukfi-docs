@@ -1,155 +1,127 @@
 ---
 title: Architecture
-description: Chukfi CMS architecture overview — CLI-first distribution, Astro integration, and AWS deployment
+description: Chukfi CMS architecture overview — source-first distribution, Dioxus admin UI, Docker local dev, and AWS deployment
 ---
 
-# Chukfi — Phase 3 Architecture
+# Chukfi — Architecture (v0.2.0)
 
-**Status:** Draft for review
-**Audience:** Platform maintainers, future contributors, solo developers evaluating Chukfi
+**Audience:** Platform maintainers, future contributors, developers evaluating Chukfi
 
 ## 1. Vision
 
-Chukfi is a headless CMS purpose-built for Astro, distributed as a single `npx chukfi` command. Three non-negotiable pillars:
+Chukfi is an open-source headless CMS distributed as a Rust binary. Two pillars:
 
-- **CLI-first distribution** — The Rust binary ships as platform-specific npm packages, wrapped by `@chukfi/cli`. No Rust toolchain, no build steps, no operating knowledge required.
+- **Source-first distribution** — `cargo install chukfi-bin` for the binary, or build from the repo for the full stack (API, admin UI, config templates).
 - **Local-to-prod parity** — Local dev runs Docker-managed PostgreSQL; production runs AWS RDS PostgreSQL. Same engine, same migrations, same SQL.
-- **AWS-only deploy** — One command provisions the full stack on AWS via CDK. One domain, one bill, no hybrid hosting.
 
-**Target user:** Solo developers shipping Astro sites who want CMS-grade content management without operating infrastructure.
+**Target user:** Developers who want a headless CMS that compiles to a single Rust binary with a fast Dioxus admin UI and PostgreSQL-backed content management.
 
-## 2. CLI-First Distribution
-
-The Rust binary does not ship as a `cargo install` artifact or a Docker image. It ships as **platform-specific npm packages** using the same pattern as esbuild, Prisma, and Turbo:
+## 2. Repository Structure
 
 ```
-@chukfi/cli                         ← thin Node wrapper (~50 lines)
-  └─ optionalDependencies:
-       ├─ @chukfi/core-linux-x64
-       ├─ @chukfi/core-linux-arm64
-       ├─ @chukfi/core-darwin-x64
-       ├─ @chukfi/core-darwin-arm64
-       └─ @chukfi/core-windows-x64
+chukfi-cms/
+├── chukfi/             # Core library crate (Axum API, auth, content engine)
+├── chukfi-bin/         # CLI binary (clap-based, all subcommands)
+├── chukfi-types/       # Shared type definitions
+├── chukfi-admin-ui/    # Dioxus 0.7 WASM admin interface
+├── chukfi-ai/          # AI integration (Bedrock)
+├── chukfi/migrations/  # SQL migrations (embedded via sqlx::migrate!)
+│   ├── ...             # Content types, users, sessions, RBAC
+│   └── 0008_navigation_groups.sql
+├── docker-compose.yml  # PostgreSQL 16 for local dev
+├── Dockerfile          # Multi-stage build
+└── Cargo.toml          # Workspace root
 ```
 
-`npm install @chukfi/cli` pulls the correct binary for the host OS automatically. The wrapper spawns it as a child process and verifies checksums against the GitHub release the npm packages were published from.
+## 3. Distribution
+
+The binary ships via `cargo install chukfi-bin`. For the full stack (admin UI, config templates, Docker Compose), clone the repo:
+
+```bash
+git clone https://github.com/smattera/chukfi-core
+cd chukfi-core
+cargo build --release -p chukfi-bin
+./target/release/chukfi serve
+```
+
+The binary embeds migrations via `sqlx::migrate!("./migrations")` and runs them automatically on startup — no separate `sqlx migrate run` needed.
 
 ### Commands
 
 | Command | Purpose |
 |---------|---------|
-| `npx chukfi dev` | Start local API on :8080 (Docker Postgres + binary + migrations) |
-| `npx chukfi init` | Scaffold a new Astro project wired to Chukfi |
-| `npx chukfi deploy` | Provision AWS stack via CDK, extract endpoints, write `.env.production` |
-| `npx chukfi upgrade` | Pull latest binary, re-run migrations, restart |
+| `chukfi serve` | Start API server on configured port (default: 4321) |
+| `chukfi seed` | Seed demo data for all content types in config |
+| `chukfi token <email>` | Generate a dev JWT (auto-creates user) |
+| `chukfi content` | Create, list, update content entries |
+| `chukfi media` | Upload, list media assets |
+| `chukfi site deploy` | Deploy frontend to Cloudflare Pages |
+| `chukfi codegen` | Generate TypeScript types from schema |
 
-### Release pipeline
+## 4. Local Development
 
-GitHub Actions builds the binary for all 5 platform targets on every release tag, uploads artifacts to GitHub Releases, and publishes the npm packages in lockstep. Manual override: `--bin-url` flag for testing pre-release builds.
+`docker compose up -d postgres` starts a PostgreSQL 16 container. The API connects via `DATABASE_URL` in `.env`. Content is managed through the REST API, CLI, or Dioxus admin UI.
 
-## 3. Local Development — Path A (Docker-managed PostgreSQL)
-
-**Decision:** Local dev uses Docker-managed PostgreSQL. SQLite dual-mode is declined for v1.
-
-### Why not SQLite
-
-The current schema uses Postgres-specific features with no drop-in SQLite equivalent:
-
-- `tsvector` + GIN index for full-text search — SQLite FTS5 is a different engine with different semantics
-- `JSONB` for `data`, `draft_data`, `seo`, `schema`, `diff` — SQLite requires `TEXT` + `json1` parsing at every read
-- Raw `sqlx::query("... WHERE id = $1 ...")` — `sqlx` does not rewrite parameter markers at runtime
-- `gen_random_uuid()` defaults — would have to be generated in Rust application code
-
-Supporting SQLite would require a multi-week database access layer refactor with permanent regression risk. Docker Postgres is universal in the target audience.
-
-### What `npx chukfi dev` does
-
-1. Detect a Docker runtime (Docker Desktop, Colima, OrbStack, Rancher Desktop)
-2. If `DATABASE_URL` is unset, spawn an ephemeral `postgres:17-alpine` container named `chukfi-dev` on port 5433
-3. Run embedded migrations from the binary
-4. Spawn the Rust API on port 8080
-5. Stream logs to the terminal until Ctrl+C
-6. Tear down the container on exit (unless `--persist` is set)
-
-`DATABASE_URL` is the only switch between local and production database configuration. Pointing it at an external Postgres (shared dev database, staging RDS) is the override path.
-
-## 4. Astro Integration (`@chukfi/astro`)
-
-A thin wrapper over the CLI. One job: provide a one-command dev experience.
-
-### What it does
-
-- `astro:server:setup` hook spawns the CLI's `dev` process when `astro dev` starts
-- Astro middleware proxies `/api/*` and `/admin/*` requests to the local API on port 8080
-- The pre-compiled admin UI in `chukfi-cms/admin-ui/` is served from the API at `/admin/*` — the Astro site inherits it transparently
-
-### What it does NOT do
-
-- It does not embed the Rust binary
-- It does not implement proxy logic itself
-- It does not manage Docker
-
-The integration is ~50 lines of glue. If it breaks, the CLI works standalone and the dev can keep moving.
-
-## 5. AWS Deployment (`npx chukfi deploy`)
-
-The CLI scaffolds a TypeScript CDK application in the project's `/deploy` directory and deploys it with one command. No hybrid hosting — frontend, backend, and database all live in the same AWS account, behind one CloudFront distribution.
-
-### Stack
-
-| Resource | Config | Free Tier? |
-|----------|--------|------------|
-| RDS PostgreSQL | `db.t4g.micro`, 20 GB, single-AZ | ✓ 12 months |
-| ECS Fargate | 0.25 vCPU / 512 MB, 1 task, auto-scale 1-2 | ✓ 400 GB-hr/mo |
-| S3 | Media bucket, lifecycle rules | ✓ 5 GB |
-| SES | Sandbox mode (production access on request) | ✓ 3,000 emails/mo |
-| CloudFront | One distribution, ACM cert, /api + /admin + /* routing | ✓ 1 TB egress/yr |
-| VPC | 2 AZs, Fargate in public subnets (public IPs, SG-restricted), RDS in private subnets | ✓ (No NAT) |
-| Secrets Manager | DB credentials, JWT secret | Minimal |
-
-**Cost:** Effectively **$0/month** for hobby tier (under Free Tier limits). **$10-15/month** for low-traffic production after Free Tier expires (no NAT Gateway).
-
-### One-command workflow
+The admin UI (`chukfi-admin-ui/`) is a separate Dioxus 0.7 WASM app:
 
 ```bash
-npx chukfi deploy
-   ↓
-Detects AWS credentials (env, profile, SSO)
-   ↓
-cd deploy && npm install
-   ↓
-npx cdk bootstrap   (one-time per AWS account/region)
-   ↓
-npx cdk deploy
-   ↓
-Outputs:
-  - CloudFront URL (https://d1234.cloudfront.net)
-  - RDS endpoint
-  - S3 bucket name
-  ↓
-Writes .env.production with all values
+cd chukfi-admin-ui
+trunk serve          # Dev on :8081, API on :4321
+trunk build          # Production: dist/ served by API
 ```
 
-No AWS Console clicking. No manual security group rules. Custom domain setup (pointing a domain at the CloudFront distribution) is documented in the generated `/deploy/README.md`.
+### PostgreSQL-only (no SQLite)
 
-## 6. Architectural Notes
+The schema uses Postgres-specific features with no drop-in SQLite equivalents:
 
-**SSR is the default.** The CloudFront → ECS architecture assumes server-side rendered Astro (like `chc-cms`, which uses `@astrojs/node`). Dynamic content is fetched at request time from the Rust API.
+- `tsvector` + GIN index for full-text search
+- `JSONB` for `data`, `draft_data`, `diff`, `schema`
+- `$1` parameter markers (sqlx does not rewrite at runtime)
+- `gen_random_uuid()` defaults
 
-**SSG is supported but requires a public API URL.** Solo developers using static builds (`astro build` with the default static output) will fetch content at build time. The API must be reachable during the build pipeline. For local SSG builds, this means the CLI's `dev` command must be running. For production SSG builds on CI, this requires either deploying the API first and using a `PUBLIC_CHUKFI_API_URL` env var, or running `chukfi dev` as a build-step sidecar. Full SSG workflow is documented in the generated `/deploy/README.md`.
+## 5. Admin UI Architecture
 
-**Path A (Docker Postgres) is the locked local-dev choice.** This decision was driven by the AWS-only deploy constraint: Docker local Postgres = RDS production Postgres = 100% engine parity. SQLite was considered and declined because the schema uses Postgres-specific features (`tsvector` + GIN for full-text search, `JSONB`, raw `$1` parameter markers, `gen_random_uuid()` defaults) with no drop-in SQLite equivalents.
+The Dioxus admin UI is a WASM SPA with:
 
-## 7. Phase 3 Roadmap
+- **Content Editor** — Quill 2.0 rich text with image upload
+- **Media Library** — Browse, upload, tag, filter
+- **Content Types** — Define schemas with typed fields
+- **Search** — Full-text via PostgreSQL tsvector
+- **Auth** — JWT-based with magic link flow
 
-| # | Deliverable | Time | v1? |
-|---|-------------|------|-----|
-| 1 | `@chukfi/cli` `dev` command (Docker detection, Postgres spawn, migrations, binary) | 2 days | ✓ |
-| 2 | Binary release pipeline (GitHub Actions → 5 platform builds → npm publish) | 2 days | ✓ |
-| 3 | `@chukfi/cli` `deploy` command (CDK scaffold, deployment orchestration, .env extraction) | 2-3 days | ✓ |
-| 4 | `@chukfi/astro` integration (spawn binary, proxy /api + /admin) | 1 day | ✓ |
-| 5 | `create-chukfi-app` scaffold (interactive project init) | 1-2 days | v1.1 |
+Production serving: build with `trunk build`, set `adminUiPath` in config to point at `dist/`.
 
-**v1 shippable scope:** Items 1-4. Total: 7-8 days focused.
+## 6. Deployment
 
-**Deferred to v2:** SQLite dual-mode (only if real demand for no-Docker local dev emerges), multi-region deployment, custom domain automation beyond CloudFront default cert.
+### Local: Docker Compose
+
+```bash
+docker compose up -d
+```
+
+Starts PostgreSQL 16 and the Chukfi API on port 4321.
+
+### Production: AWS + Cloudflare Pages
+
+- **API + DB** — ECS Fargate + RDS PostgreSQL (manual provisioning in v0.2.0; CDK automation planned)
+- **Media** — S3 (activated by setting `AWS_ACCESS_KEY_ID` and `S3_BUCKET`)
+- **Frontend** — Cloudflare Pages via `chukfi site deploy --dir <frontend> --project <name>`
+
+### Release Pipeline
+
+GitHub Actions builds the binary, publishes to crates.io (`chukfi-bin` v0.2.0), and builds Docker images.
+
+## 7. Roadmap
+
+| # | Deliverable | v0.2.0? |
+|---|-------------|---------|
+| 1 | `chukfi serve` with embedded migrations | ✓ |
+| 2 | Content CRUD (CLI + REST API) | ✓ |
+| 3 | Media library (local + S3) | ✓ |
+| 4 | Dioxus admin UI (WASM) | ✓ |
+| 5 | RBAC + audit logging | ✓ |
+| 6 | Cloudflare Pages deploy (`chukfi site deploy`) | ✓ |
+| 7 | `codegen` (TypeScript types) | ✓ |
+| 8 | `chukfi init` command | In progress |
+| 9 | AWS CDK provisioning | Planned |
+| 10 | Content import (WordPress, Sanity, Strapi) | Planned |

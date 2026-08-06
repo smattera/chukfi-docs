@@ -5,6 +5,8 @@ description: Upload, organize, and serve media assets backed by Amazon S3 — wi
 
 Chukfi's media library handles uploads, tagging, and serving — backed by Amazon S3 in production and the local filesystem during development.
 
+> **Note:** This video demonstrates a planned npm distribution. v0.2.0 ships as a Rust binary — see the [Quick Start](/guides/quick-start/) for current setup.
+
 <video controls autoplay loop muted playsinline style="width: 100%; border-radius: 0.75rem; border: 1px solid var(--sl-color-gray-5); margin: 1.5rem 0;">
   <source src="/videos/media-library-tour.webm" type="video/webm">
   <source src="/videos/media-library-tour.mp4" type="video/mp4">
@@ -14,7 +16,7 @@ Chukfi's media library handles uploads, tagging, and serving — backed by Amazo
 
 - **Drag-and-drop upload** — Drop files into the browser, Chukfi handles MIME detection and storage
 - **Type filtering** — Filter by image, document, or all media types
-- **S3-backed** — Production media lives in an S3 bucket with lifecycle rules (Free Tier: 5 GB)
+- **S3-backed** — Production media lives in an S3 bucket with lifecycle rules (Free Tier: 5 GB). Configure via `AWS_ACCESS_KEY_ID` and `S3_BUCKET` environment variables.
 - **CLI support** — Upload and list media from the terminal with `chukfi media` commands
 
 ## CLI: Media Commands
@@ -56,4 +58,4 @@ chukfi media list --q banner --limit 20 --json
 | Local development | Filesystem (`./media/` directory) |
 | Production | Amazon S3 |
 
-The S3 bucket is provisioned by `npx chukfi deploy` with lifecycle rules and Free Tier pricing (5 GB included). No configuration needed — just deploy.
+S3 storage is activated by setting `AWS_ACCESS_KEY_ID` (or `AWS_PROFILE`) and `S3_BUCKET` in your environment. The bucket itself must be provisioned separately — via the AWS console, CDK, or Terraform.

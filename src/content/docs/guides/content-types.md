@@ -5,6 +5,8 @@ description: Define custom content types with typed fields — Chukfi generates 
 
 Chukfi adapts to your business domain, not the other way around. Define any content type — blog posts, job openings, events, staff profiles — and Chukfi generates everything: database schema, REST API, and TypeScript types.
 
+> **Note:** This video demonstrates a planned npm distribution. v0.2.0 ships as a Rust binary — see the [Quick Start](/guides/quick-start/) for current setup.
+
 <video controls autoplay loop muted playsinline style="width: 100%; border-radius: 0.75rem; border: 1px solid var(--sl-color-gray-5); margin: 1.5rem 0;">
   <source src="/videos/schema-builder-tour.webm" type="video/webm">
   <source src="/videos/schema-builder-tour.mp4" type="video/mp4">
@@ -45,7 +47,7 @@ export interface JobOpenings {
 After defining content types, regenerate TypeScript types for your frontend:
 
 ```bash
-npx chukfi codegen --out src/types
+chukfi codegen --out src/types
 ```
 
 This writes a `chukfi-types.ts` file with interfaces for every content type and a union type for type-safe queries. Import it directly into your Astro components for full IDE autocompletion.

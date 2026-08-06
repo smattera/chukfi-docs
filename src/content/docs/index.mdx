@@ -1,12 +1,81 @@
 ---
 title: Chukfi CMS
-description: A high-performance, lightweight headless CMS built with Rust, Astro, and AWS. CLI-first, local-to-prod parity, one-command deploy to AWS ECS Fargate.
+description: A high-performance, lightweight headless CMS built in Rust with a Dioxus admin UI, PostgreSQL backend, and REST API.
 template: splash
 hero:
-  title: ''
-  tagline: ''
+  title: Ship a CMS in Minutes.
+  tagline: The Rust-native headless CMS for developers who want a fast Dioxus 0.7 admin UI, PostgreSQL-backed content, and a single binary — or build from source for the full stack.
+  image:
+    file: ../../assets/logo.svg
+  actions:
+    - text: Get Started
+      link: /guides/quick-start/
+      icon: right-arrow
+      variant: primary
+    - text: Read Architecture
+      link: /architecture/architecture/
+      icon: right-arrow
+      variant: secondary
 ---
 
-import Unveiling from '../../components/Unveiling.astro';
+## Rust Native, Source-First
 
-<Unveiling />
+Chukfi ships as a Rust binary via `cargo install chukfi-bin`. Clone the repo for the full stack — Dioxus admin UI, config templates, and Docker Compose setup.
+
+```bash
+cargo install chukfi-bin
+chukfi serve
+```
+
+## Built for Developers
+
+<div class="feature-grid">
+
+<div class="feature-card">
+<span class="feature-icon">⚡</span>
+<h3>Rust Core</h3>
+<p>Axum API server compiled to a single binary. Zero runtime dependencies, sub-millisecond cold starts, embedded migrations.</p>
+</div>
+
+<div class="feature-card">
+<span class="feature-icon">🦀</span>
+<h3>Dioxus 0.7 Admin</h3>
+<p>WASM-compiled admin UI with Quill 2.0 rich text editor, media library, and content type builder. Built entirely in Rust.</p>
+</div>
+
+<div class="feature-card">
+<span class="feature-icon">🗄️</span>
+<h3>PostgreSQL Backend</h3>
+<p>Docker-managed PostgreSQL 16 for local dev, AWS RDS for production. Full-text search via tsvector, JSONB fields, GIN indexes.</p>
+</div>
+
+</div>
+
+## Chat to Publish
+
+Connect Chukfi to Microsoft Teams. AWS Bedrock running Claude drafts posts, rewrites copy, and generates metadata — all from a chat thread. Every AI change is forced to **draft**. Human approval is hardcoded.
+
+## Deploy Anywhere
+
+Build from source for local dev with Docker Compose, push to AWS ECS Fargate + RDS for production, or deploy your frontend to Cloudflare Pages with one command.
+
+```bash
+chukfi site deploy --dir ./frontend --project my-site
+```
+
+<div class="dark-cta">
+<h2>Ready to Ship?</h2>
+<p>Clone the repo, run one command, and you're live. Rust binary, embedded migrations, Dioxus admin.</p>
+<a href="/guides/quick-start/" class="dark-cta-button">Get Started →</a>
+</div>
+
+## Explore the Docs
+
+<div class="doc-links">
+<a href="/guides/cli/">CLI Reference</a>
+<a href="/architecture/architecture/">Architecture</a>
+<a href="/teams-bot/overview/">Teams Bot</a>
+<a href="/guides/content-types/">Content Types</a>
+<a href="/guides/security/">Security & RBAC</a>
+<a href="/guides/migration/">Migration Guide</a>
+</div>
