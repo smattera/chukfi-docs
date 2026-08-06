@@ -8,6 +8,11 @@ description: Get Chukfi CMS running in 5 minutes from source or cargo install
 Get a headless CMS running in 5 minutes from a source checkout.
 `cargo install chukfi-bin` works for the binary (migrations are embedded and run automatically), but the admin UI and config templates live in the repo.
 
+<video controls autoplay loop muted playsinline style="width: 100%; border-radius: 0.75rem; border: 1px solid var(--sl-color-gray-5); margin: 1.5rem 0;">
+  <source src="/videos/quick-start.webm" type="video/webm">
+  <source src="/videos/quick-start.mp4" type="video/mp4">
+</video>
+
 ## Prerequisites
 
 - **Rust** 1.91+ ([rustup](https://rustup.rs))
