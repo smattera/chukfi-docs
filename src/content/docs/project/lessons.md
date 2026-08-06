@@ -5,9 +5,9 @@ description: Lessons learned during Chukfi CMS development — monorepo decision
 
 ## 2026-08 — npm Distribution Pivot → Source-First Rust Binary
 
-**Original plan:** Ship the Rust binary as platform-specific npm packages (`@chukfi/core-linux-x64`, etc.) wrapped by `@chukfi/cli`, following the esbuild/Prisma/Turbo pattern. Users would `npx chukfi dev` to start a Docker-managed Postgres and the API.
+**Original plan:** Ship the Rust binary via platform-specific packages wrapped by a CLI wrapper, following the esbuild/Prisma/Turbo pattern. Users would run a single CLI command to start a Docker-managed Postgres and the API.
 
-**Why we pivoted:** npm packaging adds significant release-pipeline complexity (5 platform targets, GitHub Actions + crates.io + npm publish lockstep, checksum verification) for a v0.2.0 binary that already ships on crates.io. The Rust-native audience — developers who already have a Rust toolchain — is underserved by an npm-first distribution when `cargo install chukfi-bin` does the job directly. Building from the repo for the full stack (admin UI, config templates, Docker Compose) provides a clearer separation: binary-only via cargo, full stack via git clone.
+**Why we pivoted:** Multi-platform packaging adds significant release-pipeline complexity for a v0.2.0 binary that already ships on crates.io. The Rust-native audience — developers who already have a Rust toolchain — is underserved by a wrapper-first distribution when `cargo install chukfi-bin` does the job directly.
 
 **Decision:** v0.2.0 ships as `cargo install chukfi-bin` with the full stack available from the source repo. npm distribution and CDK AWS provisioning are deferred to a future release. The binary embeds migrations via `sqlx::migrate!` so `cargo install` users get a working server immediately.
 
