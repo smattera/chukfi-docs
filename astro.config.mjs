@@ -62,6 +62,7 @@ export default defineConfig({
           items: [
             { label: 'Roadmap', link: '/project/roadmap/' },
             { label: 'Lessons Learned', link: '/project/lessons/' },
+            { label: 'Changelog', link: '/project/changelog/' },
           ],
         },
       ],
