@@ -20,7 +20,6 @@ description: "Chukfi CMS feature roadmap — upcoming features, priorities, and 
 | Magic-link auth + Entra ID OIDC | ✓ |
 | `chukfi token <email>` JWT generation | ✓ |
 | `chukfi seed` demo data | ✓ |
-| `chukfi site deploy` (Cloudflare Pages) | ✓ |
 | `chukfi codegen` TypeScript type generation | ✓ |
 | Audit logging | ✓ |
 | Docker Compose deployment | ✓ |

@@ -57,10 +57,11 @@ Connect Chukfi to Microsoft Teams. AWS Bedrock running Claude drafts posts, rewr
 
 ## Deploy Anywhere
 
-Build from source for local dev with Docker Compose, push to AWS ECS Fargate + RDS for production, or deploy your frontend to Cloudflare Pages with one command.
+Build from source for local dev with Docker Compose, push to AWS ECS Fargate + RDS for production.
 
 ```bash
-chukfi site deploy --dir ./frontend --project my-site
+cargo install chukfi-bin
+chukfi serve
 ```
 
 <div class="dark-cta">

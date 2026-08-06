@@ -55,7 +55,6 @@ The binary embeds migrations via `sqlx::migrate!("./migrations")` and runs them 
 | `chukfi token <email>` | Generate a dev JWT (auto-creates user) |
 | `chukfi content` | Create, list, update content entries |
 | `chukfi media` | Upload, list media assets |
-| `chukfi site deploy` | Deploy frontend to Cloudflare Pages |
 | `chukfi codegen` | Generate TypeScript types from schema |
 
 ## 4. Local Development
@@ -101,11 +100,11 @@ docker compose up -d
 
 Starts PostgreSQL 16 and the Chukfi API on port 4321.
 
-### Production: AWS + Cloudflare Pages
+### Production: AWS
 
 - **API + DB** — ECS Fargate + RDS PostgreSQL (manual provisioning in v0.2.0; CDK automation planned)
 - **Media** — S3 (activated by setting `AWS_ACCESS_KEY_ID` and `S3_BUCKET`)
-- **Frontend** — Cloudflare Pages via `chukfi site deploy --dir <frontend> --project <name>`
+- **Frontend** — Deploy your static site wherever you prefer (S3 + CloudFront, Netlify, etc.)
 
 ### Release Pipeline
 
@@ -120,8 +119,7 @@ GitHub Actions builds the binary, publishes to crates.io (`chukfi-bin` v0.2.0), 
 | 3 | Media library (local + S3) | ✓ |
 | 4 | Dioxus admin UI (WASM) | ✓ |
 | 5 | RBAC + audit logging | ✓ |
-| 6 | Cloudflare Pages deploy (`chukfi site deploy`) | ✓ |
-| 7 | `codegen` (TypeScript types) | ✓ |
-| 8 | `chukfi init` command | In progress |
-| 9 | AWS CDK provisioning | Planned |
-| 10 | Content import (WordPress, Sanity, Strapi) | Planned |
+| 6 | `codegen` (TypeScript types) | ✓ |
+| 7 | `chukfi init` command | In progress |
+| 8 | AWS CDK provisioning | Planned |
+| 9 | Content import (WordPress, Sanity, Strapi) | Planned |

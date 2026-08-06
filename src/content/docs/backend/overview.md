@@ -44,8 +44,7 @@ cd chukfi-core && cargo build --release -p chukfi-bin
 | `chukfi token <email>` | Generate a dev JWT |
 | `chukfi content` | Manage content entries |
 | `chukfi media` | Manage media assets |
-| `chukfi site deploy` | Deploy to Cloudflare Pages |
-| `chukfi codegen` | Generate TypeScript types |
+| `chukfi codegen` | Generate TypeScript types from schema |
 
 ## Domain Glossary
 
