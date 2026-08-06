@@ -3,6 +3,8 @@ title: Setup Guide
 description: How to set up the Chukfi Teams Bot — AWS Bedrock, Teams Outgoing Webhook, and deployment.
 ---
 
+> **Status: Aspirational design.** The Teams Bot is not yet implemented. The setup instructions below describe a planned feature — see the [Changelog](/project/changelog/) for what ships in v0.2.0.
+
 ## Prerequisites
 
 - Python 3.11+

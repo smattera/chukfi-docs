@@ -3,6 +3,8 @@ title: Demo Script
 description: A complete walkthrough for demonstrating the Chukfi Teams Bot — from setup to content management in Teams.
 ---
 
+> **Status: Aspirational design.** The Teams Bot is not yet implemented. The demo script below describes a planned feature — see the [Changelog](/project/changelog/) for what ships in v0.2.0.
+
 ## Demo Setup
 
 ### Prerequisites

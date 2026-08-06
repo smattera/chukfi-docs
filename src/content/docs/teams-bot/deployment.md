@@ -3,6 +3,8 @@ title: Deployment Guide
 description: Deploying the Chukfi Teams Bot to production — Docker, ECS Fargate, and CI/CD.
 ---
 
+> **Status: Aspirational design.** The Teams Bot is not yet implemented. The deployment guide below describes a planned feature — see the [Changelog](/project/changelog/) for what ships in v0.2.0.
+
 ## Deployment Options
 
 ### Option 1: ECS Fargate (Recommended)

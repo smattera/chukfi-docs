@@ -3,6 +3,8 @@ title: Troubleshooting
 description: Common issues and solutions for the Chukfi Teams Bot — HMAC, Bedrock, CLI, and connectivity problems.
 ---
 
+> **Status: Aspirational design.** The Teams Bot is not yet implemented. The troubleshooting guide below describes a planned feature — see the [Changelog](/project/changelog/) for what ships in v0.2.0.
+
 ## Quick Reference
 
 | Symptom | Likely Cause | Fix |

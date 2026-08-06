@@ -3,6 +3,8 @@ title: Model-Agnostic Architecture
 description: How the Chukfi Teams Bot is designed to work with any LLM provider, not just Amazon Bedrock.
 ---
 
+> **Status: Aspirational design.** The Teams Bot is not yet implemented. The provider architecture below describes a planned feature — see the [Changelog](/project/changelog/) for what ships in v0.2.0.
+
 ## Design Principle
 
 The Teams Bot is designed to be **model-agnostic**. While the default configuration uses Amazon Bedrock with Claude 3.5 Haiku, the architecture supports swapping in any LLM provider that supports tool-use (function calling).

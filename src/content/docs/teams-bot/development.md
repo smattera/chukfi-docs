@@ -3,6 +3,8 @@ title: Development Guide
 description: Developing and extending the Chukfi Teams Bot — adding tools, testing, and debugging.
 ---
 
+> **Status: Aspirational design.** The Teams Bot is not yet implemented. The development guide below describes a planned feature — see the [Changelog](/project/changelog/) for what ships in v0.2.0.
+
 ## Project Structure
 
 ```

@@ -3,6 +3,8 @@ title: Bedrock Integration
 description: How the Chukfi Teams Bot uses Amazon Bedrock's Converse API with Claude 3.5 Haiku for tool-use (function calling).
 ---
 
+> **Status: Aspirational design.** The Teams Bot is not yet implemented. The integration details below describe a planned feature — see the [Changelog](/project/changelog/) for what ships in v0.2.0.
+
 ## Overview
 
 The Teams Bot uses **Amazon Bedrock's Converse API** — not the Messages API or raw InvokeModel. The Converse API natively supports Claude's tool-use (function calling) mode, which is the correct way to give Claude structured tools.

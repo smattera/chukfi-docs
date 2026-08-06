@@ -3,6 +3,8 @@ title: Cost Estimation
 description: Estimated monthly costs for running the Chukfi Teams Bot with Amazon Bedrock Claude 3.5 Haiku.
 ---
 
+> **Status: Aspirational design.** The Teams Bot is not yet implemented. The cost estimates below describe a planned feature — see the [Changelog](/project/changelog/) for what ships in v0.2.0.
+
 ## Monthly Cost Breakdown
 
 ### Bedrock API Costs (Claude 3.5 Haiku)
