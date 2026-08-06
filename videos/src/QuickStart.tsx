@@ -216,53 +216,47 @@ const TerminalScene: React.FC<{ frame: number }> = ({ frame }) => {
         {/* Terminal content */}
         <div style={{ padding: '32px 0', minHeight: 420 }}>
           <TerminalLine
-            text="npm install @chukfi/cli"
+            text="cargo install chukfi-bin"
             frame={frame}
             delay={0}
             speed={2}
           />
           <TerminalLine
-            text="+ @chukfi/cli@1.0.0"
-            isOutput
-            frame={frame}
-            delay={40}
-          />
-          <TerminalLine
-            text="added 1 package in 2s"
-            isOutput
-            frame={frame}
-            delay={50}
-          />
-          <div style={{ height: 20 }} />
-          <TerminalLine
-            text="npx chukfi dev"
-            frame={frame}
-            delay={70}
-            speed={2}
-          />
-          <TerminalLine
-            text="✓ Docker detected (Docker Desktop)"
-            isOutput
-            frame={frame}
-            delay={110}
-          />
-          <TerminalLine
-            text="✓ PostgreSQL 17 started on port 5433"
+            text="+ chukfi-bin v0.2.0"
             isOutput
             frame={frame}
             delay={120}
           />
           <TerminalLine
+            text="installed package chukfi-bin"
+            isOutput
+            frame={frame}
+            delay={130}
+          />
+          <div style={{ height: 20 }} />
+          <TerminalLine
+            text="chukfi serve"
+            frame={frame}
+            delay={160}
+            speed={2}
+          />
+          <TerminalLine
+            text="✓ Docker detected — PostgreSQL 16 started"
+            isOutput
+            frame={frame}
+            delay={200}
+          />
+          <TerminalLine
             text="✓ Migrations applied"
             isOutput
             frame={frame}
-            delay={128}
+            delay={210}
           />
           <TerminalLine
-            text="✓ Chukfi CMS running on http://localhost:8080"
+            text="✓ Chukfi CMS running on http://localhost:4321"
             isOutput
             frame={frame}
-            delay={136}
+            delay={220}
           />
         </div>
       </div>
@@ -349,7 +343,7 @@ const OutroScene: React.FC<{ frame: number }> = ({ frame }) => {
           border: `1px solid ${COLORS.surfaceLight}`,
         }}
       >
-        http://localhost:8080
+        http://localhost:4321
       </p>
 
       <p
@@ -377,15 +371,15 @@ export const QuickStart: React.FC = () => {
       {/* Scene 1: Intro — frames 0-45 */}
       {frame < 45 && <IntroScene frame={frame} />}
 
-      {/* Scene 2: Terminal — frames 40-135 */}
-      {frame >= 40 && frame < 135 && (
-        <div style={{ opacity: frame < 45 ? (frame - 40) / 5 : frame > 130 ? (135 - frame) / 5 : 1 }}>
+      {/* Scene 2: Terminal — frames 40-270 */}
+      {frame >= 40 && frame < 270 && (
+        <div style={{ opacity: frame < 45 ? (frame - 40) / 5 : frame > 265 ? (270 - frame) / 5 : 1 }}>
           <TerminalScene frame={frame - 45} />
         </div>
       )}
 
-      {/* Scene 3: Outro — frames 130-150 */}
-      {frame >= 130 && <OutroScene frame={frame - 130} />}
+      {/* Scene 3: Outro — frames 265-285 */}
+      {frame >= 265 && <OutroScene frame={frame - 265} />}
     </AbsoluteFill>
   );
 };

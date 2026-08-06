@@ -1,40 +1,54 @@
 ---
 title: Frontend Overview
-description: Chukfi CMS frontend architecture — Astro 7, React islands, and admin interface
+description: Chukfi CMS frontend architecture — Dioxus 0.7 WASM admin UI and headless delivery.
 ---
 
-The Chukfi CMS frontend is built with Astro 7 and React 19, providing a modern admin interface for content management.
+The Chukfi CMS admin interface is built with Dioxus 0.7, compiled to WebAssembly, and served by the Rust API.
 
 <video controls autoplay loop muted playsinline style="width: 100%; border-radius: 0.75rem; border: 1px solid var(--sl-color-gray-5); margin: 1.5rem 0;">
   <source src="/videos/astro-integration-tour.webm" type="video/webm">
   <source src="/videos/astro-integration-tour.mp4" type="video/mp4">
 </video>
 
+> **Note:** This video references an Astro integration. v0.2.0 ships a Dioxus admin UI — see below for current architecture.
+
 ## Architecture
 
-- **Astro 7** — Static site generation with server-side rendering support
-- **React 19 islands** — Interactive admin components (schema builder, content editor, media library)
-- **shadcn/ui** — Visual primitives for consistent design
-- **Admin UI** — Pre-compiled SPA served by the Rust binary at `/`
+- **Dioxus 0.7** — Rust-based reactive UI framework, compiled to WASM
+- **Trunk** — WASM bundler and dev server (port 8081)
+- **Tailwind CSS v4** — Utility-first styling
+
+The admin UI is built in `chukfi-admin-ui/` and runs via `trunk serve` during development. For production, build with `trunk build` and point the API's `adminUiPath` in `chukfi.config.json` to the `dist/` directory.
+
+## Building and Serving
+
+```bash
+cd chukfi-admin-ui
+trunk serve            # Dev: admin UI on :8081, API on :4321
+trunk build            # Production: outputs to dist/
+```
+
+The Rust API (`chukfi serve`) can serve the built admin UI if `adminUiPath` is set:
+
+```json
+{
+  "server": {
+    "bindAddress": "0.0.0.0:4321",
+    "adminUiPath": "./chukfi-admin-ui/dist"
+  }
+}
+```
 
 ## Key Pages
 
 - **Admin Dashboard** — Stats cards, quick-access links, recent activity feed
 - **Content Editor** — Schema-driven form for creating and editing entries
 - **Media Library** — Upload, tag, filter, search, and organize media
-- **Schema Builder** — Define custom content types with typed fields
-- **Form Builder** — Create public-facing forms with drag-and-drop fields
-- **Settings Hub** — General settings, webhooks, API keys, redirects
+- **Content Types** — Define custom content types with typed fields
 
-## Features
+## Headless Delivery
 
-- Dark mode with system preference detection
-- Command palette (`Cmd+K` / `Ctrl+K`)
-- Content Calendar with month-grid view
-- Bulk actions (publish, archive, trash, export)
-- Full-text search with highlighted results
-- **Two-factor authentication**
-- **oEmbed support** for YouTube, Vimeo, Twitter/X
+Chukfi is a headless CMS — it provides a REST API for content delivery but does not dictate your frontend framework. Use any frontend (Astro, Next.js, SvelteKit, plain HTML) to fetch content from the API. The [CLI Reference](/guides/cli/) includes a `chukfi codegen` command to generate TypeScript types for your frontend.
 
 ## Search
 
@@ -43,4 +57,4 @@ The Chukfi CMS frontend is built with Astro 7 and React 19, providing a modern a
   <source src="/videos/search-tour.mp4" type="video/mp4">
 </video>
 
-Full-text search is backed by PostgreSQL `tsvector` with GIN indexes — no third-party search service needed. Search across all content types with highlighted results and sub-30ms response times.
+Full-text search is backed by PostgreSQL `tsvector` with GIN indexes — no third-party search service needed.

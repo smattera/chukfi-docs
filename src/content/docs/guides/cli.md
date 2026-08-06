@@ -1,6 +1,6 @@
 ---
 title: CLI Reference
-description: Complete reference for the Chukfi CMS CLI — content management, media uploads, site deployment, and code generation.
+description: Complete reference for the Chukfi CMS CLI — content management, media uploads, and code generation.
 ---
 
 The `chukfi` CLI is the primary interface for managing your CMS, both for humans and AI agents. Every command supports `--json` for machine-parseable output and clear exit codes.
@@ -8,7 +8,7 @@ The `chukfi` CLI is the primary interface for managing your CMS, both for humans
 ## Installation
 
 ```bash
-cargo install chukfi
+cargo install chukfi-bin
 # or build from source:
 cd chukfi-cms && cargo build --release -p chukfi-bin
 ./target/release/chukfi --help
@@ -27,9 +27,10 @@ cd chukfi-cms && cargo build --release -p chukfi-bin
 
 | Variable | Required For | Description |
 |----------|-------------|-------------|
-| `DATABASE_URL` | `content`, `media` commands | PostgreSQL connection string |
-| `CHUKFI_CONFIG` | `content create`, `codegen` | Path to `chukfi.config.json` (default: `./chukfi.config.json`) |
-| `CLOUDFLARE_API_TOKEN` | `site deploy` | Cloudflare API token with Pages Deploy permission — required to deploy your public frontend to Cloudflare Pages |
+| `DATABASE_URL` | `serve`, `seed`, `content`, `media` commands | PostgreSQL connection string |
+| `CHUKFI_CONFIG` | `serve`, `seed`, `content create`, `codegen` | Path to `chukfi.config.json` (default: `./chukfi.config.json`) |
+| `CHUKFI_JWT_SECRET` | `serve`, `token` | Secret key for JWT signing (required at runtime; can be set in `.env`) |
+| `CHUKFI_DEV_MODE` | `serve` | When `true`, auto-creates users on first login and enables permissive CORS |
 | `AWS_ACCESS_KEY_ID` | `media upload` (S3) | AWS credentials for S3-backed media storage |
 | `S3_BUCKET` | `media upload` (S3) | S3 bucket name (default: `chukfi-media`) |
 
@@ -43,7 +44,7 @@ Start the HTTP server.
 chukfi serve
 ```
 
-Reads `chukfi.config.json` and `DATABASE_URL` from the environment. Runs database migrations on startup.
+Reads `chukfi.config.json` and `DATABASE_URL` from the environment. Runs database migrations on startup. Serves the API on the configured port (default: `4321`).
 
 ### `chukfi seed`
 
@@ -53,7 +54,7 @@ Seed demo data into the database.
 chukfi seed
 ```
 
-Creates sample entries for each content type defined in `chukfi.config.json`. Useful for development and demos.
+Creates demo entries for every content type defined in `chukfi.config.json`. Navigation groups ship with schema migrations. Users are created lazily via `chukfi token`.
 
 ### `chukfi token <email>`
 
@@ -61,10 +62,10 @@ Generate a JWT for local development.
 
 ```bash
 chukfi token user@example.com
-# eyJhbGciOiJIUzI1NiIs...
+# eyJhbG...NiIs...
 ```
 
-Creates the user if they don't exist and returns a signed JWT. Paste into `sessionStorage.setItem('chukfi_token', '<token>')` to authenticate in the admin UI.
+Creates the user if they don't exist (with role `editor`) and returns a signed JWT. Paste into `sessionStorage.setItem('chukfi_token', '<token>')` to authenticate in the admin UI.
 
 ### `chukfi content create`
 
@@ -147,7 +148,7 @@ chukfi media upload \
 | `--caption` | `""` | Caption / description |
 | `--json` | `false` | Output as JSON |
 
-Auto-detects MIME type from file extension. Uploads to S3 (if AWS credentials present) or local filesystem.
+Auto-detects MIME type from file extension. Uploads to S3 (if `AWS_ACCESS_KEY_ID` present) or local filesystem.
 
 ### `chukfi media list`
 
@@ -164,30 +165,6 @@ chukfi media list --mime-type image/ --q banner --limit 20 --json
 | `--limit` | `50` | Maximum items (max 100) |
 | `--offset` | `0` | Pagination offset |
 | `--json` | `false` | Output as JSON |
-
-### `chukfi site deploy`
-
-Build and deploy a static website (your public frontend or the project docs) to Cloudflare Pages.
-
-> **Note:** The `--project` flag defaults to `chukfi-docs`. When deploying your own public frontend, override this with your Cloudflare Pages project name via `--project <your-project>`.
-
-```bash
-chukfi site deploy \
-  --dir ./frontend \
-  --project my-astro-site \
-  --yes \
-  --json
-```
-
-| Flag | Default | Description |
-|------|---------|-------------|
-| `--dir` | `.` | Path to your public frontend project directory (e.g. `./frontend`) |
-| `--project` | `chukfi-docs` | Cloudflare Pages project name |
-| `--branch` | `main` | Branch context for the deploy |
-| `--yes` / `-y` | `false` | Skip confirmation prompt |
-| `--json` | `false` | Output as JSON |
-
-Runs `npm ci`, `npm run build`, then `npx wrangler pages deploy`. Requires `CLOUDFLARE_API_TOKEN` in the environment.
 
 ### `chukfi codegen`
 
@@ -236,12 +213,6 @@ chukfi media upload --path ./featured.png --alt "Featured image" --json
 
 # 3. Publish
 chukfi content update --id <uuid> --status published --json
-```
-
-### AI Agent: Deploy after changes
-
-```bash
-chukfi site deploy --dir ./frontend --project my-astro-site --yes --json
 ```
 
 ### Developer: Generate types for the frontend

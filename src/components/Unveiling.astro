@@ -32,9 +32,9 @@ import Logo from "../assets/logo.svg";
       <p
           style="margin: 0 0 3rem; font-size: clamp(1rem, 0.85rem + 0.6vw, 1.3rem); opacity: 0.8; max-width: 700px; line-height: 1.6; color: var(--sl-color-gray-1);"
       >
-        The zero-dependency, CLI-first headless CMS built in Rust for solo
-        developers who want production-grade parity without managing
-        infrastructure.
+        The Rust-native headless CMS for developers who want a fast Dioxus
+        0.7 admin UI, PostgreSQL-backed content, and a single binary
+        &mdash; or build from source for the full stack.
       </p>
 
       <div style="display: flex; gap: clamp(0.75rem, 1.5vh, 1.5rem); flex-wrap: wrap;">
@@ -140,12 +140,12 @@ import Logo from "../assets/logo.svg";
                 <p
                     style="font-size: clamp(0.95rem, 0.85rem + 0.4vw, 1.15rem); line-height: 1.7; opacity: 0.9; margin: 0;"
                 >
-                    No Rust environment, no compilation wait times, no Docker
-                    Compose templates to copy-paste.
+                    No Rust environment, no compilation wait times. One
                     <code style="color: white; background: #1e293b"
-                        >npx chukfi dev</code
-                    > spins up a local PostgreSQL engine, applies migrations, and
-                    launches your API in under 5 seconds.
+                        >cargo install chukfi-bin</code
+                    > and you're ready. The binary embeds migrations, Docker
+                    Compose is included in the repo, and the API starts on port
+                    4321.
                 </p>
             </div>
         </div>
@@ -614,7 +614,7 @@ import Logo from "../assets/logo.svg";
         <code
             style="font-family: var(--sl-font-mono); background: var(--sl-color-bg-inline-code); padding: 1rem 2rem; border-radius: 12px; border: 1px solid var(--sl-color-hairline); font-size: clamp(0.9rem, 0.8rem + 0.5vw, 1.2rem); color: var(--sl-color-white);"
         >
-            npx chukfi deploy
+            chukfi serve
         </code>
     </div>
 </div>

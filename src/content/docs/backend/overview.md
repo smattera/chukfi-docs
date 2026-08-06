@@ -5,6 +5,15 @@ description: Chukfi CMS backend architecture — REST API, auth, content engine,
 
 The Chukfi CMS backend is written in Rust and compiled to a native binary. It provides a RESTful API for content management, authentication, media handling, and more.
 
+## Installation
+
+```bash
+cargo install chukfi-bin
+# or build from source:
+git clone https://github.com/smattera/chukfi-core
+cd chukfi-core && cargo build --release -p chukfi-bin
+```
+
 ## Core Components
 
 - **REST API** — Axum-based HTTP server handling all CRUD operations
@@ -13,6 +22,7 @@ The Chukfi CMS backend is written in Rust and compiled to a native binary. It pr
 - **Media Storage** — S3 (production) or local filesystem (development)
 - **Session Management** — JWT-based sessions with configurable expiry
 - **RBAC** — Role-based access control with granular permissions
+- **Migrations** — Embedded in the binary via `sqlx::migrate!`, run automatically on startup
 
 ## Key Technologies
 
@@ -24,6 +34,17 @@ The Chukfi CMS backend is written in Rust and compiled to a native binary. It pr
 | Media | S3 / Local filesystem |
 | Templates | Tera |
 | Email | SES (production) / stdout (development) |
+
+## CLI Commands
+
+| Command | Purpose |
+|---------|---------|
+| `chukfi serve` | Start the API server |
+| `chukfi seed` | Seed demo data |
+| `chukfi token <email>` | Generate a dev JWT |
+| `chukfi content` | Manage content entries |
+| `chukfi media` | Manage media assets |
+| `chukfi codegen` | Generate TypeScript types from schema |
 
 ## Domain Glossary
 
