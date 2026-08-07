@@ -16,7 +16,7 @@ Chukfi is a headless CMS — a content management system that provides a content
 
 ### Source-First Distribution
 
-Chukfi ships as a Rust binary via `cargo install chukfi-bin`. Build from source for full access to the Dioxus admin UI, config templates, and Docker Compose setup.
+Chukfi ships as a Rust binary via `cargo install chukfi-bin`. Build from source for full access to the Dioxus admin UI, config templates, and per-developer RDS database via `chukfi db create`.
 
 ```bash
 cargo install chukfi-bin    # Binary only (no admin UI)
@@ -33,7 +33,7 @@ cd chukfi-admin-ui && trunk serve    # Admin UI on :8081
 
 ### Local-to-Prod Parity
 
-Local development uses Docker-managed PostgreSQL; production uses AWS RDS PostgreSQL. Same engine, same migrations, same SQL. No SQLite dual-mode — the schema uses Postgres-specific features (`tsvector`, `JSONB`, `gen_random_uuid()`) that have no drop-in SQLite equivalents.
+Local dev and production both use AWS RDS PostgreSQL — each developer gets their own `db.t4g.micro` instance via `chukfi db create`. Same engine, same migrations, same SQL. No SQLite dual-mode — the schema uses Postgres-specific features (`tsvector`, `JSONB`, `gen_random_uuid()`) that have no drop-in SQLite equivalents.
 
 ### Dioxus Admin UI
 

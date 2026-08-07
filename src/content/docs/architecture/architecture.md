@@ -1,6 +1,6 @@
 ---
 title: Architecture
-description: Chukfi CMS architecture overview — source-first distribution, Dioxus admin UI, Docker local dev, and AWS deployment
+description: Chukfi CMS architecture overview — source-first distribution, Dioxus admin UI, per-developer AWS RDS, and AWS deployment
 ---
 
 # Chukfi — Architecture (v0.2.0)
@@ -12,7 +12,7 @@ description: Chukfi CMS architecture overview — source-first distribution, Dio
 Chukfi is an open-source headless CMS distributed as a Rust binary. Two pillars:
 
 - **Source-first distribution** — `cargo install chukfi-bin` for the binary, or build from the repo for the full stack (API, admin UI, config templates).
-- **Local-to-prod parity** — Local dev runs Docker-managed PostgreSQL; production runs AWS RDS PostgreSQL. Same engine, same migrations, same SQL.
+- **Local-to-prod parity** — Both local dev and production use AWS RDS PostgreSQL. Same engine, same migrations, same SQL.
 
 **Target user:** Developers who want a headless CMS that compiles to a single Rust binary with a fast Dioxus admin UI and PostgreSQL-backed content management.
 
@@ -28,14 +28,13 @@ chukfi-cms/
 ├── chukfi/migrations/  # SQL migrations (embedded via sqlx::migrate!)
 │   ├── ...             # Content types, users, sessions, RBAC
 │   └── 0008_navigation_groups.sql
-├── docker-compose.yml  # PostgreSQL 16 for local dev
-├── Dockerfile          # Multi-stage build
+├── README.md
 └── Cargo.toml          # Workspace root
 ```
 
 ## 3. Distribution
 
-The binary ships via `cargo install chukfi-bin`. For the full stack (admin UI, config templates, Docker Compose), clone the repo:
+The binary ships via `cargo install chukfi-bin`. For the full stack (admin UI, config templates, per-developer RDS), clone the repo:
 
 ```bash
 git clone https://github.com/smattera/chukfi-core
@@ -59,7 +58,7 @@ The binary embeds migrations via `sqlx::migrate!("./migrations")` and runs them 
 
 ## 4. Local Development
 
-`docker compose up -d postgres` starts a PostgreSQL 16 container. The API connects via `DATABASE_URL` in `.env`. Content is managed through the REST API, CLI, or Dioxus admin UI.
+Each developer creates their own RDS PostgreSQL instance via `chukfi db create`. The API connects via `DATABASE_URL` in `.env`. Content is managed through the REST API, CLI, or Dioxus admin UI.
 
 The admin UI (`chukfi-admin-ui/`) is a separate Dioxus 0.7 WASM app:
 
@@ -92,13 +91,15 @@ Production serving: build with `trunk build`, set `adminUiPath` in config to poi
 
 ## 6. Deployment
 
-### Local: Docker Compose
+### Local: RDS backend
+
+The API runs on your laptop, the database is on AWS:
 
 ```bash
-docker compose up -d
+chukfi db create --name my-chukfi-dev --region us-east-1
+# Paste the DATABASE_URL it prints into your .env, then:
+chukfi serve
 ```
-
-Starts PostgreSQL 16 and the Chukfi API on port 4321.
 
 ### Production: AWS
 
@@ -108,7 +109,7 @@ Starts PostgreSQL 16 and the Chukfi API on port 4321.
 
 ### Release Pipeline
 
-GitHub Actions builds the binary, publishes to crates.io (`chukfi-bin` v0.2.0), and builds Docker images.
+GitHub Actions builds the binary and publishes to crates.io (`chukfi-bin` v0.2.0).
 
 ## 7. Roadmap
 

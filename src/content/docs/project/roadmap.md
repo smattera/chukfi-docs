@@ -22,7 +22,7 @@ description: "Chukfi CMS feature roadmap — upcoming features, priorities, and 
 | `chukfi seed` demo data | ✓ |
 | `chukfi codegen` TypeScript type generation | ✓ |
 | Audit logging | ✓ |
-| Docker Compose deployment | ✓ |
+| RDS dev instances (`chukfi db create`) | ✓ |
 
 ## Planned (v0.3.0+)
 

@@ -1,29 +1,30 @@
 ---
 title: Deployment Overview
-description: Deploying Chukfi CMS — local development with Docker and production on AWS
+description: Deploying Chukfi CMS — per-developer AWS RDS
 ---
 
-Chukfi CMS in v0.2.0 supports two deployment paths: local development via Docker Compose, and production deployment to your own AWS infrastructure.
+Chukfi CMS in v0.2.0 uses per-developer AWS RDS PostgreSQL instances — both for local development and production.
 
 > **Note:** This video demonstrates planned CDK automation. In v0.2.0, AWS infrastructure must be provisioned manually or via your own IaC tooling.
 
 ## Local Development
 
-The repo includes a `docker-compose.yml` for PostgreSQL:
+Each developer creates their own RDS PostgreSQL instance:
 
 ```bash
-cat > .env << 'EOF'
-POSTGRES_PASSWORD=dev
-CHUKFI_JWT_SECRET=$(openssl rand -hex 32)
-EOF
-docker compose up -d postgres
-```
+# One-time setup (requires AWS credentials):
+#   → https://chukfi.dev/guides/aws-setup/
+chukfi db create --name my-chukfi-dev --region us-east-1
 
-Then start the API:
-
-```bash
+# Paste the DATABASE_URL it prints into your .env, then start:
 cargo build --release -p chukfi-bin
 ./target/release/chukfi serve
+```
+
+Tear down when done to avoid ~$15/month costs:
+
+```bash
+chukfi db destroy --id my-chukfi-dev --yes
 ```
 
 ## Production on AWS

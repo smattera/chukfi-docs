@@ -7,7 +7,7 @@ description: Release notes and version history for Chukfi CMS
 
 ## v0.2.0 — Source-First Rust Binary (2026-08-06)
 
-Distribution model pivot: Chukfi ships as a Rust binary via `cargo install chukfi-bin`. Clone the repo for the full stack — Dioxus admin UI, config templates, and Docker Compose.
+Distribution model pivot: Chukfi ships as a Rust binary via `cargo install chukfi-bin`. Clone the repo for the full stack — Dioxus admin UI, config templates, and per-developer RDS database via `chukfi db create`.
 
 ### Added
 
@@ -19,7 +19,7 @@ Distribution model pivot: Chukfi ships as a Rust binary via `cargo install chukf
 - `chukfi codegen` — generate TypeScript types from content schema
 - `chukfi serve` — start the API server with auto-migrations on startup
 - Dioxus 0.7 WASM admin UI with Quill 2.0 rich text editor
-- Docker Compose for local PostgreSQL 16
+- Per-developer RDS PostgreSQL via `chukfi db create`
 - RBAC (Administrator, Publisher, Editor) with colon-delimited permissions
 - Magic-link passwordless auth + Entra ID OIDC
 - Audit logging
@@ -67,5 +67,5 @@ Initial repository structure with Axum API core, SQL migrations, and workspace l
 - Content type schema system with typed fields
 - Admin dashboard with stats and activity feed
 - CRUD REST API for content entries
-- `docker-compose.yml` for local PostgreSQL
-- Dockerfile for multi-stage builds
+- `chukfi db create` for per-dev AWS RDS PostgreSQL
+- `chukfi db destroy` to tear down instances
