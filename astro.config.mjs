@@ -23,6 +23,7 @@ export default defineConfig({
             { label: 'Content Types', link: '/guides/content-types/' },
             { label: 'Media Library', link: '/guides/media/' },
             { label: 'Migration Guide', link: '/guides/migration/' },
+            { label: 'Aws Setup', link: '/guides/aws-setup/' },
             { label: 'Security & RBAC', link: '/guides/security/' },
             { label: 'CLI Reference', link: '/guides/cli/' },
           ],

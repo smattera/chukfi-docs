@@ -36,6 +36,30 @@ cd chukfi-cms && cargo build --release -p chukfi-bin
 
 ## Commands
 
+### `chukfi db`
+
+Manage per-developer AWS RDS PostgreSQL instances.
+
+```bash
+# Create a dev database (~10 min first time)
+chukfi db create --name my-chukfi-dev --region us-east-1
+
+# List your instances
+chukfi db list --region us-east-1
+
+# Destroy an instance (no more billing)
+chukfi db destroy --id my-chukfi-dev --yes
+```
+
+| Flag | Default | Description |
+|------|---------|-------------|
+| `--name` | `chukfi-dev` | Instance identifier (lowercase, hyphens ok) |
+| `--region` | `us-east-1` | AWS region |
+| `--id` | *required* | Instance identifier to destroy |
+| `--yes` | `false` | Skip confirmation prompt for `destroy` |
+
+Each developer gets their own `db.t4g.micro` instance tagged `Project=chukfi-dev`. Credentials are auto-generated (32-char random password) and printed to stdout. Tear down when not in use to avoid ~$15/month charges.
+
 ### `chukfi serve`
 
 Start the HTTP server.

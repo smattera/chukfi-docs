@@ -54,7 +54,7 @@ import '../styles/landing.css';
       <div class="landing-what-grid">
         <div>
           <h2>One binary. Zero dependencies.</h2>
-          <p>Chukfi ships as a single Rust binary via <code>cargo install chukfi-bin</code>. Migrations are embedded — they run automatically on startup. No Node.js, no Python, no Docker required to run the API. Clone the repo for the full stack: Dioxus admin UI, config templates, and Docker Compose for PostgreSQL.</p>
+          <p>Chukfi ships as a single Rust binary via <code>cargo install chukfi-bin</code>. Migrations are embedded — they run automatically on startup. No Node.js, no Python, no Docker required to run the API. Clone the repo for the full stack: Dioxus admin UI, config templates, and per-developer RDS database via <code>chukfi db create</code>.</p>
         </div>
         <div class="landing-what-code">
           <pre><span class="cmt"># Install the binary</span>
@@ -141,7 +141,7 @@ import '../styles/landing.css';
         <div class="landing-stack-col">
           <div class="landing-stack-label data">Database</div>
           <h3>PostgreSQL 16</h3>
-          <p style="margin-top:0.75rem;font-size:0.9rem;color:var(--landing-text-secondary);">Docker Compose for local dev, AWS RDS for production. Same engine everywhere.</p>
+          <p style="margin-top:0.75rem;font-size:0.9rem;color:var(--landing-text-secondary);">Per-dev `db.t4g.micro` RDS instance. Create with `chukfi db create`, tear down with `chukfi db destroy`.</p>
         </div>
       </div>
     </div>
