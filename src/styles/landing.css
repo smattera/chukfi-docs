@@ -232,6 +232,7 @@ body:has(.landing-page) > .page > .sidebar-pane,
   width: 2.5rem; height: 2.5rem;
   border-radius: 6px;
   background: rgba(20, 184, 166, 0.1);
+  color: var(--landing-accent-light);
   display: flex; align-items: center; justify-content: center;
   margin-bottom: 1rem;
   font-size: 1.2rem;
