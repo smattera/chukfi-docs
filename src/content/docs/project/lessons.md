@@ -21,7 +21,7 @@ description: Lessons learned during Chukfi CMS development — monorepo decision
 
 **Why we pivoted:** The schema uses Postgres-specific features (`tsvector` + GIN for full-text search, `JSONB`, `gen_random_uuid()`) with no drop-in SQLite equivalents in D1. Supporting D1 would have required a multi-week database abstraction layer refactor with permanent regression risk.
 
-**Decision:** Switched to Docker PostgreSQL for local dev and AWS RDS PostgreSQL + ECS Fargate for production. Same engine, same migrations, same SQL. Local-to-prod parity without compromise.
+**Decision:** Switched to per-developer AWS RDS PostgreSQL for local dev and production. Each developer creates their own `db.t4g.micro` instance via `chukfi db create`. Same engine, same migrations, same SQL. Local-to-prod parity without compromise.
 
 **Rule:** When your schema depends on database-specific features, don't fight it with an abstraction layer. Choose the deployment target that matches your database choices.
 
