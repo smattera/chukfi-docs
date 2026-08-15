@@ -7,7 +7,7 @@ import '../styles/landing.css';
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chukfi CMS — Ship a CMS in Minutes</title>
-  <meta name="description" content="A Rust-native headless CMS with a Dioxus admin UI, PostgreSQL backend, and a single binary that embeds its own migrations.">
+  <meta name="description" content="A Rust-native headless CMS with an embedded admin dashboard, PostgreSQL backend, and a single binary that embeds its own migrations.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -38,7 +38,7 @@ import '../styles/landing.css';
         v0.2.0 — Now available
       </div>
       <h1>Ship a CMS<br>in <span>Minutes.</span></h1>
-      <p>A Rust-native headless CMS with a Dioxus admin UI, PostgreSQL backend, and a single binary that embeds its own migrations.</p>
+      <p>A Rust-native headless CMS with an embedded admin dashboard, PostgreSQL backend, and a single binary that embeds its own migrations.</p>
       <div class="landing-hero-cmd">
         <span class="prompt">$</span> cargo install chukfi-bin
       </div>
@@ -54,7 +54,7 @@ import '../styles/landing.css';
       <div class="landing-what-grid">
         <div>
           <h2>One binary. Zero dependencies.</h2>
-          <p>Chukfi ships as a single Rust binary via <code>cargo install chukfi-bin</code>. Migrations are embedded — they run automatically on startup. No Node.js, no Python, no Docker required to run the API. Clone the repo for the full stack: Dioxus admin UI, config templates, and per-developer RDS database via <code>chukfi db create</code>.</p>
+          <p>Chukfi ships as a single Rust binary via <code>cargo install chukfi-bin</code>. Migrations are embedded — they run automatically on startup. No Node.js, no Python, no Docker required to run the API. The admin dashboard is bundled in the binary; no separate build step.</p>
         </div>
         <div class="landing-what-code">
           <pre><span class="cmt"># Install the binary</span>
@@ -89,8 +89,8 @@ import '../styles/landing.css';
           <div class="landing-feature-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
           </div>
-          <h3>Dioxus 0.7 Admin</h3>
-          <p>WASM-compiled admin UI with Quill 2.0 rich text editor, media library, and content type builder — entirely in Rust.</p>
+          <h3>Dioxus 0.7 Admin (optional)</h3>
+          <p>Optional WASM-compiled admin UI with Quill 2.0 rich text editor, media library, and content type builder. The embedded vanilla-JS dashboard is the zero-dependency default.</p>
         </div>
         <div class="landing-feature-card">
           <div class="landing-feature-icon">
@@ -118,7 +118,7 @@ import '../styles/landing.css';
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
           </div>
           <h3>AWS Ready</h3>
-          <p>Deploy to ECS Fargate + RDS + S3. Media library supports local filesystem or S3 with one env var.</p>
+          <p>Deploy to ARM64 EC2 + ALB + RDS + S3. Media library supports local filesystem or S3 with one env var.</p>
         </div>
       </div>
     </div>
@@ -135,8 +135,8 @@ import '../styles/landing.css';
         </div>
         <div class="landing-stack-col">
           <div class="landing-stack-label admin">Admin UI</div>
-          <h3>trunk serve</h3>
-          <p style="margin-top:0.75rem;font-size:0.9rem;color:var(--landing-text-secondary);">Dioxus 0.7 WASM on :8081. Quill editor, media browser, content type builder.</p>
+          <h3>Embedded dashboard</h3>
+          <p style="margin-top:0.75rem;font-size:0.9rem;color:var(--landing-text-secondary);">Vanilla-JS dashboard bundled in the binary. Served automatically at /admin — no build step, no Node. Dioxus 0.7 WASM available as an optional richer interface.</p>
         </div>
         <div class="landing-stack-col">
           <div class="landing-stack-label data">Database</div>

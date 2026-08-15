@@ -6,7 +6,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'Chukfi CMS',
-      description: 'Documentation for the Chukfi CMS platform — a high-performance, lightweight headless CMS built with Rust, Astro, and AWS.',
+      description: 'Documentation for the Chukfi CMS platform — a high-performance, lightweight headless CMS built with Rust and AWS.',
 
       customCss: [
         './src/styles/custom.css',
@@ -23,6 +23,7 @@ export default defineConfig({
             { label: 'Content Types', link: '/guides/content-types/' },
             { label: 'Media Library', link: '/guides/media/' },
             { label: 'Migration Guide', link: '/guides/migration/' },
+            { label: 'Production Deployment', link: '/guides/production-deployment/' },
             { label: 'Aws Setup', link: '/guides/aws-setup/' },
             { label: 'Security & RBAC', link: '/guides/security/' },
             { label: 'CLI Reference', link: '/guides/cli/' },
@@ -53,6 +54,10 @@ export default defineConfig({
             { label: 'Demo Script', link: '/teams-bot/demo/' },
             { label: 'Troubleshooting', link: '/teams-bot/troubleshooting/' },
           ],
+        },
+        {
+          label: 'API',
+          items: [{ autogenerate: { directory: 'api' } }],
         },
         {
           label: 'Deployment',

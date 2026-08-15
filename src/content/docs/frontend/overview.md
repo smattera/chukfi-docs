@@ -1,34 +1,39 @@
 ---
 title: Frontend Overview
-description: Chukfi CMS frontend architecture — Dioxus 0.7 WASM admin UI and headless delivery.
+description: Chukfi CMS frontend architecture — embedded vanilla-JS admin dashboard, optional Dioxus WASM UI, and Rust SSR for public sites
 ---
 
-The Chukfi CMS admin interface is built with Dioxus 0.7, compiled to WebAssembly, and served by the Rust API.
+Chukfi ships an **embedded admin dashboard** as the default admin UI. The public-facing website is a separate concern: Chukfi is a headless CMS, so the public frontend is your choice — with Rust server-rendering as a first-class option that requires no Node.
 
-<video controls autoplay loop muted playsinline style="width: 100%; border-radius: 0.75rem; border: 1px solid var(--sl-color-gray-5); margin: 1.5rem 0;">
-  <source src="/videos/astro-integration-tour.webm" type="video/webm">
-  <source src="/videos/astro-integration-tour.mp4" type="video/mp4">
-</video>
+## Admin Dashboard (default)
 
-> **Note:** This video references an Astro integration. v0.2.0 ships a Dioxus admin UI — see below for current architecture.
+The default admin UI is a **vanilla-JS single-page app bundled into the binary** at compile time (`include_str!`). It needs no build step, no Node, and no separately deployed static assets:
 
-## Architecture
+- **Served automatically** when `adminUiPath` is **not set** in `chukfi.config.json`.
+- Uses magic-link / Entra ID auth with a JWT stored in `localStorage`.
+- Covers the core surface: dashboard stats, content list, schema-driven editor, media library.
 
-- **Dioxus 0.7** — Rust-based reactive UI framework, compiled to WASM
-- **Trunk** — WASM bundler and dev server (port 8081)
-- **Tailwind CSS v4** — Utility-first styling
+```json
+{
+  "server": {
+    "bindAddress": "0.0.0.0:4321"
+  }
+}
+```
 
-The admin UI is built in `chukfi-admin-ui/` and runs via `trunk serve` during development. For production, build with `trunk build` and point the API's `adminUiPath` in `chukfi.config.json` to the `dist/` directory.
+For production, **omit `adminUiPath`** so the embedded dashboard serves. (The CHC deployment config deliberately leaves it unset.)
 
-## Building and Serving
+## Dioxus Admin UI (optional)
+
+A **Dioxus 0.7 WASM admin UI** also exists in `chukfi-admin-ui/` as an optional richer interface:
 
 ```bash
 cd chukfi-admin-ui
-trunk serve            # Dev: admin UI on :8081, API on :4321
-trunk build            # Production: outputs to dist/
+trunk serve          # Dev on :8081, API on :4321
+trunk build          # Production: outputs to dist/
 ```
 
-The Rust API (`chukfi serve`) can serve the built admin UI if `adminUiPath` is set:
+To use it instead of the embedded dashboard, point `adminUiPath` at the built `dist/` directory:
 
 ```json
 {
@@ -39,22 +44,18 @@ The Rust API (`chukfi serve`) can serve the built admin UI if `adminUiPath` is s
 }
 ```
 
-## Key Pages
+The embedded dashboard and the Dioxus UI are alternatives; the embedded dashboard is the zero-dependency default.
 
-- **Admin Dashboard** — Stats cards, quick-access links, recent activity feed
-- **Content Editor** — Schema-driven form for creating and editing entries
-- **Media Library** — Upload, tag, filter, search, and organize media
-- **Content Types** — Define custom content types with typed fields
+## Public Frontend (headless delivery)
 
-## Headless Delivery
+Chukfi is headless: it exposes a REST API and does not dictate your frontend framework. Any frontend that can fetch JSON works.
 
-Chukfi is a headless CMS — it provides a REST API for content delivery but does not dictate your frontend framework. Use any frontend (Astro, Next.js, SvelteKit, plain HTML) to fetch content from the API. The [CLI Reference](/guides/cli/) includes a `chukfi codegen` command to generate TypeScript types for your frontend.
+**Rust server-rendered HTML is the recommended approach for the CHC public site** — no Node, no npm, and no JavaScript framework. A Rust SSR service (e.g. Axum + a Rust template engine) fetches published content from the [Public Read API](/api/public-read-api/) and renders server-side. Vanilla (framework-free) JavaScript is acceptable for progressive enhancement.
+
+> The [Public Read API](/api/public-read-api/) is **planned** (ADR-0013) and not yet implemented. Until it ships, public frontends cannot consume CMS content anonymously.
+
+The [CLI Reference](/guides/cli/) includes `chukfi codegen` to generate TypeScript types for frontends that want typed content access.
 
 ## Search
-
-<video controls autoplay loop muted playsinline style="width: 100%; border-radius: 0.75rem; border: 1px solid var(--sl-color-gray-5); margin: 1.5rem 0;">
-  <source src="/videos/search-tour.webm" type="video/webm">
-  <source src="/videos/search-tour.mp4" type="video/mp4">
-</video>
 
 Full-text search is backed by PostgreSQL `tsvector` with GIN indexes — no third-party search service needed.

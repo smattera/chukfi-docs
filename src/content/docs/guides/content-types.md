@@ -50,4 +50,4 @@ After defining content types, regenerate TypeScript types for your frontend:
 chukfi codegen --out src/types
 ```
 
-This writes a `chukfi-types.ts` file with interfaces for every content type and a union type for type-safe queries. Import it directly into your Astro components for full IDE autocompletion.
+This writes a `chukfi-types.ts` file with interfaces for every content type and a union type for type-safe queries. Import it directly into your frontend components for full IDE autocompletion.

@@ -13,7 +13,7 @@ description: "Chukfi CMS feature roadmap — upcoming features, priorities, and 
 |---------|--------|
 | Axum REST API with embedded migrations (`sqlx::migrate!`) | ✓ |
 | `cargo install chukfi-bin` distribution | ✓ |
-| Dioxus 0.7 WASM admin UI | ✓ |
+| Embedded vanilla-JS admin dashboard | ✓ |
 | Content CRUD (CLI + REST API) | ✓ |
 | Media library (local filesystem + S3) | ✓ |
 | RBAC (Administrator, Publisher, Editor) | ✓ |
@@ -21,6 +21,7 @@ description: "Chukfi CMS feature roadmap — upcoming features, priorities, and 
 | `chukfi token <email>` JWT generation | ✓ |
 | `chukfi seed` demo data | ✓ |
 | `chukfi codegen` TypeScript type generation | ✓ |
+| `chukfi init` | ✓ |
 | Audit logging | ✓ |
 | RDS dev instances (`chukfi db create`) | ✓ |
 
@@ -28,12 +29,15 @@ description: "Chukfi CMS feature roadmap — upcoming features, priorities, and 
 
 | Feature | Notes |
 |---------|-------|
-| `chukfi init` | `init.rs` implemented, CLI wiring + .env.example template in v0.3.0 |
-| AWS CDK provisioning | `deploy` command auto-provisioning RDS/ECS/CloudFront |
+| Public read API (`/api/v1/public`) | Anonymous, published-only content surface (ADR-0013) |
+| Production IaC (Terraform) | EC2 + ALB + RDS + S3 provisioning (ADR-0011/0012/0014) |
+| Rust SSR frontend | Server-rendered public site, no Node, no JS framework |
+| ALB path routing | `/admin`+`/api` → CMS, `/*` → SSR frontend |
 | Content import | Import from WordPress WXR, Sanity NDJSON, Strapi JSON |
-| S3 + CloudFront for admin UI | Edge-cached static assets, API-only Fargate load |
-| RDS Proxy / connection pooling | Scale ECS tasks without exhausting Postgres connections |
+| RDS Proxy / connection pooling | Scale application hosts without exhausting Postgres connections |
 | AWS X-Ray / tracing | Distributed tracing for DB queries and middleware overhead |
+
+> **Superseded:** the earlier "AWS CDK provisioning" and "S3 + CloudFront for admin UI" items are replaced by the Terraform/IaC + embedded-dashboard direction above. The embedded dashboard ships inside the binary and does not require a separate static-asset/CDN deployment.
 
 ---
 
