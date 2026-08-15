@@ -7,7 +7,7 @@ description: Release notes and version history for Chukfi CMS
 
 ## v0.2.0 — Source-First Rust Binary (2026-08-06)
 
-Distribution model pivot: Chukfi ships as a Rust binary via `cargo install chukfi-bin`. Clone the repo for the full stack — Dioxus admin UI, config templates, and per-developer RDS database via `chukfi db create`.
+Distribution model pivot: Chukfi ships as a Rust binary via `cargo install chukfi-bin`. The binary bundles an embedded admin dashboard; a Dioxus 0.7 WASM admin UI is available as an optional alternative.
 
 ### Added
 
@@ -18,7 +18,9 @@ Distribution model pivot: Chukfi ships as a Rust binary via `cargo install chukf
 - `chukfi token <email>` — generate a dev JWT (auto-creates user)
 - `chukfi codegen` — generate TypeScript types from content schema
 - `chukfi serve` — start the API server with auto-migrations on startup
-- Dioxus 0.7 WASM admin UI with Quill 2.0 rich text editor
+- `chukfi init` — scaffold a new project with config and .env
+- Embedded vanilla-JS admin dashboard (bundled in the binary)
+- Dioxus 0.7 WASM admin UI (optional) with Quill 2.0 rich text editor
 - Per-developer RDS PostgreSQL via `chukfi db create`
 - RBAC (Administrator, Publisher, Editor) with colon-delimited permissions
 - Magic-link passwordless auth + Entra ID OIDC
@@ -39,8 +41,9 @@ Distribution model pivot: Chukfi ships as a Rust binary via `cargo install chukf
 
 ### Planned for v0.3.0
 
-- `chukfi init` — scaffold a new project with config and .env
-- AWS CDK provisioning — one-command deployment to ECS Fargate + RDS + CloudFront
+- Public read API (`/api/v1/public`) — anonymous, published-only content surface
+- Production IaC (Terraform) — EC2 + ALB + RDS + S3 provisioning
+- Rust SSR frontend — server-rendered public site, no Node
 - Content import — migrate from WordPress WXR, Sanity NDJSON, Strapi JSON
 
 ### Migration from pre-v0.2.0

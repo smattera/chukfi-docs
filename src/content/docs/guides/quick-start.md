@@ -89,7 +89,9 @@ curl -H "Authorization: Bearer $TOKEN" http://localhost:4321/api/admin/config
 
 ### 7. Admin UI
 
-The Dioxus-based admin UI builds separately:
+The embedded admin dashboard is bundled in the binary — just open `http://localhost:4321` in your browser and sign in. No separate build step.
+
+For the optional Dioxus admin UI:
 
 ```bash
 cd chukfi-admin-ui
@@ -103,11 +105,7 @@ cargo install chukfi-bin
 chukfi serve
 ```
 
-The binary auto-runs migrations on startup (no `sqlx migrate run` needed).
-You'll still need the repo for:
-
-- **Admin UI** — not bundled yet; build it from source
-- **Config templates** — copy `chukfi.config.json` from the repo
+The binary auto-runs migrations on startup (no `sqlx migrate run` needed) and serves the embedded admin dashboard at `http://localhost:4321`. To scaffold a config, run `chukfi init` (writes `chukfi.config.json` + `.env.example`).
 
 ## Customize
 
@@ -156,6 +154,5 @@ This deletes the RDS instance so you're not paying for idle compute.
 
 ## Known gaps (v0.2.0)
 
-- **No `init` command** — `chukfi init` ships in v0.3.0. For v0.2.0, copy `chukfi-bin/templates/standard.config.json` to `chukfi.config.json` manually.
-- **Admin UI not bundled in `cargo install`** — build it from source (`cd chukfi-admin-ui && trunk serve`).
-- **`cargo install` is binary-only** — migrations are embedded in the binary via `sqlx::migrate!` and run automatically on startup, but config templates and admin UI must come from the source repo.
+- **No public read API yet** — anonymous content delivery (`/api/v1/public`) is planned (see [Public Read API](/api/public-read-api/)).
+- **Optional Dioxus admin UI** — the embedded vanilla-JS dashboard is the default; the Dioxus UI in `chukfi-admin-ui/` is an optional richer interface built separately with `trunk build`.
