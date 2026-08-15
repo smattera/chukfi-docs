@@ -59,6 +59,21 @@ The CMS dashboard is a catch-all fallback inside the binary (`app.fallback`). Th
 
 The public frontend must not receive CMS admin/API paths, and vice-versa. Two separate systemd services (CMS + SSR frontend), not one binary.
 
+Note on local vs. production paths: `chukfi serve` locally serves the dashboard as a catch-all at `/`. Production mounts the same dashboard under `/admin` purely via the ALB path rules above — the binary itself is unchanged and does not mount `/admin` on its own.
+
+## Private-subnet networking
+
+The EC2 instance sits in a private subnet, so it needs egress to reach AWS services:
+
+- **SSM Parameter Store / SES** — via a NAT gateway or the corresponding VPC endpoints (`ssm`, `ec2messages`, `ssmmessages`, `ses`).
+- **S3** — via a NAT gateway or an S3 gateway endpoint.
+
+This is provisioned as part of the Terraform IaC (Stage 3d); it is not automatic.
+
+## Cloudflare ACM validation
+
+ACM certificate validation requires DNS CNAME records. Because DNS is managed in Cloudflare, create the ACM-issued validation CNAMEs in Cloudflare. If Cloudflare proxying (orange cloud) is used, the validation records must remain **DNS-only (grey cloud)** so ACM can resolve them.
+
 ## Deployment sequence (planned)
 
 1. Provision VPC, private EC2, RDS, S3, ALB, ACM, IAM, SSM via Terraform.
