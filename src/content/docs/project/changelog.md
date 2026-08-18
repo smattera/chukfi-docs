@@ -5,7 +5,7 @@ description: Release notes and version history for Chukfi CMS
 
 # Chukfi CMS — Changelog
 
-## v0.3.0 — Public Read API (Unreleased)
+## v0.3.0 — Public Read API (2026-08-18)
 
 ### Added
 
