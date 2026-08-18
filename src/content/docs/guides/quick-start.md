@@ -3,7 +3,7 @@ title: Quick Start
 description: Get Chukfi CMS running in 5 minutes with an AWS RDS database
 ---
 
-# Chukfi CMS — Quickstart (v0.2.0)
+# Chukfi CMS — Quickstart (v0.3.0)
 
 Get a headless CMS running in 5 minutes.
 
@@ -46,7 +46,7 @@ postgres://chukfi:<password>@my-chukfi-dev.abcdef.us-east-1.rds.amazonaws.com:54
 cp chukfi-bin/templates/standard.config.json chukfi.config.json
 
 # Create .env with the DATABASE_URL from step 1 + a random JWT secret
-cat > .env << 'EOF'
+cat > .env << EOF
 DATABASE_URL=postgres://chukfi:<password>@your-instance.region.rds.amazonaws.com:5432/chukfi
 CHUKFI_JWT_SECRET=$(openssl rand -hex 32)
 CHUKFI_DEV_MODE=true
@@ -60,7 +60,7 @@ cargo build --release -p chukfi-bin
 ./target/release/chukfi serve
 ```
 
-Server is live at [http://localhost:4321](http://localhost:4321).
+Server is live at [http://localhost:8080](http://localhost:8080).
 
 ### 4. Seed demo data (optional)
 
@@ -84,18 +84,18 @@ Use it in headers: `Authorization: Bearer <token>`
 
 ```bash
 TOKEN=$(./target/release/chukfi token you@example.com)
-curl -H "Authorization: Bearer $TOKEN" http://localhost:4321/api/admin/config
+curl -H "Authorization: Bearer $TOKEN" http://localhost:8080/api/admin/config
 ```
 
 ### 7. Admin UI
 
-The embedded admin dashboard is bundled in the binary — just open `http://localhost:4321` in your browser and sign in. No separate build step.
+The embedded admin dashboard is bundled in the binary — just open `http://localhost:8080` in your browser and sign in. No separate build step.
 
 For the optional Dioxus admin UI:
 
 ```bash
 cd chukfi-admin-ui
-trunk serve --open    # Opens admin UI at http://localhost:8081 (API runs at http://localhost:4321)
+trunk serve --open    # Opens admin UI at http://localhost:8081 (API runs at http://localhost:8080)
 ```
 
 ## Option B: cargo install (binary only)
@@ -105,7 +105,7 @@ cargo install chukfi-bin
 chukfi serve
 ```
 
-The binary auto-runs migrations on startup (no `sqlx migrate run` needed) and serves the embedded admin dashboard at `http://localhost:4321`. To scaffold a config, run `chukfi init` (writes `chukfi.config.json` + `.env.example`).
+The binary auto-runs migrations on startup (no `sqlx migrate run` needed) and serves the embedded admin dashboard at `http://localhost:8080`. To scaffold a config, run `chukfi init` (writes `chukfi.config.json` + `.env.example`).
 
 ## Customize
 
@@ -152,7 +152,6 @@ This deletes the RDS instance so you're not paying for idle compute.
 - **AWS Setup**: [/guides/aws-setup/](/guides/aws-setup/)
 - **Issues / questions**: Open a GitHub issue
 
-## Known gaps (v0.2.0)
+## Known gaps (v0.3.0)
 
-- **No public read API yet** — anonymous content delivery (`/api/v1/public`) is planned (see [Public Read API](/api/public-read-api/)).
 - **Optional Dioxus admin UI** — the embedded vanilla-JS dashboard is the default; the Dioxus UI in `chukfi-admin-ui/` is an optional richer interface built separately with `trunk build`.

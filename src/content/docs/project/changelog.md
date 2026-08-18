@@ -5,6 +5,29 @@ description: Release notes and version history for Chukfi CMS
 
 # Chukfi CMS — Changelog
 
+## v0.3.0 — Public Read API (Unreleased)
+
+### Added
+
+- **Public read API** — anonymous, published-only content surface under `/api/v1/public/` (list, slug lookup, and `/search`), gated by an opt-in `public: true` flag per content type and a `published`-only filter, with a dedicated `PublicEntry` DTO that structurally excludes draft data (ADR-0013).
+
+### Changed
+
+- Default Bedrock model → Claude 3.5 Haiku (cheaper default; still configurable).
+- Production AI consolidated into the `chukfi-ai` crate.
+- Default bind address is now `8080` (4321 was the legacy Astro dev port).
+
+### Security
+
+- Removed a customer-specific config file and redacted customer data from the public repository.
+
+### Fixed
+
+- An intermittent parallel-test race in the JWT secret tests.
+- Docker build references to the removed `chukfi.config.json`.
+
+---
+
 ## v0.2.0 — Source-First Rust Binary (2026-08-06)
 
 Distribution model pivot: Chukfi ships as a Rust binary via `cargo install chukfi-bin`. The binary bundles an embedded admin dashboard; a Dioxus 0.7 WASM admin UI is available as an optional alternative.
@@ -39,9 +62,8 @@ Distribution model pivot: Chukfi ships as a Rust binary via `cargo install chukf
 - npm distribution (never shipped) — no `@chukfi/cli`, no `npx chukfi`
 - `chukfi site deploy` — Cloudflare Pages deploy wrapper removed; deploy your frontend however you prefer
 
-### Planned for v0.3.0
+### Planned for v0.4.0
 
-- Public read API (`/api/v1/public`) — anonymous, published-only content surface
 - Production IaC (Terraform) — EC2 + ALB + RDS + S3 provisioning
 - Rust SSR frontend — server-rendered public site, no Node
 - Content import — migrate from WordPress WXR, Sanity NDJSON, Strapi JSON

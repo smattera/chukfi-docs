@@ -3,7 +3,7 @@ title: Architecture
 description: Chukfi CMS architecture overview — binary-first distribution, embedded dashboard, and AWS deployment on EC2 + RDS + S3
 ---
 
-# Chukfi — Architecture (v0.2.0)
+# Chukfi — Architecture (v0.3.0)
 
 **Audience:** Platform maintainers, future contributors, developers evaluating Chukfi
 
@@ -54,7 +54,7 @@ cargo build --release -p chukfi-bin
 
 | Command | Purpose |
 |---------|---------|
-| `chukfi serve` | Start API server on configured port (default: 4321) |
+| `chukfi serve` | Start API server on configured port (default: 8080) |
 | `chukfi seed` | Seed demo data for all content types in config |
 | `chukfi token <email>` | Generate a dev JWT (auto-creates user) |
 | `chukfi content` | Create, list, update content entries |
@@ -83,7 +83,7 @@ A **Dioxus 0.7 WASM admin UI** also exists in `chukfi-admin-ui/` as an optional 
 
 ```bash
 cd chukfi-admin-ui
-trunk serve          # Dev on :8081, API on :4321
+trunk serve          # Dev on :8081, API on :8080
 trunk build          # Production: dist/ served by API
 ```
 
@@ -108,7 +108,7 @@ The recommended production stack is **EC2 + ALB + RDS + S3**:
 - **Compute** — ARM64 EC2 (Graviton) running the static musl binary under `systemd`. No Docker at runtime.
 - **Database** — managed RDS PostgreSQL (private subnet, encrypted at rest, automated backups).
 - **Media** — S3 (activated by setting `S3_BUCKET`; the SDK obtains credentials from the instance role).
-- **TLS** — Application Load Balancer terminates HTTPS (ACM certificate) and forwards to the private EC2 instance. The binary listens plain HTTP on 4321.
+- **TLS** — Application Load Balancer terminates HTTPS (ACM certificate) and forwards to the private EC2 instance. The binary listens plain HTTP on 8080.
 - **Routing** — ALB path rules send `/admin*`, `/api/*`, and `/health` to the CMS; a separate Rust SSR frontend serves the public site on the default `/*` rule.
 
 Provisioning is done with your own IaC (Terraform is the current direction for the CHC deployment); `chukfi db create` is a **dev-only** helper and is not used for production RDS. See [Production Deployment](/guides/production-deployment/) and [Deployment Overview](/deployment/overview/).
@@ -119,8 +119,8 @@ GitHub Actions builds the binary and publishes to crates.io (`chukfi-bin`).
 
 ## 7. Roadmap
 
-| # | Deliverable | v0.2.0? |
-|---|-------------|---------|
+| # | Deliverable | Status |
+|---|-------------|--------|
 | 1 | `chukfi serve` with embedded migrations | ✓ |
 | 2 | Content CRUD (CLI + REST API) | ✓ |
 | 3 | Media library (local + S3) | ✓ |
@@ -128,6 +128,6 @@ GitHub Actions builds the binary and publishes to crates.io (`chukfi-bin`).
 | 5 | RBAC + audit logging | ✓ |
 | 6 | `codegen` (TypeScript types) | ✓ |
 | 7 | `chukfi init` command | ✓ |
-| 8 | Public read API (`/api/v1/public`) | Planned |
+| 8 | Public read API (`/api/v1/public`) | ✓ |
 | 9 | Production IaC (Terraform) | Planned |
 | 10 | Content import (WordPress, Sanity, Strapi) | Planned |

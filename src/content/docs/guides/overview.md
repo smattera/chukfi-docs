@@ -21,7 +21,7 @@ Chukfi ships as a Rust binary via `cargo install chukfi-bin`. The admin dashboar
 ```bash
 cargo install chukfi-bin
 chukfi init                 # Writes chukfi.config.json + .env.example
-chukfi serve                # Start the API server on :4321
+chukfi serve                # Start the API server on :8080
 ```
 
 For the optional Dioxus admin UI, build from source:

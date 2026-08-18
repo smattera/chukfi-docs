@@ -16,7 +16,7 @@ The default admin UI is a **vanilla-JS single-page app bundled into the binary**
 ```json
 {
   "server": {
-    "bindAddress": "0.0.0.0:4321"
+    "bindAddress": "0.0.0.0:8080"
   }
 }
 ```
@@ -29,7 +29,7 @@ A **Dioxus 0.7 WASM admin UI** also exists in `chukfi-admin-ui/` as an optional 
 
 ```bash
 cd chukfi-admin-ui
-trunk serve          # Dev on :8081, API on :4321
+trunk serve          # Dev on :8081, API on :8080
 trunk build          # Production: outputs to dist/
 ```
 
@@ -38,7 +38,7 @@ To use it instead of the embedded dashboard, point `adminUiPath` at the built `d
 ```json
 {
   "server": {
-    "bindAddress": "0.0.0.0:4321",
+    "bindAddress": "0.0.0.0:8080",
     "adminUiPath": "./chukfi-admin-ui/dist"
   }
 }
@@ -52,7 +52,7 @@ Chukfi is headless: it exposes a REST API and does not dictate your frontend fra
 
 **Rust server-rendered HTML is the recommended approach for the CHC public site** — no Node, no npm, and no JavaScript framework. A Rust SSR service (e.g. Axum + a Rust template engine) fetches published content from the [Public Read API](/api/public-read-api/) and renders server-side. Vanilla (framework-free) JavaScript is acceptable for progressive enhancement.
 
-> The [Public Read API](/api/public-read-api/) is **planned** (ADR-0013) and not yet implemented. Until it ships, public frontends cannot consume CMS content anonymously.
+> The [Public Read API](/api/public-read-api/) is **implemented** (ADR-0013, v0.3.0) — public frontends can now consume published CMS content anonymously.
 
 The [CLI Reference](/guides/cli/) includes `chukfi codegen` to generate TypeScript types for frontends that want typed content access.
 

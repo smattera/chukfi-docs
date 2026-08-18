@@ -42,7 +42,7 @@ Production RDS is provisioned via IaC — **`chukfi db create` is dev-only** (it
 
 The ALB routes by path:
 
-- `/admin`, `/admin/*`, `/api/*`, `/health` → Chukfi CMS (`chukfi serve`, port 4321)
+- `/admin`, `/admin/*`, `/api/*`, `/health` → Chukfi CMS (`chukfi serve`, port 8080)
 - default `/*` → public frontend (a separate Rust SSR service)
 
 The CMS serves the embedded vanilla-JS dashboard when `adminUiPath` is omitted from config. The public frontend is server-rendered Rust (no Node, no JavaScript framework).

@@ -25,11 +25,16 @@ description: "Chukfi CMS feature roadmap — upcoming features, priorities, and 
 | Audit logging | ✓ |
 | RDS dev instances (`chukfi db create`) | ✓ |
 
-## Planned (v0.3.0+)
+## v0.3.0
 
 | Feature | Notes |
 |---------|-------|
 | Public read API (`/api/v1/public`) | Anonymous, published-only content surface (ADR-0013) |
+
+## Planned (v0.4.0+)
+
+| Feature | Notes |
+|---------|-------|
 | Production IaC (Terraform) | EC2 + ALB + RDS + S3 provisioning (ADR-0011/0012/0014) |
 | Rust SSR frontend | Server-rendered public site, no Node, no JS framework |
 | ALB path routing | `/admin`+`/api` → CMS, `/*` → SSR frontend |

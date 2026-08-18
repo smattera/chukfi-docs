@@ -1,13 +1,13 @@
 ---
 title: Public Read API
-description: Planned public read API for serving published content anonymously (ADR-0013)
+description: Public read API for serving published content anonymously (ADR-0013)
 ---
 
 # Public Read API
 
-> **Status: Planned — not yet implemented.**
+> **Status: Implemented (v0.3.0, PR #48).**
 >
-> This page documents the **design contract** for Chukfi's public read API, authorized by ADR-0013. The endpoints described here do **not** exist in the shipped binary yet. Treat this as a spec, not a reference for a live API.
+> This page documents Chukfi's public read API, authorized by ADR-0013. The endpoints described here are live in the shipped binary.
 
 ## Purpose
 
@@ -37,7 +37,7 @@ GET /api/v1/public/search                  → search published content
 - `{content-type}` resolves against the content-type **slug** in `chukfi.config.json`; only types with `public: true` are reachable.
 - `/search` is a reserved path on the public surface — a content type literally named `search` is disallowed to avoid a route collision with `GET /api/v1/public/search`.
 - List pagination: `?limit=` (default 20, maximum 100), `?offset=`, ordered by `updated_at DESC`.
-- Search is part of the v1 contract and uses the same offset/limit scheme; the exact search-term parameter name is still `[DESIGN TENTATIVE]`.
+- Search is part of the v1 contract and uses the same offset/limit scheme; the search-term parameter is `q` (e.g. `GET /api/v1/public/search?q=chickasaw`).
 
 ## `PublicEntry` DTO
 

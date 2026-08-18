@@ -16,7 +16,7 @@ This guide walks through the intended production topology for Chukfi CMS. It ref
                                 │
                                 ▼
                      ALB (internet-facing, ACM TLS)
-                     ├─ /admin, /admin/*, /api/*, /health ─► Chukfi CMS (EC2, ARM64, systemd, :4321)
+                     ├─ /admin, /admin/*, /api/*, /health ─► Chukfi CMS (EC2, ARM64, systemd, :8080)
                      └─ /* (default) ──────────────────────► Rust SSR frontend (separate service)
                                 │
                                 ├─ RDS PostgreSQL (private subnet)
