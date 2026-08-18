@@ -1,11 +1,9 @@
 ---
 title: Deployment Overview
-description: Deploying Chukfi CMS — per-developer AWS RDS
+description: Deploying Chukfi CMS — EC2 + ALB + RDS + S3 on AWS, per-developer RDS for local dev
 ---
 
-Chukfi CMS in v0.2.0 uses per-developer AWS RDS PostgreSQL instances — both for local development and production.
-
-> **Note:** This video demonstrates planned CDK automation. In v0.2.0, AWS infrastructure must be provisioned manually or via your own IaC tooling.
+Chukfi CMS deploys as a single static Rust binary. Production runs on AWS **EC2** (ARM64, systemd, no Docker) with managed **RDS** for the database, **S3** for media, and an **Application Load Balancer** for TLS and path routing.
 
 ## Local Development
 
@@ -17,8 +15,7 @@ Each developer creates their own RDS PostgreSQL instance:
 chukfi db create --name my-chukfi-dev --region us-east-1
 
 # Paste the DATABASE_URL it prints into your .env, then start:
-cargo build --release -p chukfi-bin
-./target/release/chukfi serve
+chukfi serve
 ```
 
 Tear down when done to avoid ~$15/month costs:
@@ -29,18 +26,31 @@ chukfi db destroy --id my-chukfi-dev --yes
 
 ## Production on AWS
 
-The recommended production stack includes:
+The recommended production stack:
 
 | Resource | Notes |
 |----------|-------|
-| RDS PostgreSQL | `db.t4g.micro`, 20 GB, single-AZ |
-| ECS Fargate | 0.25 vCPU / 512 MB (Free Tier eligible) |
-| S3 | Media bucket with lifecycle rules |
-| SES | Email sending (sandbox mode initially) |
-| CloudFront | CDN with ACM cert |
+| EC2 (ARM64 Graviton) | Static musl binary under `systemd`. No Docker. |
+| RDS PostgreSQL | Private subnet, encrypted at rest, automated backups |
+| S3 | Media bucket |
+| ALB + ACM | TLS termination, path-based routing to services |
+| SES | Email sending (magic-link auth; sandbox mode initially) |
 
-AWS CDK provisioning for the full stack (ECS Fargate + RDS + CloudFront) is deferred to v0.3.0+. In v0.2.0, provision these resources manually, via the AWS Console, or with your own IaC tooling (CDK, Terraform, Pulumi). Set `DATABASE_URL` to your RDS endpoint and configure S3 via `AWS_ACCESS_KEY_ID` and `S3_BUCKET` environment variables.
+Production RDS is provisioned via IaC — **`chukfi db create` is dev-only** (it creates publicly-accessible, password-only instances and must not be used for production).
+
+### Routing topology (single origin)
+
+The ALB routes by path:
+
+- `/admin`, `/admin/*`, `/api/*`, `/health` → Chukfi CMS (`chukfi serve`, port 8080)
+- default `/*` → public frontend (a separate Rust SSR service)
+
+The CMS serves the embedded vanilla-JS dashboard when `adminUiPath` is omitted from config. The public frontend is server-rendered Rust (no Node, no JavaScript framework).
+
+### DNS
+
+`choctawhealthcenter.org` DNS is managed in **Cloudflare**. Proxy mode (DNS-only "grey cloud" vs. proxied "orange cloud") is a deployment-time choice: grey-cloud sends browsers directly to the ALB/ACM origin; orange-cloud terminates TLS at Cloudflare's edge (use **Full (strict)**) with the ALB as origin.
 
 ## CI/CD
 
-GitHub Actions builds the Rust binary on every release tag, publishes to crates.io, and uploads release artifacts.
+GitHub Actions builds the Rust binary on every release tag, publishes to crates.io, and uploads release artifacts. See [Production Deployment](/guides/production-deployment/) for the full walkthrough.

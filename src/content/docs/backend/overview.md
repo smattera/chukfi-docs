@@ -45,6 +45,7 @@ cd chukfi-core && cargo build --release -p chukfi-bin
 | `chukfi content` | Manage content entries |
 | `chukfi media` | Manage media assets |
 | `chukfi codegen` | Generate TypeScript types from schema |
+| `chukfi init` | Write a starter `chukfi.config.json` + `.env.example` |
 
 ## Domain Glossary
 

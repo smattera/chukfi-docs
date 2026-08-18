@@ -68,7 +68,7 @@ Start the HTTP server.
 chukfi serve
 ```
 
-Reads `chukfi.config.json` and `DATABASE_URL` from the environment. Runs database migrations on startup. Serves the API on the configured port (default: `4321`).
+Reads `chukfi.config.json` and `DATABASE_URL` from the environment. Runs database migrations on startup. Serves the API on the configured port (default: `8080`).
 
 ### `chukfi seed`
 

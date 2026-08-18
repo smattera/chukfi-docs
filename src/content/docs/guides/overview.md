@@ -1,6 +1,6 @@
 ---
 title: Overview
-description: An overview of the Chukfi CMS platform — a headless CMS built with Rust, Dioxus, and PostgreSQL
+description: An overview of the Chukfi CMS platform — a headless CMS built with Rust and PostgreSQL
 ---
 
 Chukfi is a headless CMS — a content management system that provides a content API and admin interface without dictating how your frontend renders content.
@@ -14,31 +14,32 @@ Chukfi is a headless CMS — a content management system that provides a content
 
 ## How It Works
 
-### Source-First Distribution
+### Binary-First Distribution
 
-Chukfi ships as a Rust binary via `cargo install chukfi-bin`. Build from source for full access to the Dioxus admin UI, config templates, and per-developer RDS database via `chukfi db create`.
+Chukfi ships as a Rust binary via `cargo install chukfi-bin`. The admin dashboard is embedded in the binary, and `chukfi init` scaffolds a config:
 
 ```bash
-cargo install chukfi-bin    # Binary only (no admin UI)
-chukfi serve                 # Start the API server on :4321
+cargo install chukfi-bin
+chukfi init                 # Writes chukfi.config.json + .env.example
+chukfi serve                # Start the API server on :8080
 ```
 
-For the admin UI and config templates, clone the repo:
+For the optional Dioxus admin UI, build from source:
 
 ```bash
 git clone https://github.com/smattera/chukfi-core
 cd chukfi-core
-cd chukfi-admin-ui && trunk serve    # Admin UI on :8081
+cd chukfi-admin-ui && trunk serve    # Optional admin UI on :8081
 ```
 
 ### Local-to-Prod Parity
 
 Local dev and production both use AWS RDS PostgreSQL — each developer gets their own `db.t4g.micro` instance via `chukfi db create`. Same engine, same migrations, same SQL. No SQLite dual-mode — the schema uses Postgres-specific features (`tsvector`, `JSONB`, `gen_random_uuid()`) that have no drop-in SQLite equivalents.
 
-### Dioxus Admin UI
+### Admin Dashboard
 
-The admin interface — content editor, media library, schema builder, and settings — is built with Dioxus 0.7, compiled to WASM, and served by the Rust API at `/`. No JavaScript framework required; everything ships in one binary repo.
+The admin interface is an **embedded vanilla-JS dashboard** bundled into the binary and served automatically at `/`. No build step, no Node, no separately deployed assets. A Dioxus 0.7 WASM admin UI is available as an optional richer alternative (`chukfi-admin-ui/`).
 
 ## Target Audience
 
-Developers who want a headless CMS that compiles to a single Rust binary with a fast Dioxus admin UI and PostgreSQL-backed content management.
+Developers who want a headless CMS that compiles to a single Rust binary with an embedded admin dashboard and PostgreSQL-backed content management.
